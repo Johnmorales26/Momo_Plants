@@ -2,11 +2,18 @@ package login
 
 class Service {
     var authenticatedUser: Boolean = false
-    val registredUsers = mutableListOf<User>()
+    val registeredUsers = mutableListOf<User>()
 
     fun login(username: String, password: String) {
-        val autenticacion = Authentication(username, password)
+        /*val autenticacion = Authentication(username, password)
         if (autenticacion.authenticate(username, password)) {
+            authenticatedUser = true
+        } else {
+            println("Credenciales incorrectas")
+        }*/
+        val tempUser = User(username, password)
+
+        if (registeredUsers.contains(tempUser)) {
             authenticatedUser = true
         } else {
             println("Credenciales incorrectas")
@@ -19,10 +26,10 @@ class Service {
 
     fun registrarUsuario(username: String, password: String) {
         val usuario = User(username, password)
-        registredUsers.add(usuario)
+        registeredUsers.add(usuario)
     }
 
     fun existeUsuario(username: String): Boolean {
-        return registredUsers.any { it.username == username }
+        return registeredUsers.any { it.username == username }
     }
 }
