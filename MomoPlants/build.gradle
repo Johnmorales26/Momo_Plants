@@ -18,7 +18,7 @@ sourceSets {
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 compileKotlin {
     kotlinOptions {
