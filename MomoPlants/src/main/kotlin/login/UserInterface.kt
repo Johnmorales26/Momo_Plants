@@ -1,10 +1,17 @@
 package login
 
+import Catalogue
 import Plant
 
 class UserInterface {
     private val servicio = Service()
     private var usuarioAutenticado: Boolean = false
+
+    private fun cleanScreen() {
+        repeat (50) {
+            print("\n")
+        }
+    }
 
     fun seeMenu() {
         println("Bienvenido a la aplicación!")
@@ -26,6 +33,7 @@ class UserInterface {
     }
 
     fun seeLogin() {
+        cleanScreen()
         println("Ingresa tus credenciales para iniciar sesión")
         print("Nombre de usuario: ")
         val nombreUsuario = readLine()!!
