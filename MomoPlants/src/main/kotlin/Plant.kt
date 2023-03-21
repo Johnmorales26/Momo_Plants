@@ -3,5 +3,6 @@ data class Plant(
     val origin: String,
     val weather: String,
     val format: String,
-    val price: Int
+    val price: Int,
+    val stock: Int = 0
 )

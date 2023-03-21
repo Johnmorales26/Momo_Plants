@@ -1,5 +1,6 @@
+import login.UserInterface
+
 fun main() {
-    for (plant: Plant in Catalogue.plants) {
-        println(plant)
-    }
+    val interfaz = UserInterface()
+    interfaz.seeMenu()
 }
