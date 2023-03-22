@@ -54,9 +54,16 @@ class UserInterface {
     }
 
     private fun seePrincipalMenu() {
+        val plants = Catalogue.plants
+
+        for (i in 0..10) {
+            println(plants[i])
+        }
+        val nombreUsuario = readLine()!!
+        /*
         for (plant: Plant in Catalogue.plants) {
             println("${plant.stock} x ${plant.name} - Precio unitario: ${plant.price}")
-        }
+        }*/
     }
 
     fun seeRegister() {

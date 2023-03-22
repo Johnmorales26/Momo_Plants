@@ -3,6 +3,7 @@ import java.util.UUID
 data class Plant(val name: String, val id:String)
 
 class Cart {
+    private var cart = mutableListOf<Plant>()
 
     fun showMenu(){
         val menu = listOf(
@@ -14,7 +15,7 @@ class Cart {
         )
         return menu.forEach { option-> println("${option.first}.- ${option.second}") }
     }
-    fun addPlant(cart: MutableList<Plant>) {
+    fun addPlant() {
         print("Ingresa el nombre de la planta: ")
         val nameP = readlnOrNull()?.trim()
 
@@ -34,7 +35,7 @@ class Cart {
             println("Error: Datos invalidos")
         }
     }
-    fun findPlant(cart: MutableList<Plant>) {
+    fun findPlant() {
         print("Ingresa el nombre de la planta a buscar: ")
         val nameP = readLine()?.trim()
 
@@ -49,7 +50,7 @@ class Cart {
             println("Error: datos ingresados inválidos.")
         }
     }
-    fun removePlant(cart: MutableList<Plant>) {
+    fun removePlant() {
         print("Ingresa el índice de planta que deseas eliminar: ")
         val indexP = readLine()?.trim()?.toIntOrNull()
 
@@ -71,7 +72,7 @@ class Cart {
             println("no existe el indice")
         }
     }
-    fun showPlants(cart: List<Plant>) {
+    fun showPlants() {
         if (cart.isEmpty()) {
             println("El carrito está vacío.")
         } else {
