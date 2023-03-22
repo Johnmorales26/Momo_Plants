@@ -5,7 +5,6 @@ import Plant
 
 class UserInterface {
     private val servicio = Service()
-    private var usuarioAutenticado: Boolean = false
 
     private fun cleanScreen() {
         repeat (50) {
@@ -41,8 +40,7 @@ class UserInterface {
         val contraseña = readLine()!!
 
         servicio.login(User(nombreUsuario, contraseña))
-        usuarioAutenticado = servicio.authenticatedUser
-        if (usuarioAutenticado) {
+        if (servicio.authenticatedUser) {
             println("Inicio de sesión exitoso!")
             seePrincipalMenu()
         }
