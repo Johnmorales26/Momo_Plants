@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="login.ServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-03-22T21:40:50" hostname="debian" time="0.115">
+<testsuite name="login.ServiceTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-22T21:46:54" hostname="debian" time="0.107">
   <properties/>
-  <testcase name="login_userRegistered_authenticatedUserTrue()" classname="login.ServiceTest" time="0.073"/>
-  <testcase name="login_noUserRegistered_authenticatedUserFalse()" classname="login.ServiceTest" time="0.031"/>
-  <system-out><![CDATA[Credenciales incorrectas
-]]></system-out>
+  <testcase name="existeUsuario_noUserExists_false()" classname="login.ServiceTest" time="0.107"/>
+  <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
