@@ -16,9 +16,8 @@ class Service {
         authenticatedUser = false
     }
 
-    fun registrarUsuario(username: String, password: String) {
-        val usuario = User(username, password)
-        registeredUsers.add(usuario)
+    fun registrarUsuario(user: User) {
+        registeredUsers.add(user)
     }
 
     fun existeUsuario(username: String): Boolean {

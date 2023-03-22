@@ -64,7 +64,7 @@ class UserInterface {
         }
         print("Contraseña: ")
         val contraseña = readLine()!!
-        servicio.registrarUsuario(nombreUsuario, contraseña)
+        servicio.registrarUsuario(User(nombreUsuario, contraseña))
         println("Cuenta creada exitosamente! Ahora puedes iniciar sesión.")
     }
 }
