@@ -40,7 +40,7 @@ class UserInterface {
         print("Contraseña: ")
         val contraseña = readLine()!!
 
-        servicio.login(nombreUsuario, contraseña)
+        servicio.login(User(nombreUsuario, contraseña))
         usuarioAutenticado = servicio.authenticatedUser
         if (usuarioAutenticado) {
             println("Inicio de sesión exitoso!")

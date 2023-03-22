@@ -4,10 +4,8 @@ class Service {
     var authenticatedUser: Boolean = false
     val registeredUsers = mutableListOf<User>()
 
-    fun login(username: String, password: String) {
-        val tempUser = User(username, password)
-
-        if (registeredUsers.contains(tempUser)) {
+    fun login(user: User) {
+        if (registeredUsers.contains(user)) {
             authenticatedUser = true
         } else {
             println("Credenciales incorrectas")

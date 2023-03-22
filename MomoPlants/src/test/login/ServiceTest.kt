@@ -11,7 +11,7 @@ class ServiceTest() {
 
         //When
         val service = Service()
-        service.login(user.username, user.password)
+        service.login(user)
         val result = service.authenticatedUser
 
         //Then
