@@ -73,14 +73,12 @@ class UserInterface {
         val nombreUsuario = readLine()!!
         if (servicio.existeUsuario(nombreUsuario)) {
             println("Ese nombre de usuario ya está en uso. Inténtalo de nuevo.")
-            sleep()
-            cleanScreen()
-            return
+        } else {
+            print("Contraseña: ")
+            val contraseña = readLine()!!
+            servicio.registrarUsuario(User(nombreUsuario, contraseña))
+            println("Cuenta creada exitosamente! Ahora puedes iniciar sesión.")
         }
-        print("Contraseña: ")
-        val contraseña = readLine()!!
-        servicio.registrarUsuario(User(nombreUsuario, contraseña))
-        println("Cuenta creada exitosamente! Ahora puedes iniciar sesión.")
         sleep()
         cleanScreen()
     }
