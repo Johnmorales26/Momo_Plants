@@ -5,12 +5,6 @@ class Service {
     val registeredUsers = mutableListOf<User>()
 
     fun login(username: String, password: String) {
-        /*val autenticacion = Authentication(username, password)
-        if (autenticacion.authenticate(username, password)) {
-            authenticatedUser = true
-        } else {
-            println("Credenciales incorrectas")
-        }*/
         val tempUser = User(username, password)
 
         if (registeredUsers.contains(tempUser)) {
