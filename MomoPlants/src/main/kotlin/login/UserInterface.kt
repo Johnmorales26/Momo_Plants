@@ -12,6 +12,10 @@ class UserInterface {
         }
     }
 
+    private fun sleep() {
+        Thread.sleep(1000)
+    }
+
     fun seeMenu() {
         println("Bienvenido a la aplicación!")
         var opcion: Int
@@ -22,6 +26,8 @@ class UserInterface {
             println("3. Salir")
             print("Selecciona una opción: ")
             opcion = readln().toInt()
+            sleep()
+            cleanScreen()
             when (opcion) {
                 1 -> seeLogin()
                 2 -> seeRegister()
@@ -32,7 +38,6 @@ class UserInterface {
     }
 
     fun seeLogin() {
-        cleanScreen()
         println("Ingresa tus credenciales para iniciar sesión")
         print("Nombre de usuario: ")
         val nombreUsuario = readLine()!!
@@ -44,6 +49,8 @@ class UserInterface {
             println("Inicio de sesión exitoso!")
             seePrincipalMenu()
         }
+        sleep()
+        cleanScreen()
     }
 
     private fun seePrincipalMenu() {
@@ -53,16 +60,21 @@ class UserInterface {
     }
 
     fun seeRegister() {
+        cleanScreen()
         println("Crea una cuenta para iniciar sesión")
         print("Nombre de usuario: ")
         val nombreUsuario = readLine()!!
         if (servicio.existeUsuario(nombreUsuario)) {
             println("Ese nombre de usuario ya está en uso. Inténtalo de nuevo.")
+            sleep()
+            cleanScreen()
             return
         }
         print("Contraseña: ")
         val contraseña = readLine()!!
         servicio.registrarUsuario(User(nombreUsuario, contraseña))
         println("Cuenta creada exitosamente! Ahora puedes iniciar sesión.")
+        sleep()
+        cleanScreen()
     }
 }

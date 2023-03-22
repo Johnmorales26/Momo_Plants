@@ -26,7 +26,7 @@ class ServiceTest() {
         service.registrarUsuario(user)
 
         //When
-        service.login(user)
+        service.login(User("Pablo", "123456"))
         val result = service.authenticatedUser
 
         //Then
@@ -59,7 +59,4 @@ class ServiceTest() {
         //Then
         assertEquals(false, result)
     }
-
-
-
 }
