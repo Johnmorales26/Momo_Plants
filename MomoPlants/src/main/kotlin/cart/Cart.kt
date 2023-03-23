@@ -1,5 +1,6 @@
 package cart
 
+import UserInterfaceUtils.Companion.showPlantsCatalogue
 internal class Cart {
     internal val shoppingCart = mutableListOf<Item>()
     private val plants = Catalogue.plants
@@ -9,8 +10,9 @@ internal class Cart {
             Pair(1,"Agregar planta al carrito"),
             Pair(2,"Buscar planta"),
             Pair(3,"Eliminar planta"),
-            Pair(4,"Mostrar plantas"),
-            Pair(5,"Salir")
+            Pair(4,"Mostrar plantas del carrito"),
+            Pair(5,"Mostrar plantas del catálogo"),
+            Pair(6,"Salir")
         )
         return menu.forEach { option-> println("${option.first}.- ${option.second}") }
     }
@@ -44,7 +46,7 @@ internal class Cart {
             val item = findItem(nameP)
 
             if (item != null) {
-                println("La planta $nameP se encuentra en el carrito.")
+                println("La planta ${item.plant.name} se encuentra en el carrito.")
             } else {
                 println("La planta $nameP no se encuentra en el carrito.")
             }
@@ -71,7 +73,7 @@ internal class Cart {
             val resp = readLine()?.trim()?.toIntOrNull()
             if (resp == 1){
                 removeItem(indexP)
-                println("$indexP se ha eliminado del carrito ${itemToRemove.plant.name}")
+                println("${itemToRemove.plant.name} se ha eliminado del carrito")
             } else {
                 println("Presiona enter para continuar")
             }
@@ -83,7 +85,7 @@ internal class Cart {
     internal fun removeItem(id: Int) {
         shoppingCart.removeAt(id)
     }
-    fun showPlants() {
+    fun showPlantsCart() {
         if (shoppingCart.isEmpty()) {
             println("El carrito está vacío.")
         } else {
@@ -93,5 +95,9 @@ internal class Cart {
             }
             println("Total ${shoppingCart.size}")
         }
+    }
+
+    fun showPlantsCatalogue() {
+        UserInterfaceUtils.showPlantsCatalogue()
     }
 }

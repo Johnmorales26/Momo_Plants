@@ -7,7 +7,13 @@ class UserInterfaceUtils {
         }
 
         public fun sleep() {
-            Thread.sleep(1000)
+            Thread.sleep(2000)
+        }
+
+        public fun showPlantsCatalogue() {
+            Catalogue.plants.forEachIndexed { index, plant ->
+                println("Id: $index, ${plant.stock} x ${plant.name} - Precio unitario: ${plant.price}")
+            }
         }
     }
 }

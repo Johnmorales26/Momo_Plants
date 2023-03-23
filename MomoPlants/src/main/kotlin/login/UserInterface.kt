@@ -3,6 +3,7 @@ package login
 import Catalogue
 import UserInterfaceUtils.Companion.sleep
 import UserInterfaceUtils.Companion.cleanScreen
+import UserInterfaceUtils.Companion.showPlantsCatalogue
 
 class UserInterface {
     private val servicio = Service()
@@ -47,14 +48,10 @@ class UserInterface {
     private fun seePrincipalMenu() {
         val plants = Catalogue.plants
 
-        for (i in 0..10) {
-            println(plants[i])
-        }
-        val nombreUsuario = readLine()!!
-        /*
-        for (plant: Plant in Catalogue.plants) {
-            println("${plant.stock} x ${plant.name} - Precio unitario: ${plant.price}")
-        }*/
+        showPlantsCatalogue()
+
+        print("Presiona enter para continuar -> ")
+        readLine()!!
     }
 
     fun seeRegister() {
