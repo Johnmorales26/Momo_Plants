@@ -3,7 +3,7 @@ import java.util.UUID
 data class Plant(val name: String, val id:String)
 
 class Cart {
-    private var cart = mutableListOf<Plant>()
+    private val cart = mutableListOf<Plant>()
 
     fun showMenu(){
         val menu = listOf(

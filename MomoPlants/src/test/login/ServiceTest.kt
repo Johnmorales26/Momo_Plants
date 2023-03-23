@@ -21,12 +21,14 @@ class ServiceTest() {
     @Test
     fun login_userRegistered_authenticatedUserTrue() {
         //Given
-        val user = User("Pablo", "123456")
+        val username = "Pablo"
+        val password = "123456"
+        val user = User(username, password)
         val service = Service()
         service.registrarUsuario(user)
 
         //When
-        service.login(User("Pablo", "123456"))
+        service.login(User(username, password))
         val result = service.authenticatedUser
 
         //Then
