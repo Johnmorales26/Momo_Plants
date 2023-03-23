@@ -1,20 +1,11 @@
 package login
 
 import Catalogue
-import Plant
+import UserInterfaceUtils.Companion.sleep
+import UserInterfaceUtils.Companion.cleanScreen
 
 class UserInterface {
     private val servicio = Service()
-
-    private fun cleanScreen() {
-        repeat (50) {
-            print("\n")
-        }
-    }
-
-    private fun sleep() {
-        Thread.sleep(1000)
-    }
 
     fun seeMenu() {
         println("Bienvenido a la aplicación!")
