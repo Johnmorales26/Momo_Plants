@@ -4,8 +4,8 @@ import Plant
 //import java.util.UUID
 //data class Plant(val name: String, val id:String)
 
-class Cart {
-    private val shoppingCart = mutableListOf<Item>()
+internal class Cart {
+    internal val shoppingCart = mutableListOf<Item>()
     private val plants = Catalogue.plants
 
     fun showMenu() {
@@ -20,18 +20,14 @@ class Cart {
     }
     fun askPlantToAdd() {
         print("Ingresa el id de la planta: ")
-        val id: Int = readlnOrNull()?.trim() as Int
+        val id: Int? = readlnOrNull()?.trim()?.toIntOrNull()
 
         if (id != null) {
             print("Cantidad de plantas que deseas agregar: ")
             val quantity = readLine()?.toIntOrNull()
             if (quantity != null && quantity > 0) {
                 val plant = plants[id]
-                addItem(plant, quantity)
-                /*
-                for (i in 1..quantity){
-                    val plant = Plant(nameP,UUID.randomUUID().toString())
-                }*/
+                addItem(Item(plant, quantity))
                 println("Se agregaron $quantity planta(s) de ${plant.name} al carrito.")
             } else {
                 println("Error: cantidad invalida.")
@@ -41,8 +37,8 @@ class Cart {
         }
     }
 
-    private fun addItem(plant: Plant, quantity: Int) {
-        shoppingCart.add(Item(plant, quantity))
+    internal fun addItem(item: Item) {
+        shoppingCart.add(item)
     }
     fun askPlantToFind() {
         print("Ingresa el nombre de la planta a buscar: ")
@@ -61,7 +57,7 @@ class Cart {
         }
     }
 
-    private fun findItem(plantName: String): Item? {
+    internal fun findItem(plantName: String): Item? {
         val item = shoppingCart.find { item -> item.plant.name.lowercase().contains(plantName.lowercase()) }
 
         return item
@@ -89,7 +85,7 @@ class Cart {
         }
     }
 
-    private fun removeItem(id: Int) {
+    internal fun removeItem(id: Int) {
         shoppingCart.removeAt(id)
     }
     fun showPlants() {
@@ -98,7 +94,7 @@ class Cart {
         } else {
             println("Plantas en el carrito:")
             shoppingCart.forEachIndexed {
-                    index, elemento -> { println("Id: ${index}, Nombre: ${elemento.plant.name}, Cantidad: ${elemento.quantity}")}
+                    index, elemento -> println("Id: ${index}, Nombre: ${elemento.plant.name}, Cantidad: ${elemento.quantity}")
             }
             println("Total ${shoppingCart.size}")
         }
