@@ -1,7 +1,7 @@
 package cart
 
 import UserInterfaceUtils.Companion.showPlantsCatalogue
-internal class Cart {
+class Cart {
     internal val shoppingCart = mutableListOf<Item>()
     private val plants = Catalogue.plants
 

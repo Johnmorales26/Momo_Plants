@@ -6,7 +6,6 @@ import UserInterfaceUtils.Companion.cleanScreen
 fun main() {
     //Instancia de carrito de compras
     val cart = Cart()
-    //val shoppingCart: MutableList<Plant> = mutableListOf<Plant>()
 
     while (true) {
         println("Menu principal Carrito de compras:")

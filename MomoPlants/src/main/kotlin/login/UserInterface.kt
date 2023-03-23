@@ -46,8 +46,6 @@ class UserInterface {
     }
 
     private fun seePrincipalMenu() {
-        val plants = Catalogue.plants
-
         showPlantsCatalogue()
 
         print("Presiona enter para continuar -> ")
@@ -55,7 +53,6 @@ class UserInterface {
     }
 
     fun seeRegister() {
-        cleanScreen()
         println("Crea una cuenta para iniciar sesión")
         print("Nombre de usuario: ")
         val nombreUsuario = readLine()!!

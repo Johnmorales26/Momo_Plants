@@ -1,8 +1,6 @@
 package cart
 
 import Catalogue
-import login.Service
-import login.User
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
