@@ -1,5 +1,5 @@
 class Catalogue {
-    companion object Factory {
+    companion object {
         val plants = listOf<Plant>(
             Plant(
                 "Culantrillo de pozo.",

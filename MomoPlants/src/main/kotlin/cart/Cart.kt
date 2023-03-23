@@ -1,9 +1,5 @@
 package cart
 
-import Plant
-//import java.util.UUID
-//data class Plant(val name: String, val id:String)
-
 internal class Cart {
     internal val shoppingCart = mutableListOf<Item>()
     private val plants = Catalogue.plants
@@ -22,7 +18,7 @@ internal class Cart {
         print("Ingresa el id de la planta: ")
         val id: Int? = readlnOrNull()?.trim()?.toIntOrNull()
 
-        if (id != null) {
+        if (id != null && id in 0..(plants.size - 1)) {
             print("Cantidad de plantas que deseas agregar: ")
             val quantity = readLine()?.toIntOrNull()
             if (quantity != null && quantity > 0) {
@@ -66,7 +62,7 @@ internal class Cart {
         print("Ingresa el id de planta que deseas eliminar: ")
         val indexP = readLine()?.trim()?.toIntOrNull()
 
-        if (indexP != null && indexP < shoppingCart.size){
+        if (indexP != null && indexP in 0..(shoppingCart.size - 1)){
             val itemToRemove = shoppingCart[indexP]
 
             println("¿Seguro que desea eliminar la planta ${itemToRemove.plant.name} del carrito ?")
@@ -76,12 +72,11 @@ internal class Cart {
             if (resp == 1){
                 removeItem(indexP)
                 println("$indexP se ha eliminado del carrito ${itemToRemove.plant.name}")
-            }else{
+            } else {
                 println("Presiona enter para continuar")
             }
-
         }else{
-            println("no existe el id")
+            println("No existe el id")
         }
     }
 
