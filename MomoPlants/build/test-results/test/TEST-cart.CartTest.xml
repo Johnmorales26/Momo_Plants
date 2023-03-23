@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="cart.CartTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-23T04:18:07" hostname="debian" time="0.184">
+<testsuite name="cart.CartTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-03-23T04:48:46" hostname="debian" time="0.169">
   <properties/>
-  <testcase name="addItem_oneItemAdded_oneItemSize()" classname="cart.CartTest" time="0.184"/>
+  <testcase name="findItem_noExistsItem_returnsNull()" classname="cart.CartTest" time="0.169"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

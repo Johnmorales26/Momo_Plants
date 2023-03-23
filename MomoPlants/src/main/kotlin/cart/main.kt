@@ -1,4 +1,8 @@
 package cart
+
+import UserInterfaceUtils.Companion.sleep
+import UserInterfaceUtils.Companion.cleanScreen
+
 fun main() {
     //Instancia de carrito de compras
     val cart = Cart()
@@ -16,5 +20,7 @@ fun main() {
             5 -> break
             else -> println("Opción inválida.")
         }
+        sleep()
+        cleanScreen()
     }
 }
