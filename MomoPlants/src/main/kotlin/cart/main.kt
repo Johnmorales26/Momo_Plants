@@ -8,6 +8,7 @@ fun main() {
     val cart = Cart()
 
     while (true) {
+        println("BIENVENIDO A MOMO PLANTS")
         println("Menu principal Carrito de compras:")
         cart.showMenu()
         println("Ingresa una opción: ")
