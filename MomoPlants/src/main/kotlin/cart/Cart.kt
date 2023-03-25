@@ -3,6 +3,7 @@ package cart
 import UserInterfaceUtils.Companion.showPlantsCatalogue
 class Cart {
     internal val shoppingCart = mutableListOf<Item>()
+    internal val Orders=mutableListOf<Item>()
     private val plants = Catalogue.plants
 
     fun showMenu() {
@@ -12,7 +13,10 @@ class Cart {
             Pair(3,"Eliminar planta"),
             Pair(4,"Mostrar plantas del carrito"),
             Pair(5,"Mostrar plantas del catálogo"),
-            Pair(6,"Salir")
+            Pair(6,"Finalizar Pedido"),
+            Pair(7,"Ver pedidos anteriores"),
+            Pair(8,"Salir")
+
         )
         return menu.forEach { option-> println("${option.first}.- ${option.second}") }
     }
@@ -152,6 +156,42 @@ class Cart {
         }else{
             println("No existe el id")
         }
+    }
+    fun showOldOrders(){
+        if (Orders.isEmpty()) {
+            println("No hay ordenes antiguas.")
+        } else {
+            println("Plantas en el carrito:")
+            Orders.forEachIndexed {
+                index, elemento -> println("Id: ${index}, Nombre: ${elemento.plant.name}, Cantidad: ${elemento.quantity}")
+            }
+
+
+            menuShow()
+        }
+    }
+    fun checkOut(){
+        val total=shoppingCart.sumOf { shoppingCart.size }
+        println("Su pedido actualmente tiene {$total} items")
+        println("¿Desea finalizar su pedido?")
+        println("1.Finalizar Pedido")
+        println("2. Volver al menú Principal")
+        println("Ingresa una opción")
+        val option=readLine()?.toIntOrNull()
+        when (option) {
+            1 -> saveOrder()
+            2 -> showMenu()
+
+            else -> println("Opción inválida. Inténtalo de nuevo.")
+        }
+
+
+    }
+    internal fun saveOrder(){
+        shoppingCart.forEach{ Orders.add(it) }
+        shoppingCart.clear()
+        menuShow()
+
     }
 
 

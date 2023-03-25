@@ -20,7 +20,10 @@ fun main() {
             3 -> cart.askPlantToRemove()
             4 -> cart.showPlantsCart()
             5 -> cart.showPlantsCatalogue()
-            6 -> break
+            6 ->cart.checkOut()
+            7 ->cart.showOldOrders()
+            8 -> break
+
             else -> println("Opción inválida.")
         }
         if (prompt == 4 || prompt == 5) {
