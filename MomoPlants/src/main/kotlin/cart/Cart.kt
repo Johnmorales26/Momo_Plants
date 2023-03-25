@@ -94,10 +94,69 @@ class Cart {
                     index, elemento -> println("Id: ${index}, Nombre: ${elemento.plant.name}, Cantidad: ${elemento.quantity}")
             }
             println("Total ${shoppingCart.size}")
+
+            menuShow()
         }
     }
 
     fun showPlantsCatalogue() {
         UserInterfaceUtils.showPlantsCatalogue()
     }
+
+    fun menuShow(){
+        var opcion: Int
+        do {
+            println()
+            println("1. Edita una planta del carro")
+            println("2. Eliminar una planta del carro")
+            //println("3. Aplicar cupón")
+            println("3. Salir\n")
+            print("Selecciona una opción: ")
+            println ()
+            opcion = readln().toInt()
+
+
+            when (opcion) {
+                1 -> updatePlant()
+                2 -> cart.askPlantToRemove()
+                //3 -> println("3!")
+                3 -> println("Has regresado al menu principal")
+                else -> println("Opción inválida. Inténtalo de nuevo.")
+            }
+        } while (opcion != 3)
+    }
+
+
+    fun updatePlant(){
+        print("Ingresa el id de la planta a cambiar cantidad: ")
+        val indexP = readLine()?.trim()?.toIntOrNull()
+
+        if (indexP != null && indexP in 0..(shoppingCart.size - 1)){
+            val itemToRemove = shoppingCart[indexP]
+
+
+            print("Cantidad nueva de plantas que deseas agregar: ")
+            val quantity = readLine()?.toIntOrNull()
+            if (quantity != null && quantity > 0) {
+                val plant = plants[indexP]
+                println(plant)
+                addItem(Item(plant, quantity))
+                println("Se agregaron $quantity planta(s) de ${plant.name} al carrito.")
+            } else {
+                println("Error: cantidad invalida.")
+            }
+
+                //se elimina
+                removeItem(indexP)
+
+        }else{
+            println("No existe el id")
+        }
+    }
+
+
+
+
+
+
 }

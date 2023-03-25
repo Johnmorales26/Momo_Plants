@@ -3,9 +3,10 @@ package cart
 import UserInterfaceUtils.Companion.sleep
 import UserInterfaceUtils.Companion.cleanScreen
 
+public val cart = Cart()
 fun main() {
     //Instancia de carrito de compras
-    val cart = Cart()
+   // val cart = Cart()
 
     while (true) {
         println("BIENVENIDO A MOMO PLANTS")
