@@ -3,7 +3,7 @@ package cart
 import UserInterfaceUtils.Companion.showPlantsCatalogue
 class Cart {
     internal val shoppingCart = mutableListOf<Item>()
-    internal val Orders=mutableListOf<Item>()
+    internal val Orders = mutableListOf<Item>()
     private val plants = Catalogue.plants
 
     fun showMenu() {
@@ -121,8 +121,8 @@ class Cart {
 
 
             when (opcion) {
-                1 -> updatePlant()
-                2 -> cart.askPlantToRemove()
+                1 -> askPlantToUpdate()
+                2 -> askPlantToRemove()
                 //3 -> println("3!")
                 3 -> println("Has regresado al menu principal")
                 else -> println("Opción inválida. Inténtalo de nuevo.")
@@ -131,31 +131,28 @@ class Cart {
     }
 
 
-    fun updatePlant(){
+    fun askPlantToUpdate() {
         print("Ingresa el id de la planta a cambiar cantidad: ")
         val indexP = readLine()?.trim()?.toIntOrNull()
 
-        if (indexP != null && indexP in 0..(shoppingCart.size - 1)){
-            val itemToRemove = shoppingCart[indexP]
-
+        if (indexP != null && indexP in 0..(shoppingCart.size - 1)) {
 
             print("Cantidad nueva de plantas que deseas agregar: ")
             val quantity = readLine()?.toIntOrNull()
             if (quantity != null && quantity > 0) {
                 val plant = plants[indexP]
-                println(plant)
-                addItem(Item(plant, quantity))
-                println("Se agregaron $quantity planta(s) de ${plant.name} al carrito.")
+                updateItem(Item(plant, quantity), indexP)
+                println("Se actualizaron $quantity planta(s) de ${plant.name} al carrito.")
             } else {
                 println("Error: cantidad invalida.")
             }
-
-                //se elimina
-                removeItem(indexP)
-
-        }else{
+        } else {
             println("No existe el id")
         }
+    }
+
+    internal fun updateItem(item: Item, index: Int) {
+        shoppingCart[index] = item
     }
     fun showOldOrders(){
         if (Orders.isEmpty()) {
@@ -184,19 +181,10 @@ class Cart {
 
             else -> println("Opción inválida. Inténtalo de nuevo.")
         }
-
-
     }
     internal fun saveOrder(){
         shoppingCart.forEach{ Orders.add(it) }
         shoppingCart.clear()
         menuShow()
-
     }
-
-
-
-
-
-
 }

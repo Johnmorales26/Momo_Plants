@@ -60,4 +60,21 @@ class CartTest {
         //Then
         assertEquals(null, result)
     }
+
+    @Test
+    fun updateItem_itemExists_itemUpdated() {
+        //Given
+        val cart = Cart()
+
+        cart.addItem(Item(Catalogue.plants[5], 10))
+        cart.addItem(Item(Catalogue.plants[0], 5))
+        cart.addItem(Item(Catalogue.plants[10], 15))
+
+        //When
+        cart.updateItem(Item(Catalogue.plants[0], 15), 1)
+
+        //Then
+        assertEquals(Item(Catalogue.plants[0], 15), cart.shoppingCart[1])
+        assertEquals(3, cart.shoppingCart.size)
+    }
 }
