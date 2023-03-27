@@ -158,17 +158,16 @@ class Cart {
         if (Orders.isEmpty()) {
             println("No hay ordenes antiguas.")
         } else {
-            println("Plantas en el carrito:")
+            println("Ordenes anteriores:")
             Orders.forEachIndexed {
                 index, elemento -> println("Id: ${index}, Nombre: ${elemento.plant.name}, Cantidad: ${elemento.quantity}")
             }
-
 
             menuShow()
         }
     }
     fun checkOut(){
-        val total=shoppingCart.sumOf { shoppingCart.size }
+        val total = shoppingCart.size
         println("Su pedido actualmente tiene {$total} items")
         println("¿Desea finalizar su pedido?")
         println("1.Finalizar Pedido")
