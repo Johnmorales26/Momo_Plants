@@ -1,6 +1,6 @@
 # Momo Plants
 
-Esta aplicación se basa en un E-Commerce el cual se centra en una Aplicación para su venta de plantas.
+Esta aplicación se basa en un E-Commerce el cual se centra en una Aplicación para su venta de plantas desarrollado para el programa Bedu - Kotlin Fundamentals.
 
 <p align="center">
   <img src="assets/ic_momo_plants.png" width="200" title="Icon Aplication">
@@ -15,10 +15,14 @@ Esta aplicación se basa en un E-Commerce el cual se centra en una Aplicación p
 ## Tech Stack 🛠️
 
 * Intellij Idea - El IDE utilizado
+* Visual Studio Code
 
 ## Autor ✒️
 
-* **Jonatan Morales** - *Estudiante de Ingenieria En Tecnologias De Informacion Y Comunicaciones* - [Jonatan Arturo Morales Tavera](https://www.linkedin.com/in/jonatan-arturo-morales-tavera-3b825b240/)
+* **Estefania Mejía** - *Licenciada en Informática* - [Estefania Mejía](https://www.linkedin.com/in/estefania-mej%C3%ADa-798bb6267/?original_referer=)
+* **Jonatan Morales** - *Estudiante de Ingenieria En Tecnologias De Informacion Y Comunicaciones | Android Developer* - [Jonatan Arturo Morales Tavera](https://www.linkedin.com/in/jonatan-arturo-morales-tavera-3b825b240/)
+* **Luis Garcia** - *Ingeniero en Sistemas Computacionales* - [Luis Manuel García Barajas](https://www.linkedin.com/in/luis-garcia-barajas/)
+* **Orlando Canchola** - *React Native developer | Android developer | Javascript, Java, Kotlin* - [Orlando Canchola](https://www.linkedin.com/in/orlando-canchola/)
 
 ## Licencia 📄
 
