@@ -128,16 +128,18 @@ class Cart {
             val quantity = readlnOrNull()?.toIntOrNull()
             if (quantity != null && quantity > 0) {
                 val plant = plants[indexP]
-                println(plant)
-                addItem(ItemEntity(plant, quantity))
+                updateItem(ItemEntity(plant, quantity), indexP)
                 println("Se agregaron $quantity planta(s) de ${plant.name} al carrito.")
             } else {
                 println("Error: cantidad invalida.")
             }
-                removeItem(indexP)
         }else{
             println("No existe el id")
         }
+    }
+
+    internal fun updateItem(item: ItemEntity, index: Int) {
+        shoppingCart.items[index] = item
     }
 
     fun showOldOrders(){

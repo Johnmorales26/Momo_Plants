@@ -72,7 +72,7 @@ class CartTest {
         cart.addItem(ItemEntity(PlantsDatabase.getAllPlants()[10], 15))
 
         //When
-        //cart.updateItem(ItemEntity(PlantsDatabase.getAllPlants()[0], 15), 1)
+        cart.updateItem(ItemEntity(PlantsDatabase.getAllPlants()[0], 15), 1)
 
         //Then
         assertEquals(ItemEntity(PlantsDatabase.getAllPlants()[0], 15), cart.shoppingCart.items[1])
