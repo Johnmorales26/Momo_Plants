@@ -7,7 +7,7 @@ import utils.OrderStatus
 
 class Cart {
 
-    private val shoppingCart = OrderEntity()
+    internal val shoppingCart = OrderEntity()
     private val orderList = mutableListOf<OrderEntity>()
     private val plants = PlantsDatabase.getAllPlants()
 
@@ -44,7 +44,7 @@ class Cart {
         }
     }
 
-    private fun addItem(item: ItemEntity) = shoppingCart.items.add(item)
+    internal fun addItem(item: ItemEntity) = shoppingCart.items.add(item)
 
     fun askPlantToFind() {
         print("Ingresa el nombre de la planta a buscar: ")
@@ -62,7 +62,7 @@ class Cart {
         }
     }
 
-    private fun findItem(plantName: String): ItemEntity? = shoppingCart.items.find { item -> item.plant.name.lowercase().contains(plantName.lowercase()) }
+    internal fun findItem(plantName: String): ItemEntity? = shoppingCart.items.find { item -> item.plant.name.lowercase().contains(plantName.lowercase()) }
 
     fun askPlantToRemove() {
         print("Ingresa el id de planta que deseas eliminar: ")
