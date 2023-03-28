@@ -28,9 +28,9 @@ test {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation "org.jetbrains.kotlin:kotlin-test-junit:1.8.20-RC2"
+    implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 compileKotlin {
     kotlinOptions {
