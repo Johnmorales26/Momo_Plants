@@ -101,7 +101,7 @@ class Cart {
     }
 
     internal fun increaseQuantity(plant: PlantEntity, quantity: Int) {
-        shoppingCart.find { it == plant }?.let { it.quantity += quantity }
+        shoppingCart.find { it.id == plant.id }?.let { it.quantity += quantity }
     }
 
         /*fun addToCart() {

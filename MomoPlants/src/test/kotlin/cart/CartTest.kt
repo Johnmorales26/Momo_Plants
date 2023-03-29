@@ -94,16 +94,27 @@ class CartTest {
     fun increaseQuantity_incrementByOne_quantityIncreasedOne() {
         //Given
         val cart = Cart()
+
+        val plant1 = PlantsDatabase.getAllPlants()[5]
+        val plant2 = PlantsDatabase.getAllPlants()[0]
+        val plant3 = PlantsDatabase.getAllPlants()[10]
+
+        plant1.quantity = 1
+        plant2.quantity = 2
+        plant3.quantity = 3
+
         cart.apply {
-            addItem(PlantsDatabase.getAllPlants()[5])
-            addItem(PlantsDatabase.getAllPlants()[0])
-            addItem(PlantsDatabase.getAllPlants()[10])
+            addItem(plant1)
+            addItem(plant2)
+            addItem(plant3)
         }
 
         //When
-        val item = cart.findItemByID(15)
+        cart.increaseQuantity(PlantsDatabase.getAllPlants()[0], 5)
 
         //Then
-        assertEquals(PlantsDatabase.getAllPlants()[14], item)
+        val plantExpected = PlantsDatabase.getAllPlants()[0]
+        plantExpected.quantity = 7
+        assertEquals(plantExpected, cart.shoppingCart[1])
     }
 }
