@@ -1,6 +1,7 @@
 package cart
 
 import dataAccess.PlantsDatabase
+import entities.ItemEntity
 import entities.PlantEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
@@ -89,7 +90,7 @@ class Cart {
                 return
             }
             if (plant in shoppingCart) {
-                shoppingCart.find { it == plant }?.let { it.quantity += quantity }
+                increaseQuantity(plant, quantity)
             } else {
                 plant.quantity = quantity
                 shoppingCart.add(plant)
@@ -97,6 +98,10 @@ class Cart {
         } catch (e: Exception) {
             println("Error: $e")
         }
+    }
+
+    internal fun increaseQuantity(plant: PlantEntity, quantity: Int) {
+        shoppingCart.find { it == plant }?.let { it.quantity += quantity }
     }
 
         /*fun addToCart() {
@@ -124,7 +129,7 @@ class Cart {
             }
         }*/
 
-    private fun deleteFromCart() {
+    fun deleteFromCart() {
         print("Ingresa el id de planta que deseas eliminar: ")
         val indexP = readlnOrNull()?.trim()?.toIntOrNull()
         val plant = shoppingCart.find { item -> item.id == indexP }

@@ -67,11 +67,43 @@ class CartTest {
             addItem(PlantsDatabase.getAllPlants()[5])
             addItem(PlantsDatabase.getAllPlants()[0])
             addItem(PlantsDatabase.getAllPlants()[10])
-            //When
-            updateItem(PlantsDatabase.getAllPlants()[0], 1)
         }
+
+        //When
+        cart.updateItem(PlantsDatabase.getAllPlants()[0], 1)
+
         //Then
         assertEquals(ItemEntity(PlantsDatabase.getAllPlants()[0], 15), cart.shoppingCart[1])
         assertEquals(3, cart.shoppingCart.size)
+    }
+
+    @Test
+    fun findItemByID_itemExists_returnsItem() {
+        //Given
+        val cart = Cart()
+        cart.getPlantsByFlow()
+
+        //When
+        val item = cart.findItemByID(15)
+
+        //Then
+        assertEquals(PlantsDatabase.getAllPlants()[14], item)
+    }
+
+    @Test
+    fun increaseQuantity_incrementByOne_quantityIncreasedOne() {
+        //Given
+        val cart = Cart()
+        cart.apply {
+            addItem(PlantsDatabase.getAllPlants()[5])
+            addItem(PlantsDatabase.getAllPlants()[0])
+            addItem(PlantsDatabase.getAllPlants()[10])
+        }
+
+        //When
+        val item = cart.findItemByID(15)
+
+        //Then
+        assertEquals(PlantsDatabase.getAllPlants()[14], item)
     }
 }
