@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="login.ServiceTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-03-29T01:36:44" hostname="DESKTOP-3QKN386" time="0.035">
+  <properties/>
+  <testcase name="login_userRegistered_authenticatedUserTrue()" classname="login.ServiceTest" time="0.028"/>
+  <testcase name="existeUsuario_userExists_true()" classname="login.ServiceTest" time="0.001"/>
+  <testcase name="login_noUserRegistered_authenticatedUserFalse()" classname="login.ServiceTest" time="0.003"/>
+  <testcase name="existeUsuario_noUserExists_false()" classname="login.ServiceTest" time="0.0"/>
+  <system-out><![CDATA[Credenciales incorrectas
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
