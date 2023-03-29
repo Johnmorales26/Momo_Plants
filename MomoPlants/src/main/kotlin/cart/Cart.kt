@@ -238,13 +238,13 @@ class Cart {
         println("2. Volver al menú Principal")
         println("Ingresa una opción")
         when (readlnOrNull()?.toIntOrNull()) {
-            1 -> painCart()
+            1 -> payToCart()
             2 -> showMenu()
             else -> println("Opción inválida. Inténtalo de nuevo.")
         }
     }
 
-    private fun painCart() {
+    private fun payToCart() {
         println("Su listado de plantas a comprar es el siguiente: ")
         println("------------------------------------------------------------")
         shoppingCart.forEach {
