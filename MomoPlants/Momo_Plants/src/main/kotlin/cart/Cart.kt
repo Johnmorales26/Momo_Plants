@@ -162,7 +162,7 @@ class Cart {
         println("¿Desea finalizar su pedido?")
         println("1. Finalizar Pedido")
         println("2. Cancelar Pedido")
-        println("2. Volver al menú Principal")
+        println("3. Volver al menú Principal")
         println("Ingresa una opción")
         when (readlnOrNull()?.toIntOrNull()) {
             1 -> updatedStatus(OrderStatus.PAID)
