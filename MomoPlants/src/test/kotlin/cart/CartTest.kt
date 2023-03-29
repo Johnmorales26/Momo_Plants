@@ -10,10 +10,10 @@ class CartTest {
     fun addItem_oneItemAdded_oneItemSize() {
         //Given
         val cart = Cart()
-        val item = ItemEntity(PlantsDatabase.getAllPlants()[0], 5)
+        val item = PlantsDatabase.getAllPlants()[0]
         cart.addItem(item)
         //When
-        val result = cart.shoppingCart.items.size
+        val result = cart.shoppingCart.size
         //Then
         assertEquals(1, result)
     }
@@ -24,17 +24,16 @@ class CartTest {
         val cart = Cart()
         val plantName = "Galatea"
         cart.apply {
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[8], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[5], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[10], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[15], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[20], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[25], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[30], 5))
+            addItem(PlantsDatabase.getAllPlants()[8])
+            addItem(PlantsDatabase.getAllPlants()[5])
+            addItem(PlantsDatabase.getAllPlants()[10])
+            addItem(PlantsDatabase.getAllPlants()[15])
+            addItem(PlantsDatabase.getAllPlants()[20])
+            addItem(PlantsDatabase.getAllPlants()[25])
+            addItem(PlantsDatabase.getAllPlants()[30])
         }
         //When
-        val result = cart.findItem(plantName)
-
+        val result = cart.findItemByName(plantName)
         //Then
         assertEquals(ItemEntity(PlantsDatabase.getAllPlants()[8], 5), result)
     }
@@ -45,16 +44,16 @@ class CartTest {
         val cart = Cart()
         val plantName = "Parangaricutirimicuaro"
         cart.apply {
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[8], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[5], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[10], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[15], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[20], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[25], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[30], 5))
+            addItem(PlantsDatabase.getAllPlants()[8])
+            addItem(PlantsDatabase.getAllPlants()[5])
+            addItem(PlantsDatabase.getAllPlants()[10])
+            addItem(PlantsDatabase.getAllPlants()[15])
+            addItem(PlantsDatabase.getAllPlants()[20])
+            addItem(PlantsDatabase.getAllPlants()[25])
+            addItem(PlantsDatabase.getAllPlants()[30])
         }
         //When
-        val result = cart.findItem(plantName)
+        val result = cart.findItemByName(plantName)
         //Then
         assertEquals(null, result)
     }
@@ -64,14 +63,14 @@ class CartTest {
         //Given
         val cart = Cart()
         cart.apply {
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[5], 10))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[0], 5))
-            addItem(ItemEntity(PlantsDatabase.getAllPlants()[10], 15))
+            addItem(PlantsDatabase.getAllPlants()[5])
+            addItem(PlantsDatabase.getAllPlants()[0])
+            addItem(PlantsDatabase.getAllPlants()[10])
             //When
-            updateItem(ItemEntity(PlantsDatabase.getAllPlants()[0], 15), 1)
+            updateItem(PlantsDatabase.getAllPlants()[0], 1)
         }
         //Then
-        assertEquals(ItemEntity(PlantsDatabase.getAllPlants()[0], 15), cart.shoppingCart.items[1])
-        assertEquals(3, cart.shoppingCart.items.size)
+        assertEquals(ItemEntity(PlantsDatabase.getAllPlants()[0], 15), cart.shoppingCart[1])
+        assertEquals(3, cart.shoppingCart.size)
     }
 }

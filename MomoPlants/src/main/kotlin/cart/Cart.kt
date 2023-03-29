@@ -74,39 +74,77 @@ class Cart {
     fun addToCart() {
         print("Ingresa el id de planta que deseas agregar: ")
         val indexP = readlnOrNull()?.trim()?.toIntOrNull()
-        val plant = findItemByID(indexP!!)
-        if (plant != null) {
+        val plant = findItemByID(indexP ?: -1)
+        if (plant == null) {
+            println("Datos Invalidos")
+            return
+        }
+        try {
             print("Cantidad de plantas que deseas agregar: ")
             val quantity = readlnOrNull()?.toIntOrNull()
-            if (shoppingCart.contains(plant)) {
-                shoppingCart.find { item -> item == plant }?.let {
-                    it.quantity += quantity!!
-                }
-            } else {
-                plant.quantity = quantity!!
-                shoppingCart.add(plant)
 
+            if (quantity == null || quantity < 1) {
+                println("Cantidad invalida")
+                return
             }
-        } else {
-            println("Datos Invalidos")
+            if (plant in shoppingCart) {
+                shoppingCart.find { it == plant }?.let { it.quantity += quantity }
+            } else {
+                plant.quantity = quantity
+                shoppingCart.add(plant)
+            }
+        } catch (e: Exception) {
+            println("Error: $e")
         }
     }
 
-    private fun deleteFromCart(quantity: Int = 1) {
+        /*fun addToCart() {
+            print("Ingresa el id de planta que deseas agregar: ")
+            val indexP = readlnOrNull()?.trim()?.toIntOrNull()
+            val plant = findItemByID(indexP!!)
+            if (plant != null) {
+                try {
+                    print("Cantidad de plantas que deseas agregar: ")
+                    val quantity = readlnOrNull()?.toIntOrNull()
+                    if (shoppingCart.contains(plant)) {
+                        shoppingCart.find { item -> item == plant }?.let {
+                            it.quantity += quantity!!
+                        }
+                    } else {
+                        plant.quantity = quantity!!
+                        shoppingCart.add(plant)
+
+                    }
+                } catch (e: Exception) {
+                    println("Error: $e")
+                }
+            } else {
+                println("Datos Invalidos")
+            }
+        }*/
+
+    private fun deleteFromCart() {
         print("Ingresa el id de planta que deseas eliminar: ")
         val indexP = readlnOrNull()?.trim()?.toIntOrNull()
         val plant = shoppingCart.find { item -> item.id == indexP }
-        if (plant != null) {
+        if (plant == null) {
+            println("Datos Invalidos")
+            return
+        }
+        try {
             print("Cantidad de plantas que deseas disminuir: ")
             val quantity = readlnOrNull()?.toIntOrNull()
-            if (plant.quantity > 1) {
-                plant.quantity -= quantity!!
+            if (quantity == null || quantity < 1) {
+                println("Cantidad invalida")
+                return
+            }
+            if (plant.quantity > quantity) {
+                plant.quantity -= quantity
             } else {
                 shoppingCart.remove(plant)
-
             }
-        } else {
-            println("Datos Invalidos")
+        } catch (e: Exception) {
+            println("Error: $e")
         }
     }
 
@@ -115,8 +153,8 @@ class Cart {
             println("El carrito está vacío.")
         } else {
             println("Plantas en el carrito:")
-            shoppingCart.forEachIndexed { index, elemento ->
-                println("Id: ${elemento.id}, Nombre: ${elemento.name}, Cantidad: ${elemento.quantity}, Precio: ${elemento.price}")
+            shoppingCart.forEach {
+                println("Id: ${it.id}, Nombre: ${it.name}, Cantidad: ${it.quantity}, Precio: ${it.price}")
             }
             println("Total ${shoppingCart.size}")
             menuShow()
