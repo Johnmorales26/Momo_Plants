@@ -91,7 +91,7 @@ class CartTest {
     }
 
     @Test
-    fun increaseQuantity_incrementByOne_quantityIncreasedOne() {
+    fun increaseQuantity_incrementByFive_quantityIncreasedFive() {
         //Given
         val cart = Cart()
 
@@ -116,5 +116,63 @@ class CartTest {
         val plantExpected = PlantsDatabase.getAllPlants()[0]
         plantExpected.quantity = 7
         assertEquals(plantExpected, cart.shoppingCart[1])
+    }
+
+    @Test
+    fun decreaseQuantity_decreaseByOne_quantityDecreasedOne() {
+        //Given
+        val cart = Cart()
+
+        val plant1 = PlantsDatabase.getAllPlants()[5]
+        val plant2 = PlantsDatabase.getAllPlants()[0]
+        val plant3 = PlantsDatabase.getAllPlants()[10]
+
+        plant1.quantity = 1
+        plant2.quantity = 2
+        plant3.quantity = 3
+
+        cart.apply {
+            addItem(plant1)
+            addItem(plant2)
+            addItem(plant3)
+        }
+
+        //When
+        cart.decreaseQuantity(plant2, 1)
+
+        //Then
+        val plantExpected = PlantsDatabase.getAllPlants()[0]
+        plantExpected.quantity = 1
+        assertEquals(plantExpected, cart.shoppingCart[1])
+    }
+
+    @Test
+    fun calcTotal_addFiveItems_getCostFiveItems() {
+        //Given
+        val cart = Cart()
+
+        val plant1 = PlantsDatabase.getAllPlants()[5]
+        val plant2 = PlantsDatabase.getAllPlants()[0]
+        val plant3 = PlantsDatabase.getAllPlants()[10]
+
+        plant1.quantity = 1
+        plant2.quantity = 2
+        plant3.quantity = 3
+
+        cart.apply {
+            addItem(plant1)
+            addItem(plant2)
+            addItem(plant3)
+        }
+
+        //When
+        val result = cart.calcTotal()
+
+        //Then
+        val cost1 = plant1.quantity * plant1.price
+        val cost2 = plant2.quantity * plant2.price
+        val cost3 = plant3.quantity * plant3.price
+        val totalCost = cost1 + cost2 + cost3
+        assertEquals(totalCost.toDouble(), result)
     }
 }

@@ -145,13 +145,17 @@ class Cart {
                 return
             }
             if (plant.quantity > quantity) {
-                plant.quantity -= quantity
+                decreaseQuantity(plant, quantity)
             } else {
                 shoppingCart.remove(plant)
             }
         } catch (e: Exception) {
             println("Error: $e")
         }
+    }
+
+    internal fun decreaseQuantity(plant: PlantEntity, quantity: Int) {
+        plant.quantity -= quantity
     }
 
     fun showPlantsCart() {
@@ -254,7 +258,7 @@ class Cart {
         readlnOrNull()?.toIntOrNull()
     }
 
-    private fun calcTotal(): Double {
+    internal fun calcTotal(): Double {
         var result = 0.0
         for (product in shoppingCart){
             result += product.totalPrice()
