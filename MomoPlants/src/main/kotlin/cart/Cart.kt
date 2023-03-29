@@ -1,5 +1,6 @@
 package cart
 
+import dataAccess.PlantsDatabase
 import entities.PlantEntity
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
@@ -51,7 +52,7 @@ class Cart {
     }
 
     internal fun findItemByName(plantName: String): PlantEntity? =
-        plants.find { item -> item.name.contains(plantName.lowercase()) }
+        shoppingCart.find { item -> item.name.lowercase().contains(plantName.lowercase()) }
 
     internal fun findItemByID(idPlant: Int): PlantEntity? = plants.find { item -> item.id == idPlant }
 

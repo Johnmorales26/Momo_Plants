@@ -2,6 +2,7 @@ package cart
 
 import dataAccess.PlantsDatabase
 import entities.ItemEntity
+import entities.PlantEntity
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
@@ -35,7 +36,7 @@ class CartTest {
         //When
         val result = cart.findItemByName(plantName)
         //Then
-        assertEquals(ItemEntity(PlantsDatabase.getAllPlants()[8], 5), result)
+        assertEquals(ItemEntity(PlantsDatabase.getAllPlants()[8], 1), ItemEntity(result!!, 1))
     }
 
     @Test
