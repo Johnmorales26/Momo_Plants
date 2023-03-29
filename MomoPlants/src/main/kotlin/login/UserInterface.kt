@@ -10,6 +10,7 @@ class UserInterface {
     private val servicio = Service()
 
     fun screenSplash() {
+        Cart.cart.getPlantsByFlow()
         println("Bienvenido a la aplicación!")
         var opcion: Int
         do {
@@ -63,23 +64,22 @@ class UserInterface {
 
     private fun screenMenu() {
         showPlantsCatalogue()
-        val cart = Cart()
         print("Presiona enter para continuar -> ")
         readln()
         while (true) {
             println("BIENVENIDO A MOMO PLANTS")
             println("Menu principal Carrito de compras:")
-            cart.showMenu()
+            Cart.cart.showMenu()
             println("Ingresa una opción: ")
             val prompt = readlnOrNull()?.toIntOrNull()
             when (prompt) {
-                1 -> cart.askPlantToAdd()
-                2 -> cart.askPlantToFind()
-                3 -> cart.askPlantToRemove()
-                4 -> cart.showPlantsCart()
+                1 -> Cart.cart.addToCart()
+                2 -> Cart.cart.askPlantToFind()
+                3 -> Cart.cart.updatePlantInShoppingCart()
+                4 -> Cart.cart.showPlantsCart()
                 5 -> showPlantsCatalogue()
-                6 -> cart.checkOut()
-                7 -> cart.showOldOrders()
+                6 -> Cart.cart.checkOut()
+                7 -> Cart.cart.showOldOrders()
                 8 -> break
 
                 else -> println("Opción inválida.")
