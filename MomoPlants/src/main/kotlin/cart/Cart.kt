@@ -1,14 +1,9 @@
 package cart
 
 import dataAccess.PlantsDatabase
-import entities.ItemEntity
 import entities.PlantEntity
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import utils.PlantsUtils
 
 class Cart {
 
@@ -228,13 +223,6 @@ class Cart {
             oldOrders.forEach {
                 println(it)
             }
-            /*orderList.forEachIndexed { index, plantEntities ->
-                println("Orden No. $index -----")
-                println(plantEntities)
-                plantEntities.forEach {
-                    println("Id: ${it.id}, Nombre: ${it.name}, Cantidad: ${it.quantity}")
-                }
-            }*/
             menuShow()
         }
     }
@@ -267,12 +255,6 @@ class Cart {
         readlnOrNull()?.toIntOrNull()
     }
 
-    internal fun calcTotal(): Double {
-        var result = 0.0
-        for (product in shoppingCart){
-            result += product.totalPrice()
-        }
-        return result
-    }
+    internal fun calcTotal(): Int = shoppingCart.sumOf { it.totalPrice() }
 
 }
