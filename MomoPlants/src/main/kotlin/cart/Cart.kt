@@ -4,6 +4,8 @@ import dataAccess.PlantsDatabase
 import entities.PlantEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 class Cart {
 
@@ -242,6 +244,9 @@ class Cart {
     }
 
     private fun payToCart() {
+        val now = Date();
+        val date = SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz")
+        println("Fecha actual:  ${date.format(now)}")
         println("Su listado de plantas a comprar es el siguiente: ")
         println("------------------------------------------------------------")
         shoppingCart.forEach {
