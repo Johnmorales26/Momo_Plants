@@ -4,8 +4,10 @@ import dataAccess.PlantsDatabase
 import entities.ItemEntity
 import entities.PlantEntity
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import utils.PlantsUtils
 
 class Cart {
@@ -18,7 +20,14 @@ class Cart {
         val cart = Cart()
     }
 
-    fun getPlantsByFlow() = GlobalScope.launch { PlantsUtils.getAllPlantsByFlow().collect { plants.add(it) } }
+    fun getPlantsByCoroutines() {
+        runBlocking {
+            PlantsDatabase.getAllPlants().forEach {
+                plants.add(it)
+                delay(100)
+            }
+        }
+    }
 
     fun showMenu() {
         val menu = listOf(

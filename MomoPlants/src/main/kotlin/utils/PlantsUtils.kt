@@ -23,12 +23,4 @@ object PlantsUtils {
         }
     }
 
-    fun getAllPlantsByFlow(): Flow<PlantEntity> {
-        return flow {
-            PlantsDatabase.getAllPlants().forEach {
-                emit(it)
-            }
-        }
-    }
-
 }

@@ -10,7 +10,7 @@ class UserInterface {
     private val servicio = Service()
 
     fun screenSplash() {
-        Cart.cart.getPlantsByFlow()
+        Cart.cart.getPlantsByCoroutines()
         println("Bienvenido a la aplicación!")
         var opcion: Int
         do {
