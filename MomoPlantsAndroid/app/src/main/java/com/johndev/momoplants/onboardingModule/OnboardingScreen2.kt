@@ -1,12 +1,12 @@
-package com.johndev.momoplants
+package com.johndev.momoplants.onboardingModule
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.johndev.momoplants.R
 
 class OnboardingScreen2 : Fragment() {
 
@@ -24,7 +24,7 @@ class OnboardingScreen2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fab = view.findViewById(R.id.fabNext)
         fab.apply {
-            visibility = GONE
+            visibility = View.GONE
         }
     }
 

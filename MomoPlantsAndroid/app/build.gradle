@@ -47,7 +47,14 @@ dependencies {
     kapt "androidx.room:room-compiler:2.5.0"
     implementation 'androidx.room:room-ktx:2.5.0'
 
-    //  Live Data
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
-    implementation "androidx.compose.runtime:runtime-livedata:1.3.3"
+    // ViewModel
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+    //Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    //LiveData
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
+
+    // Kotlin
+    implementation("androidx.activity:activity-ktx:1.6.1")
+
 }

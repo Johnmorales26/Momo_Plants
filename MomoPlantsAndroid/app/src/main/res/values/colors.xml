@@ -9,4 +9,5 @@
     <color name="secondaryColor">#80534a</color>
     <color name="secondaryDarkColor">#633e38</color>
     <color name="secondaryTextColor">#ffffff</color>
+    <color name="primaryTextColorTransparance">#80000000</color>
 </resources>
