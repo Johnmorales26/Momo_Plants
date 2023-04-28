@@ -30,6 +30,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    namespace 'com.johndev.momoplants'
 }
 
 dependencies {
@@ -53,8 +54,13 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     //LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-
     // Kotlin
     implementation("androidx.activity:activity-ktx:1.6.1")
+
+    //  SharedPreferences
+    implementation 'androidx.preference:preference:1.2.0'
+
+    //  Coil
+    implementation 'io.coil-kt:coil:1.4.0'
 
 }

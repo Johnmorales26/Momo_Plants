@@ -12,5 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" >?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <!--<item name="android:background">@color/backgroundColor</item>
+        <item name="colorSurface">@color/surfaceColor</item>
+        <item name="colorError">@color/errorColor</item>
+        <item name="colorOnBackground">@color/onBackgroundColor</item>
+        <item name="colorOnSurface">@color/onSurfaceColor</item>
+        <item name="colorOnError">@color/onErrorColor</item>-->
     </style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
