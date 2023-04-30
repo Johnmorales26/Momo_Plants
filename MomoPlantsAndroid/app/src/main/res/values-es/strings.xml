@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Momo Plants</string>
+
+    <string name="error_unknow">Error desconocido</string>
+    <string name="error_unique_code">Error de codigo único</string>
+
+    <string name="msg_welcome_user">Bienvenido %s</string>
+    <string name="msg_user_not_found">No se encontró el usuario</string>
+
+    <string name="login_insert_success">Usuario registrado con éxito</string>
+
+    <string name="alert_required">Requerido</string>
+
+</resources>

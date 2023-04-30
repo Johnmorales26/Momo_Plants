@@ -1,20 +1,27 @@
 package com.johndev.momoplants.loginModule.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.UserEntity
+import com.johndev.momoplants.common.utils.Constants
+import com.johndev.momoplants.common.utils.printSnackbarMsg
+import com.johndev.momoplants.common.utils.printToastMsg
+import com.johndev.momoplants.common.utils.setupNavigationTo
+import com.johndev.momoplants.common.utils.validFields
+import com.johndev.momoplants.loginModule.view.LoginActivity.Companion.sharedPreferences
 import com.johndev.momoplants.loginModule.view.LoginActivity.Companion.userViewModel
-import java.lang.StringBuilder
+import com.johndev.momoplants.mainModule.view.MainActivity
 
 class SignUpFragment : Fragment() {
 
@@ -31,6 +38,7 @@ class SignUpFragment : Fragment() {
     private lateinit var etPasswordVerify: TextInputEditText
     private lateinit var tilPasswordVerify: TextInputLayout
     private lateinit var btnSignUp: MaterialButton
+    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,14 +51,29 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initVariables(view)
+        setupToolbar()
         watchPassword()
         recoverData()
         setupObservers(view)
     }
 
+    private fun setupToolbar() {
+        toolbar.setupNavigationTo(fragment = SignMainFragment(), fragmentManager = parentFragmentManager)
+    }
+
     private fun setupObservers(view: View) {
         userViewModel.getSnackbarMsg().observe(viewLifecycleOwner) { msg ->
-            Snackbar.make(view, getString(msg), Snackbar.LENGTH_SHORT).show()
+            when (msg) {
+                R.string.login_insert_success -> {
+                    sharedPreferences.edit {
+                        putBoolean(Constants.IS_SESSION_ACTIVE, true)
+                        apply()
+                    }
+                    printToastMsg(msg, requireContext())
+                    startActivity(Intent(context, MainActivity::class.java))
+                }
+                else -> printSnackbarMsg(view, msg, requireContext())
+            }
         }
     }
 
@@ -77,20 +100,22 @@ class SignUpFragment : Fragment() {
     }
 
     private fun recoverData() {
+        val fields = listOf(
+            etName to tilName,
+            etLastname to tilLastname,
+            etAddress to tilAddress,
+            etEmail to tilEmail,
+            etPassword to tilPassword,
+            etPasswordVerify to tilPasswordVerify
+        )
         btnSignUp.setOnClickListener {
-            if (validFields()) {
-                val name = etName.text.toString().trim()
-                val lastname = etLastname.text.toString().trim()
-                val address = etAddress.text.toString().trim()
-                val email = etEmail.text.toString().trim()
-                val password = etPassword.text.toString().trim()
+            if (validFields(fields, requireContext())) {
                 val userEntity = UserEntity(
                     user_id = System.currentTimeMillis(),
-                    name = StringBuilder().append(name).append(" ").append(lastname).toString()
-                        .trim(),
-                    email = email,
-                    password = password,
-                    direction = address
+                    name = "${etName.text} ${etLastname.text}".trim(),
+                    email = etEmail.text.toString().trim(),
+                    password = etPassword.text.toString().trim(),
+                    direction = etAddress.text.toString().trim()
                 )
                 userViewModel.insert(userEntity)
             }
@@ -102,7 +127,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun initVariables(view: View) {
-        with(view) {
+        view.apply {
             etName = findViewById(R.id.etName)
             tilName= findViewById(R.id.tilName)
             etLastname = findViewById(R.id.etLastname)
@@ -116,74 +141,9 @@ class SignUpFragment : Fragment() {
             etPasswordVerify = findViewById(R.id.etPasswordVerify)
             tilPasswordVerify = findViewById(R.id.tilPasswordVerify)
             btnSignUp = findViewById(R.id.btnSignUp)
+            toolbar = findViewById(R.id.toolbar)
         }
     }
 
-    private fun validFields(): Boolean {
-        var isValid = true
-        //  Evaluando Edit Text Name
-        if (etName.text.isNullOrEmpty()) {
-            tilName.run {
-                error = getString(R.string.alert_required)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            tilName.error = null
-        }
-        //  Evaluando Edit Text Lastname
-        if (etLastname.text.isNullOrEmpty()) {
-            tilLastname.run {
-                error = getString(R.string.alert_required)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            tilLastname.error = null
-        }
-        //  Evaluando Edit Text Address
-        if (etAddress.text.isNullOrEmpty()) {
-            tilAddress.run {
-                error = getString(R.string.alert_required)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            tilAddress.error = null
-        }
-        //  Evaluando Edit Text Email
-        if (etEmail.text.isNullOrEmpty()) {
-            tilEmail.run {
-                error = getString(R.string.alert_required)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            tilEmail.error = null
-        }
-        //  Evaluando Edit Text Password
-        if (etPassword.text.isNullOrEmpty()) {
-            tilPassword.run {
-                error = getString(R.string.alert_required)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            tilPassword.error = null
-        }
-        //  Evaluando Edit Text Password Verify
-        if (etPasswordVerify.text.isNullOrEmpty()) {
-            tilPasswordVerify.run {
-                error = getString(R.string.alert_required)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            tilPasswordVerify.error = null
-        }
-        return isValid
-    }
-
-    private fun String.editable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 }

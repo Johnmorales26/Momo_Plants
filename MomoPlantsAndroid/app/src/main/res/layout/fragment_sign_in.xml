@@ -1,89 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/common_padding_default"
-    android:orientation="vertical"
     tools:context=".loginModule.view.SignInFragment">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vamos a iniciar sesión"
-            android:textStyle="bold"
-            android:layout_marginVertical="@dimen/common_padding_default"
-            style="@style/TextAppearance.MaterialComponents.Headline4"/>
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Te estamos esperando para que te registres y comiences tu viaje con nosotros"
-            style="@style/TextAppearance.MaterialComponents.Body1"/>
-    </LinearLayout>
+            android:layout_height="?attr/actionBarSize"
+            android:title="@string/app_name"
+            android:background="@color/primaryColor"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:padding="@dimen/common_padding_default"
         android:orientation="vertical"
-        android:gravity="center">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilEmail"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_padding_min"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEmail"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:hint="Correo Electronico" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:text="Vamos a iniciar sesión"
+                android:textStyle="bold"
+                android:layout_marginVertical="@dimen/common_padding_default"
+                style="@style/TextAppearance.MaterialComponents.Headline4"/>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/common_padding_min"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etPassword"
+            <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:inputType="textPassword"
-                android:hint="Contraseña" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:text="Te estamos esperando para que te registres y comiences tu viaje con nosotros"
+                style="@style/TextAppearance.MaterialComponents.Body1"/>
+        </LinearLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnForgotPassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="Olvide mi contraseña"
-            android:layout_marginBottom="@dimen/common_padding_default"
-            style="@style/Widget.MaterialComponents.Button.TextButton"/>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignIn"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign In" />
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_padding_min"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:hint="Correo Electronico" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_padding_min"
+                app:passwordToggleEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Password"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnForgotPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="Olvide mi contraseña"
+                android:layout_marginBottom="@dimen/common_padding_default"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sign In" />
+        </LinearLayout>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            layout="@layout/signin_social_media"/>
+
     </LinearLayout>
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        layout="@layout/signin_social_media"/>
-
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
