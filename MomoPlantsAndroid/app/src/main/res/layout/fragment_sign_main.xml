@@ -18,7 +18,7 @@
         android:id="@+id/imgCover"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:src="@drawable/bonsai"
+        android:src="@drawable/img_indoor_plant"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/guideline"/>
 
