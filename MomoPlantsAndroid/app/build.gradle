@@ -54,13 +54,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     //LiveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
-<<<<<<< HEAD
 
-    //Recyclerview
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
-
-=======
->>>>>>> 436f6a7f0ed7985b6dd8b84aa11a0052d0ac166b
     // Kotlin
     implementation("androidx.activity:activity-ktx:1.6.1")
 
