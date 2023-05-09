@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/common_padding_default"
     tools:context=".profileModule.view.ProfileFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ProfileFragment" />
 
-</FrameLayout>
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+
+
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <com.google.android.material.textview.MaterialTextView
+                   android:id="@+id/tvProfile"
+                   style="@style/TextAppearance.MaterialComponents.Headline4"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="sans-serif-condensed"
+                   android:gravity="center_horizontal"
+                   android:text="Mi perfil"
+                   android:textColor="@color/primaryColor"
+                   android:textStyle="bold" />
+
+               <com.google.android.material.imageview.ShapeableImageView
+                   android:id="@+id/profileImage"
+                   android:layout_width="80dp"
+                   android:layout_height="80dp"
+                   android:layout_gravity="center_horizontal"
+                   android:contentDescription="Description"
+                   app:srcCompat="@drawable/ic_person"
+                   android:layout_marginTop="30dp"
+                   android:layout_marginBottom="30dp"/>
+
+               <com.google.android.material.textview.MaterialTextView
+                   android:id="@+id/tvInfo"
+                   style="@style/TextAppearance.MaterialComponents.Headline5"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="sans-serif-condensed"
+                   android:paddingBottom="25dp"
+                   android:text="Información basica"
+                   android:textColor="@color/primaryTextColor"
+                   android:textStyle="bold" />
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/tilName"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:startIconDrawable="@drawable/ic_person"
+                   android:hint="Nombre"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   >
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/etName"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       tools:text="Luis"
+                       android:inputType="textPersonName"
+                       android:enabled="false"
+                       />
+
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/tilEmail"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:startIconDrawable="@drawable/ic_email"
+                   android:hint="Email"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   >
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/etEmail"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       tools:text="luis@gmail.com"
+                       android:inputType="textPersonName"
+                       android:enabled="false"
+                       />
+
+               </com.google.android.material.textfield.TextInputLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/tilPassword"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:startIconDrawable="@drawable/ic_password"
+                   android:hint="Password"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   app:endIconMode="password_toggle"
+                   >
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/etPassword"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       tools:text="Luis"
+                       android:inputType="textPassword"
+                       android:enabled="false"
+                       />
+
+               </com.google.android.material.textfield.TextInputLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:id="@+id/tilAddress"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:startIconDrawable="@drawable/ic_place"
+                   android:hint="Dirección"
+                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                   >
+                   <com.google.android.material.textfield.TextInputEditText
+                       android:id="@+id/etAddress"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       tools:text="direccion"
+                       android:inputType="textMultiLine"
+                       android:singleLine="false"
+                       android:maxLines="3"
+                       android:ellipsize="end"
+                       android:enabled="false"
+                       />
+
+               </com.google.android.material.textfield.TextInputLayout>
+
+               <View
+                   android:layout_width="match_parent"
+                   android:layout_height="1dp"
+                   android:background="@android:color/darker_gray"/>
+
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical"
+               android:layout_marginTop="10dp">
+
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btnEditProfile"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="@dimen/common_padding_default"
+                   android:text="Editar perfil"
+                   />
+               <com.google.android.material.button.MaterialButton
+                   android:id="@+id/btnChangePassword"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginTop="@dimen/common_padding_default"
+                   android:text="Cambiar contraseña"
+                   />
+
+           </LinearLayout>
+
+       </LinearLayout>
+   </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
