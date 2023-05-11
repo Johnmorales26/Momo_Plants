@@ -29,22 +29,22 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvTitle"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/common_padding_default"
-            android:text="Registrate"
+            android:text="@string/btn_sign_up"
             android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvSubtitle"
-            style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Regístrate y descubre todas las funciones que nuestra aplicación tiene para ofrecerte. Es rápido, fácil y gratuito. ¡Únete ahora!"
+            android:text="@string/label_sign_up_description"
+            android:textAppearance="?attr/textAppearanceBody1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_padding_default"
             android:layout_marginEnd="@dimen/common_padding_min"
+            android:hint="@string/hint_name"
             app:layout_constraintEnd_toStartOf="@id/tilSurname"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
@@ -64,7 +65,6 @@
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Name"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,7 +84,7 @@
                 android:id="@+id/etLastname"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Lastname"
+                android:hint="@string/hint_lastname"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +103,7 @@
                 android:id="@+id/etAddress"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Address"
+                android:hint="@string/hint_address"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -122,7 +122,7 @@
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Email"
+                android:hint="@string/hint_email"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -142,7 +142,7 @@
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Password"
+                android:hint="@string/hint_password"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -162,7 +162,7 @@
                 android:id="@+id/etPasswordVerify"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Verify the password"
+                android:hint="@string/hint_verigy_password"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -172,7 +172,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_padding_default"
-            android:text="Sign Up"
+            android:text="@string/btn_sign_up"
             app:layout_constraintTop_toBottomOf="@id/tilPasswordVerify" />
 
         <include

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import com.johndev.momoplants.R
@@ -16,12 +17,12 @@ class ProfileFragment : Fragment() {
     private lateinit var etEmail:TextInputEditText
     private lateinit var etPassword:TextInputEditText
     private lateinit var etAddress:TextInputEditText
+    private lateinit var btnSelectImg: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
@@ -30,6 +31,13 @@ class ProfileFragment : Fragment() {
         initComponents(view)
         setupViewModel()
         setupObservers()
+        setupButtons()
+    }
+
+    private fun setupButtons() {
+        btnSelectImg.setOnClickListener {
+            Toast.makeText(requireContext(), "Comming soon this functionality", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun initComponents(view: View) {
@@ -38,6 +46,7 @@ class ProfileFragment : Fragment() {
            etEmail = findViewById(R.id.etEmail)
            etPassword = findViewById(R.id.etPassword)
            etAddress = findViewById(R.id.etAddress)
+           btnSelectImg = findViewById(R.id.btnSelectImg)
        }
 
     }
@@ -55,6 +64,11 @@ class ProfileFragment : Fragment() {
                     etPassword.text = password.trim().editable()
                     etAddress.text  =direction.trim().editable()
                 }
+            } ?: run {
+                etName.text = "Usuario No Encontrado".editable()
+                etEmail.text = "Usuario No Encontrado".editable()
+                etPassword.text = "Usuario No Encontrado".editable()
+                etAddress.text  = "Usuario No Encontrado".editable()
             }
         }
     }

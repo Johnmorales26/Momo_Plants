@@ -13,6 +13,7 @@
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_margin="@dimen/common_padding_min"
+        android:contentDescription="@null"
         android:src="@drawable/ic_facebook" />
 
 </com.google.android.material.card.MaterialCardView>

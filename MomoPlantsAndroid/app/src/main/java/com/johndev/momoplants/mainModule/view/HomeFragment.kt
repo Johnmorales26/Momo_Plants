@@ -13,6 +13,7 @@ import com.johndev.momoplants.common.dataAccess.OnClickListener
 import com.johndev.momoplants.R
 import com.johndev.momoplants.adapter.PlantAdapter
 import com.johndev.momoplants.common.entities.PlantEntity
+import com.johndev.momoplants.common.utils.Constants.PLANT_ID
 import com.johndev.momoplants.common.utils.getAllPlants
 import com.johndev.momoplants.detailsModule.view.DetailsActivity
 
@@ -43,7 +44,9 @@ class HomeFragment : Fragment(), OnClickListener {
     }
 
     override fun onClicListener(plantEntity: PlantEntity) {
-        val intent = Intent(requireContext(), DetailsActivity::class.java)
+        val intent = Intent(requireContext(), DetailsActivity::class.java).apply {
+            putExtra(PLANT_ID, plantEntity.plant_id)
+        }
         startActivity(intent)
     }
 }

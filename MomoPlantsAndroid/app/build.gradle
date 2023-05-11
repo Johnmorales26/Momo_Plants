@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.johndev.momoplants"
-        minSdk 21
+        minSdk 23
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -29,6 +29,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+    buildFeatures{
+        viewBinding = true
     }
     namespace 'com.johndev.momoplants'
 }
@@ -63,5 +66,8 @@ dependencies {
 
     //  Coil
     implementation 'io.coil-kt:coil:1.4.0'
+
+    //Jetpack security, for file encryption
+    implementation 'androidx.security:security-crypto:1.0.0'
 
 }

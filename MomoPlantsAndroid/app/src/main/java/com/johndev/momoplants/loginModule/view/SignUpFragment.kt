@@ -117,7 +117,7 @@ class SignUpFragment : Fragment() {
                     password = etPassword.text.toString().trim(),
                     direction = etAddress.text.toString().trim()
                 )
-                userViewModel.insert(userEntity)
+                userViewModel.insert(userEntity, context)
             }
         }
     }

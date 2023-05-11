@@ -19,6 +19,7 @@
             android:layout_marginTop="@dimen/common_padding_default"
             android:layout_marginEnd="@dimen/common_padding_default"
             android:src="@drawable/bonsai"
+            android:contentDescription="@null"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -29,23 +30,22 @@
             android:layout_marginStart="@dimen/common_padding_default"
             tools:text="AloeVera"
             android:textStyle="bold"
+            android:textAppearance="?attr/textAppearanceHeadline5"
             app:layout_constraintTop_toTopOf="@id/imgPlant"
             app:layout_constraintEnd_toStartOf="@id/imgPlant"
-            app:layout_constraintStart_toStartOf="parent"
-            style="@style/TextAppearance.MaterialComponents.Headline5"/>
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="$20.00"
-            android:textSize="18dp"
             android:textStyle="bold"
             android:textColor="@color/primaryColor"
+            android:textAppearance="?attr/textAppearanceSubtitle2"
             app:layout_constraintTop_toBottomOf="@+id/tvPlantName"
             app:layout_constraintStart_toStartOf="@+id/tvPlantName"
-            app:layout_constraintEnd_toEndOf="@+id/tvPlantName"
-            style="@style/TextAppearance.MaterialComponents.Overline"/>
+            app:layout_constraintEnd_toEndOf="@+id/tvPlantName"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvDescription"
@@ -53,17 +53,17 @@
             android:layout_height="wrap_content"
             android:maxLines="2"
             android:ellipsize="end"
+            android:textAppearance="?attr/textAppearanceBody1"
             tools:text="Aloe vera, llamado sábila, acíbar o áloe de Barbados, entre otros, es una especie suculenta."
             app:layout_constraintTop_toBottomOf="@id/tvPrice"
             app:layout_constraintStart_toStartOf="@id/tvPlantName"
-            app:layout_constraintEnd_toEndOf="@id/tvPlantName"
-            style="@style/TextAppearance.AppCompat.Body1"/>
+            app:layout_constraintEnd_toEndOf="@id/tvPlantName"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ver detalles"
+            android:text="@string/btn_see_details"
             android:layout_marginTop="@dimen/common_padding_min"
             app:layout_constraintTop_toBottomOf="@id/tvDescription"
             app:layout_constraintStart_toStartOf="@id/tvPrice"

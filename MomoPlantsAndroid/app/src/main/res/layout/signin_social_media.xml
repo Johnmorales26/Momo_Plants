@@ -6,12 +6,12 @@
     android:orientation="vertical">
 
     <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Subtitle1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/common_padding_min"
-        android:text="O inicia sesion con las redes sociales"
-        android:textAlignment="center" />
+        android:text="@string/label_social_media"
+        android:textAlignment="center"
+        android:textAppearance="?attr/textAppearanceBody1"/>
 
     <LinearLayout
         android:layout_width="match_parent"

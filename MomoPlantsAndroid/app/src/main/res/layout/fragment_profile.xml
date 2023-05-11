@@ -7,164 +7,168 @@
     android:padding="@dimen/common_padding_default"
     tools:context=".profileModule.view.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical">
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/label_my_profile"
+                android:textColor="@color/primaryColor"
+                android:textStyle="bold"
+                android:textAppearance="?attr/textAppearanceHeadline4"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="@dimen/common_padding_min">
+
+                <ImageView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_person" />
+
+                <ImageButton
+                    android:id="@+id/btnSelectImg"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_image_search"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/common_padding_middle"
+                android:text="@string/label_basic_information"
+                android:textAppearance="?attr/textAppearanceHeadline5"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_name"
+                app:startIconDrawable="@drawable/ic_person">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    tools:text="Luis" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_email"
+                app:startIconDrawable="@drawable/ic_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:enabled="false"
+                    android:inputType="textPersonName"
+                    tools:text="luis@gmail.com" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_password"
+                app:endIconMode="password_toggle"
+                app:startIconDrawable="@drawable/ic_password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:enabled="false"
+                    android:inputType="textPassword"
+                    tools:text="Luis" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hint_address"
+                app:startIconDrawable="@drawable/ic_place">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ellipsize="end"
+                    android:enabled="false"
+                    android:inputType="textMultiLine"
+                    android:maxLines="3"
+                    android:singleLine="false"
+                    tools:text="direccion" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
 
 
+        </LinearLayout>
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-               <com.google.android.material.textview.MaterialTextView
-                   android:id="@+id/tvProfile"
-                   style="@style/TextAppearance.MaterialComponents.Headline4"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:fontFamily="sans-serif-condensed"
-                   android:gravity="center_horizontal"
-                   android:text="Mi perfil"
-                   android:textColor="@color/primaryColor"
-                   android:textStyle="bold" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:text="@string/btn_edit_profile" />
 
-               <com.google.android.material.imageview.ShapeableImageView
-                   android:id="@+id/profileImage"
-                   android:layout_width="80dp"
-                   android:layout_height="80dp"
-                   android:layout_gravity="center_horizontal"
-                   android:contentDescription="Description"
-                   app:srcCompat="@drawable/ic_person"
-                   android:layout_marginTop="30dp"
-                   android:layout_marginBottom="30dp"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnChangePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:text="@string/btn_change_password" />
 
-               <com.google.android.material.textview.MaterialTextView
-                   android:id="@+id/tvInfo"
-                   style="@style/TextAppearance.MaterialComponents.Headline5"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:fontFamily="sans-serif-condensed"
-                   android:paddingBottom="25dp"
-                   android:text="Información basica"
-                   android:textColor="@color/primaryTextColor"
-                   android:textStyle="bold" />
-               <com.google.android.material.textfield.TextInputLayout
-                   android:id="@+id/tilName"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:startIconDrawable="@drawable/ic_person"
-                   android:hint="Nombre"
-                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                   >
-                   <com.google.android.material.textfield.TextInputEditText
-                       android:id="@+id/etName"
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       tools:text="Luis"
-                       android:inputType="textPersonName"
-                       android:enabled="false"
-                       />
+        </LinearLayout>
 
-               </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
-               <com.google.android.material.textfield.TextInputLayout
-                   android:id="@+id/tilEmail"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:startIconDrawable="@drawable/ic_email"
-                   android:hint="Email"
-                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                   >
-                   <com.google.android.material.textfield.TextInputEditText
-                       android:id="@+id/etEmail"
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       tools:text="luis@gmail.com"
-                       android:inputType="textPersonName"
-                       android:enabled="false"
-                       />
-
-               </com.google.android.material.textfield.TextInputLayout>
-               <com.google.android.material.textfield.TextInputLayout
-                   android:id="@+id/tilPassword"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:startIconDrawable="@drawable/ic_password"
-                   android:hint="Password"
-                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                   app:endIconMode="password_toggle"
-                   >
-                   <com.google.android.material.textfield.TextInputEditText
-                       android:id="@+id/etPassword"
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       tools:text="Luis"
-                       android:inputType="textPassword"
-                       android:enabled="false"
-                       />
-
-               </com.google.android.material.textfield.TextInputLayout>
-               <com.google.android.material.textfield.TextInputLayout
-                   android:id="@+id/tilAddress"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:startIconDrawable="@drawable/ic_place"
-                   android:hint="Dirección"
-                   style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                   >
-                   <com.google.android.material.textfield.TextInputEditText
-                       android:id="@+id/etAddress"
-                       android:layout_width="match_parent"
-                       android:layout_height="match_parent"
-                       tools:text="direccion"
-                       android:inputType="textMultiLine"
-                       android:singleLine="false"
-                       android:maxLines="3"
-                       android:ellipsize="end"
-                       android:enabled="false"
-                       />
-
-               </com.google.android.material.textfield.TextInputLayout>
-
-               <View
-                   android:layout_width="match_parent"
-                   android:layout_height="1dp"
-                   android:background="@android:color/darker_gray"/>
-
-
-           </LinearLayout>
-
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:orientation="vertical"
-               android:layout_marginTop="10dp">
-
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/btnEditProfile"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="@dimen/common_padding_default"
-                   android:text="Editar perfil"
-                   />
-               <com.google.android.material.button.MaterialButton
-                   android:id="@+id/btnChangePassword"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginTop="@dimen/common_padding_default"
-                   android:text="Cambiar contraseña"
-                   />
-
-           </LinearLayout>
-
-       </LinearLayout>
-   </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+</androidx.core.widget.NestedScrollView>

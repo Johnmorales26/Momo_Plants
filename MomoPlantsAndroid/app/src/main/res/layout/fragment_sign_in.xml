@@ -37,16 +37,16 @@
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Vamos a iniciar sesión"
+                android:text="@string/label_log_in"
                 android:textStyle="bold"
                 android:layout_marginVertical="@dimen/common_padding_default"
-                style="@style/TextAppearance.MaterialComponents.Headline4"/>
+                android:textAppearance="?attr/textAppearanceHeadline4"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Te estamos esperando para que te registres y comiences tu viaje con nosotros"
-                style="@style/TextAppearance.MaterialComponents.Body1"/>
+                android:text="@string/label_instructions_log_in"
+                android:textAppearance="?attr/textAppearanceBody1"/>
         </LinearLayout>
 
         <LinearLayout
@@ -60,14 +60,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/common_padding_min"
+                android:hint="@string/hint_email"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    android:hint="Correo Electronico" />
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -76,14 +77,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/common_padding_min"
                 app:passwordToggleEnabled="true"
+                android:hint="@string/hint_password"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etPassword"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Password"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:ellipsize="end"
+                    android:imeOptions="actionDone"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -92,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="Olvide mi contraseña"
+                android:text="@string/btn_forgot_password"
                 android:layout_marginBottom="@dimen/common_padding_default"
                 style="@style/Widget.MaterialComponents.Button.TextButton"/>
 
@@ -100,7 +103,7 @@
                 android:id="@+id/btnSignIn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sign In" />
+                android:text="@string/btn_sign_in" />
         </LinearLayout>
 
         <include

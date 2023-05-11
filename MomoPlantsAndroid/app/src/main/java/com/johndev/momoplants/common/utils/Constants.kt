@@ -8,5 +8,6 @@ object Constants {
 
     const val IS_SESSION_ACTIVE = "IS_SESSION_ACTIVE"
     const val USER_ACTIVE = "USER_ACTIVE"
+    const val PLANT_ID = "PLANT_ID"
 
 }

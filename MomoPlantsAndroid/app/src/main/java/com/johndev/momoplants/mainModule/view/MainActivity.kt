@@ -1,19 +1,15 @@
 package com.johndev.momoplants.mainModule.view
 
-import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.johndev.momoplants.R
 import com.johndev.momoplants.cartModule.view.CartFragment
 import com.johndev.momoplants.common.utils.Constants
 import com.johndev.momoplants.common.utils.openFragment
-import com.johndev.momoplants.common.utils.setupNavigationTo
-import com.johndev.momoplants.loginModule.view.LoginActivity
-import com.johndev.momoplants.loginModule.view.SignMainFragment
 import com.johndev.momoplants.profileModule.view.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
