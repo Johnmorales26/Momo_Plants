@@ -23,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="@string/label_my_profile"
-                android:textColor="@color/primaryColor"
+                android:fontFamily="sans-serif-condensed"
+                android:textColor="@color/backgroundColorDark"
                 android:textStyle="bold"
                 android:textAppearance="?attr/textAppearanceHeadline4"/>
 
@@ -60,6 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/common_padding_middle"
                 android:text="@string/label_basic_information"
+                android:textColor="@color/primaryDarkColor"
                 android:textAppearance="?attr/textAppearanceHeadline5"
                 android:textStyle="bold" />
 
@@ -155,6 +157,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnEditProfile"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_padding_default"
@@ -162,6 +165,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnChangePassword"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/common_padding_default"
