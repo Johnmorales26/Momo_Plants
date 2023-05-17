@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MomoPlants">
         <activity
-            android:name=".detailsModule.view.DetailsActivity"
+            android:name=".settingsModule.view.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".loginModule.view.LoginActivity"
@@ -22,8 +22,11 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".detailsModule.view.DetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".mainModule.view.MainActivity"
-            android:exported="true" />
+            android:exported="false" />
     </application>
 
 </manifest>

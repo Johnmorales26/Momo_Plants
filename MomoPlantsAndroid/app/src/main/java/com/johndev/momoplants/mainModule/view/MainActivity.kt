@@ -14,7 +14,6 @@ import com.johndev.momoplants.profileModule.view.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var bottomNavigation: BottomNavigationView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +55,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun getIdUser() {
         val idUser = sharedPreferences.getLong(Constants.USER_ACTIVE, 0)
-        Toast.makeText(this, idUser.toString(), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(this, idUser.toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    companion object {
+        lateinit var sharedPreferences: SharedPreferences
     }
 
 }

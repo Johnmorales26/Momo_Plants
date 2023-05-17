@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import coil.load
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.utils.Constants.IS_SESSION_ACTIVE
 import com.johndev.momoplants.common.utils.Constants.USER_ACTIVE
@@ -18,6 +16,7 @@ import com.johndev.momoplants.common.utils.printToastMsg
 import com.johndev.momoplants.common.utils.printToastWithStringMsg
 import com.johndev.momoplants.common.utils.setupNavigationTo
 import com.johndev.momoplants.common.utils.validFields
+import com.johndev.momoplants.databinding.FragmentSignInBinding
 import com.johndev.momoplants.loginModule.view.LoginActivity.Companion.sharedPreferences
 import com.johndev.momoplants.loginModule.view.LoginActivity.Companion.userViewModel
 import com.johndev.momoplants.mainModule.view.MainActivity
@@ -26,40 +25,57 @@ import kotlinx.coroutines.launch
 
 class SignInFragment : Fragment() {
 
-    private lateinit var tilEmail: TextInputLayout
-    private lateinit var tilPassword: TextInputLayout
-    private lateinit var etEmail: TextInputEditText
-    private lateinit var etPassword: TextInputEditText
-    private lateinit var btnSignIn: MaterialButton
-    private lateinit var toolbar: androidx.appcompat.widget.Toolbar
+    private var _binding: FragmentSignInBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_in, container, false)
+    ): View {
+        _binding = FragmentSignInBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initComponents(view)
         setupToolbar()
+        setupButtons()
         recoveryData()
         setupObservers()
     }
 
+    private fun setupButtons() {
+        with(binding) {
+            viewButtons.apply {
+                btnFacebook.imgButton.load(R.drawable.ic_facebook)
+                btnGoogle.imgButton.load(R.drawable.ic_google)
+                btnFacebook.imgButton.setOnClickListener {
+                    printToastMsg(R.string.soon_available_option, requireContext())
+                }
+                btnGoogle.imgButton.setOnClickListener {
+                    printToastMsg(R.string.soon_available_option, requireContext())
+                }
+                btnForgotPassword.setOnClickListener {
+                    printToastMsg(R.string.soon_available_option, requireContext())
+                }
+            }
+        }
+    }
+
     private fun setupToolbar() {
-        toolbar.setupNavigationTo(fragment = SignMainFragment(), fragmentManager = parentFragmentManager)
+        binding.toolbar.setupNavigationTo(
+            fragment = SignMainFragment(),
+            fragmentManager = parentFragmentManager
+        )
     }
 
     private fun setupObservers() {
         userViewModel.getRegisteredUser().observe(viewLifecycleOwner) { user ->
             user?.let {
                 printToastWithStringMsg(R.string.msg_welcome_user, user.name, requireContext())
+                userViewModel.writeToSharedPrefs(requireContext(), user.user_id)
                 sharedPreferences.edit {
                     putBoolean(IS_SESSION_ACTIVE, true)
-                    putLong(USER_ACTIVE, user.user_id)
                     apply()
                 }
                 startActivity(Intent(context, MainActivity::class.java))
@@ -70,13 +86,13 @@ class SignInFragment : Fragment() {
 
     private fun recoveryData() {
         val fields = listOf(
-            etEmail to tilEmail,
-            etPassword to tilPassword
+            binding.etEmail to binding.tilEmail,
+            binding.etPassword to binding.tilPassword
         )
-        btnSignIn.setOnClickListener {
+        binding.btnSignIn.setOnClickListener {
             if (validFields(fields, requireContext())) {
-                val email = etEmail.text.toString().trim()
-                val password = etPassword.text.toString().trim()
+                val email = binding.etEmail.text.toString().trim()
+                val password = binding.etPassword.text.toString().trim()
                 lifecycleScope.launch(Dispatchers.IO) {
                     userViewModel.getUserByEmailAndPassword(email, password)
                 }
@@ -84,15 +100,9 @@ class SignInFragment : Fragment() {
         }
     }
 
-    private fun initComponents(view: View) {
-        view.apply {
-            tilEmail = findViewById(R.id.tilEmail)
-            tilPassword = findViewById(R.id.tilPassword)
-            etEmail = findViewById(R.id.etEmail)
-            etPassword = findViewById(R.id.etPassword)
-            btnSignIn = findViewById(R.id.btnSignIn)
-            toolbar = findViewById(R.id.toolbar)
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

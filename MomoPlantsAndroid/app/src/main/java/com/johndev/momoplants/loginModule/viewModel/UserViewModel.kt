@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.johndev.momoplants.R
@@ -42,7 +43,8 @@ class UserViewModel() : ViewModel() {
         )
     }
 
-    private fun writeToSharedPrefs(value: Long) {
+    fun writeToSharedPrefs(context: Context, value: Long) {
+        _context.value = context
         with (sharedPreferences.edit()) {
             putLong(Constants.USER_ACTIVE, value)
             apply()
@@ -65,13 +67,12 @@ class UserViewModel() : ViewModel() {
         }
     }
 
-    fun insert(userEntity: UserEntity, context: Context?) {
-        _context.value = context
+    fun insert(userEntity: UserEntity, context: Context) {
         viewModelScope.launch {
             try {
                 repository.insert(userEntity)
                 getUserByEmailAndPassword(userEntity.email, userEntity.password)
-                writeToSharedPrefs(userEntity.user_id)
+                writeToSharedPrefs(context, userEntity.user_id)
                 snackbarMsg.value = R.string.login_insert_success
             } catch (e: Exception) {
                 snackbarMsg.value = getMsgErrorByCode(e.message)

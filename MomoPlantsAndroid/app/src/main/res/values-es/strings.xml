@@ -13,4 +13,47 @@
 
     <string name="alert_required">Requerido</string>
 
+    <string name="bottom_navigation_home">Principal</string>
+    <string name="bottom_navigation_cart">Carrito</string>
+    <string name="bottom_navigation_profile">Perfil</string>
+
+    <string name="label_description">Descripción:</string>
+    <string name="label_format">Formato:</string>
+    <string name="label_origin">Origen:</string>
+    <string name="label_weather">Clima:</string>
+    <string name="label_my_profile">Mi perfil</string>
+    <string name="label_basic_information">Información basica</string>
+    <string name="label_favorite_plant">Encuentra tu planta favorita</string>
+    <string name="label_instructions_one">Te ayudamos a elegir tu primera planta crea tu propio jardín hermoso con nustra colección de plantas.</string>
+    <string name="label_log_in">Vamos a iniciar sesión</string>
+    <string name="label_instructions_log_in">Te estamos esperando para que te registres y comiences tu viaje con nosotros</string>
+    <string name="label_main_title">Planta un árbol verde a la tierra</string>
+    <string name="label_main_description">Plante en un lugar soleado, la mayoría de las plantas necesitan al menos 6 horas de luz solar directa por día.</string>
+    <string name="label_sign_up_description">Regístrate y descubre todas las funciones que nuestra aplicación tiene para ofrecerte. Es rápido, fácil y gratuito. ¡Únete ahora!</string>
+    <string name="label_social_media">O inicia sesion con las redes sociales</string>
+    <string name="label_onboarging_title_end">Las plantas hacen la vida mejor</string>
+    <string name="label_onboarging_description_end">Encuentra la planta ideal para ti y has que tu casa se convierta en un hermoso jardín.</string>
+
+    <string name="btn_add_to_cart">Añadir al carrito</string>
+    <string name="btn_skip">Saltar</string>
+    <string name="btn_edit_profile">Editar perfil</string>
+    <string name="btn_change_password">Cambiar contraseña</string>
+    <string name="btn_forgot_password">Olvide mi contraseña</string>
+    <string name="btn_sign_in">Iniciar sesión</string>
+    <string name="btn_sign_up">Registrarse</string>
+    <string name="btn_see_details">Ver detalles</string>
+    <string name="btn_sign_out">Cerrar Sesión</string>
+
+    <string name="hint_name">Nombre</string>
+    <string name="hint_email">Correo</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_address">Dirección</string>
+    <string name="hint_lastname">Apellido</string>
+    <string name="hint_verigy_password">Verifica la contraseña</string>
+
+    <string name="soon_available_option">Estamos trabajando en esta opción</string>
+
+    <string name="menu_option_about">Acerca de</string>
+    <string name="menu_option_settings">Configuración</string>
+
 </resources>

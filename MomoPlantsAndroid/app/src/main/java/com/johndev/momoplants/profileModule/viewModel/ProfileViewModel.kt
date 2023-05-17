@@ -1,6 +1,7 @@
 package com.johndev.momoplants.profileModule.viewModel
 
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,6 +11,8 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.johndev.momoplants.common.entities.UserEntity
 import com.johndev.momoplants.common.utils.Constants
+import com.johndev.momoplants.common.utils.Constants.IS_SESSION_ACTIVE
+import com.johndev.momoplants.common.utils.Constants.USER_ACTIVE
 import com.johndev.momoplants.profileModule.model.ProfileRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,7 +55,18 @@ class ProfileViewModel:ViewModel() {
     }
 
     private fun readFromSharedPrefs(): Long {
-        return sharedPreferences.getLong(Constants.USER_ACTIVE, 0L)
+        return sharedPreferences.getLong(USER_ACTIVE, 0L)
+    }
+
+    private fun writeToSharedPrefs() {
+        with (sharedPreferences.edit()) {
+            putLong(USER_ACTIVE, 0)
+            apply()
+        }
+    }
+
+    fun onLogOut() {
+        writeToSharedPrefs()
     }
 
 

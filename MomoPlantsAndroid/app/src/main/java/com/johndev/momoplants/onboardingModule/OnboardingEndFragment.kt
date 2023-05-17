@@ -42,8 +42,8 @@ class OnboardingEndFragment : Fragment() {
     }
 
     private fun changeTextViews() {
-        tvTitle.text = "Las plantas hacen la vida mejor"
-        tvDescription.text = "Encuentra la planta ideal para ti y has que tu casa se convierta en un hermoso jardín."
+        tvTitle.text = getString(R.string.label_onboarging_title_end)
+        tvDescription.text = getString(R.string.label_onboarging_description_end)
     }
 
     private fun setupButtons() {

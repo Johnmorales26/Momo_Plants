@@ -5,9 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".cartModule.view.CartFragment">
 
-    <TextView
+    <include
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="CartFragment" />
+        layout="@layout/view_build_screens"/>
 
 </FrameLayout>

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View.GONE
 import android.widget.Toast
+import com.johndev.momoplants.R
 import com.johndev.momoplants.common.utils.Constants.PLANT_ID
 import com.johndev.momoplants.common.utils.getAllPlants
 import com.johndev.momoplants.databinding.ActivityDetailsBinding
@@ -23,7 +24,7 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun setupButtons() {
         binding.btnAdd.setOnClickListener {
-            Toast.makeText(this, "Soon available this option", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.soon_available_option), Toast.LENGTH_SHORT).show()
             finish()
         }
     }
