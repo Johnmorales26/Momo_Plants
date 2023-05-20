@@ -42,7 +42,6 @@
     <string name="btn_sign_in">Iniciar sesión</string>
     <string name="btn_sign_up">Registrarse</string>
     <string name="btn_see_details">Ver detalles</string>
-    <string name="btn_sign_out">Cerrar Sesión</string>
 
     <string name="hint_name">Nombre</string>
     <string name="hint_email">Correo</string>
@@ -55,5 +54,6 @@
 
     <string name="menu_option_about">Acerca de</string>
     <string name="menu_option_settings">Configuración</string>
+    <string name="menu_option_sign_out">Cerrar Sesión</string>
 
 </resources>

@@ -192,14 +192,6 @@
                     android:layout_marginTop="@dimen/common_padding_min"
                     android:text="@string/btn_change_password" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSignOut"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_padding_min"
-                    android:text="@string/btn_sign_out" />
-
             </LinearLayout>
 
         </LinearLayout>

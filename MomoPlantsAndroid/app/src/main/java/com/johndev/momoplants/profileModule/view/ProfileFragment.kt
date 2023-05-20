@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
 import com.johndev.momoplants.R
@@ -52,6 +53,15 @@ class ProfileFragment : Fragment() {
                     startActivity(Intent(requireContext(), SettingsActivity::class.java))
                     true
                 }
+                R.id.action_signout -> {
+                    getInstanceProfileVM().onLogOut()
+                    sharedPreferences.edit {
+                        putBoolean(Constants.IS_SESSION_ACTIVE, false)
+                        apply()
+                    }
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                    true
+                }
                 else -> false
             }
         }
@@ -60,14 +70,6 @@ class ProfileFragment : Fragment() {
     private fun setupButtons() {
         binding.btnSelectImg.setOnClickListener {
             printToastMsg(R.string.soon_available_option, requireContext())
-        }
-        binding.btnSignOut.setOnClickListener {
-            getInstanceProfileVM().onLogOut()
-            sharedPreferences.edit {
-                putBoolean(Constants.IS_SESSION_ACTIVE, false)
-                apply()
-            }
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
         }
         binding.btnEditProfile.setOnClickListener {
             printToastMsg(
@@ -80,6 +82,7 @@ class ProfileFragment : Fragment() {
                 R.string.soon_available_option,
                 requireContext()
             )
+            Toast.makeText(requireContext(), R.string.soon_available_option, Toast.LENGTH_SHORT).show()
         }
     }
 
