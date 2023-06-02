@@ -51,10 +51,6 @@ class UserViewModel() : ViewModel() {
         }
     }
 
-    private fun readFromSharedPrefs(): Long {
-        return sharedPreferences.getLong(Constants.USER_ACTIVE, 0L)
-    }
-
     private val registeredUser = MutableLiveData<UserEntity?>()
     fun getRegisteredUser() = registeredUser
 
@@ -70,10 +66,13 @@ class UserViewModel() : ViewModel() {
     fun insert(userEntity: UserEntity, context: Context) {
         viewModelScope.launch {
             try {
-                repository.insert(userEntity)
-                getUserByEmailAndPassword(userEntity.email, userEntity.password)
-                writeToSharedPrefs(context, userEntity.user_id)
-                snackbarMsg.value = R.string.login_insert_success
+                if (repository.insert(userEntity) < 0) {
+                    snackbarMsg.value = R.string.login_insert_error
+                } else {
+                    getUserByEmailAndPassword(userEntity.email, userEntity.password)
+                    writeToSharedPrefs(context, userEntity.user_id)
+                    snackbarMsg.value = R.string.login_insert_success
+                }
             } catch (e: Exception) {
                 snackbarMsg.value = getMsgErrorByCode(e.message)
             }

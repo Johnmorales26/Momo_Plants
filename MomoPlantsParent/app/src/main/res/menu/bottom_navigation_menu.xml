@@ -9,12 +9,6 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/ic_shopping_cart"
-        android:title="@string/bottom_navigation_cart"
-        app:showAsAction="ifRoom" />
-
-    <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person"
         android:title="@string/bottom_navigation_profile"
