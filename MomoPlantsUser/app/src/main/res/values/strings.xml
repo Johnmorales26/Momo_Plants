@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Momo Plants</string>
+
+    <string name="error_unknow">Error unknown</string>
+    <string name="error_unique_code">Error unique code</string>
+
+    <string name="msg_welcome_user">Welcome, %s</string>
+    <string name="msg_user_not_found">User not found</string>
+
+    <string name="login_insert_success">Insert Success</string>
+
+    <string name="alert_required">Required</string>
+
+    <string name="bottom_navigation_home">Home</string>
+    <string name="bottom_navigation_cart">Cart</string>
+    <string name="bottom_navigation_profile">Profile</string>
+
+    <string name="label_description">Description:</string>
+    <string name="label_format">Format:</string>
+    <string name="label_origin">Origin:</string>
+    <string name="label_weather">Weather:</string>
+    <string name="label_my_profile">My profile</string>
+    <string name="label_basic_information">Basic information</string>
+    <string name="label_favorite_plant">Find your favourite plant</string>
+    <string name="label_instructions_one">We help you choose your first plant and create your own beautiful garden with our plant collection.</string>
+    <string name="label_log_in">Let\'s log in</string>
+    <string name="label_instructions_log_in">We are waiting for you to register and start your journey with us</string>
+    <string name="label_main_title">Plant a green tree to the earth</string>
+    <string name="label_main_description">Plant in a sunny location, most plants need at least 6 hours of direct sunlight per day.</string>
+    <string name="label_sign_up_description">Sign up and discover all the features our application has to offer. It\'s fast, easy, and free. Join now!</string>
+    <string name="label_social_media">Or sign in with social media</string>
+    <string name="label_onboarging_title_end">Plants make life better</string>
+    <string name="label_onboarging_description_end">Find the ideal plant for you and make your home a beautiful garden.</string>
+
+    <string name="btn_add_to_cart">Add to cart</string>
+    <string name="btn_skip">Skip</string>
+    <string name="btn_edit_profile">Edit profile</string>
+    <string name="btn_change_password">Change password</string>
+    <string name="btn_forgot_password">Forgot password</string>
+    <string name="btn_sign_in">Sign In</string>
+    <string name="btn_sign_up">Sign Up</string>
+    <string name="btn_see_details">See details</string>
+
+    <string name="hint_name">Name</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_address">Address</string>
+    <string name="hint_lastname">Lastname</string>
+    <string name="hint_verigy_password">Verify the password</string>
+
+    <string name="soon_available_option">Soon available this option</string>
+
+    <string name="menu_option_about">About</string>
+    <string name="menu_option_settings">Settings</string>
+    <string name="menu_option_sign_out">Sign Out</string>
+    <string name="login_insert_error">Error</string>
+
+    <string name="msg_stock_with_stock">There are plants in our warehouses</string>
+    <string name="msg_stock_without_stock">There are no plants in our warehouses</string>
+
+</resources>

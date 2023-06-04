@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "124533420691",
+    "project_id": "momo-plants",
+    "storage_bucket": "momo-plants.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124533420691:android:65225b32243be290c19366",
+        "android_client_info": {
+          "package_name": "com.johndev.momoplants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124533420691-r6ngnik17pk2k9uptv72td54k2p9rnpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjpCH4V2jJFzBl-qyFhR4KVYLLvF0YARM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124533420691-r6ngnik17pk2k9uptv72td54k2p9rnpf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:124533420691:android:477414ea34e8e8fcc19366",
+        "android_client_info": {
+          "package_name": "com.johndev.momoplantspartnet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "124533420691-m14oiqiikld9iotbqpifu9045quuehj1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.johndev.momoplantspartnet",
+            "certificate_hash": "eb68de8c5f644ea35097758f1805767c14d35884"
+          }
+        },
+        {
+          "client_id": "124533420691-r6ngnik17pk2k9uptv72td54k2p9rnpf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjpCH4V2jJFzBl-qyFhR4KVYLLvF0YARM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "124533420691-r6ngnik17pk2k9uptv72td54k2p9rnpf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
