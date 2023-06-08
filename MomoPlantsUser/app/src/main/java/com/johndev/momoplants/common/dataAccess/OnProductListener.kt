@@ -6,4 +6,6 @@ interface OnProductListener {
 
     fun onClick(plantEntity: PlantEntity)
 
+    fun onClickAdd(plantEntity: PlantEntity)
+
 }

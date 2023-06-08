@@ -5,15 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.johndev.momoplants.R
 import com.johndev.momoplants.adapter.PlantCartAdapter
 import com.johndev.momoplants.common.dataAccess.OnCartListener
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.databinding.FragmentCartBinding
-import com.johndev.momoplants.databinding.FragmentHomeBinding
-import com.johndev.momoplants.mainModule.view.MainActivity
+import com.johndev.momoplants.mainModule.view.MainActivity.Companion.cartViewModel
 
 class CartFragment : Fragment(), OnCartListener {
 
@@ -37,10 +35,13 @@ class CartFragment : Fragment(), OnCartListener {
     }
 
     private fun setupObservers() {
-        MainActivity.cartViewModel.totalPrice.observe(viewLifecycleOwner) {
+        cartViewModel.totalPrice.observe(viewLifecycleOwner) {
             it?.let { price ->
                 binding.bottomOptions.tvPrice.text = price.toString().trim()
             }
+        }
+        cartViewModel.listCart.observe(viewLifecycleOwner) {
+            it?.let { it.forEach { plantCartAdapter.add(it) } }
         }
     }
 
@@ -61,8 +62,12 @@ class CartFragment : Fragment(), OnCartListener {
         }
     }
 
-    override fun setQuantity(plantEntity: PlantEntity) {
+    override fun incrementQuantity(plantEntity: PlantEntity) {
+        cartViewModel.updateQuantity(plantEntity, true, plantCartAdapter)
+    }
 
+    override fun decrementQuantity(plantEntity: PlantEntity) {
+        cartViewModel.updateQuantity(plantEntity, false, plantCartAdapter)
     }
 
     override fun showTotal(total: Double) {
@@ -71,7 +76,7 @@ class CartFragment : Fragment(), OnCartListener {
 
     override fun onResume() {
         super.onResume()
-        MainActivity.cartViewModel.configFirestoreRealtime(requireContext(), plantCartAdapter)
+        cartViewModel.getCartList()
     }
 
     override fun onDestroyView() {

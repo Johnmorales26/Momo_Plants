@@ -9,6 +9,7 @@ import com.johndev.momoplants.cartModule.viewModel.CartViewModel
 import com.johndev.momoplants.common.utils.openFragment
 import com.johndev.momoplants.databinding.ActivityMainBinding
 import com.johndev.momoplants.mainModule.viewModel.HomeViewModel
+import com.johndev.momoplants.ordersModule.view.OrdersFragment
 import com.johndev.momoplants.profileModule.view.ProfileFragment
 import com.johndev.momoplants.profileModule.viewModel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_cart -> {
                     val cartFragment = CartFragment()
                     openFragment(fragment = cartFragment, fragmentManager = supportFragmentManager, containerId = R.id.container)
+                    true
+                }
+                R.id.navigation_orders -> {
+                    val ordersFragment = OrdersFragment()
+                    openFragment(fragment = ordersFragment, fragmentManager = supportFragmentManager, containerId = R.id.container)
                     true
                 }
                 R.id.navigation_profile -> {

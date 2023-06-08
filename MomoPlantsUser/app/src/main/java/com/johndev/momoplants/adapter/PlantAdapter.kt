@@ -75,6 +75,7 @@ class PlantAdapter(
 
         fun setListener(plantEntity: PlantEntity) {
             binding.cardItem.setOnClickListener { listener.onClick(plantEntity) }
+            binding.fabAdd.setOnClickListener { listener.onClickAdd(plantEntity) }
         }
     }
 

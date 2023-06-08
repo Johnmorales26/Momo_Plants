@@ -1,6 +1,7 @@
 package com.johndev.momoplants.mainModule.viewModel
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,10 +12,15 @@ import com.google.firebase.firestore.ListenerRegistration
 import com.johndev.momoplants.adapter.PlantAdapter
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     lateinit var firestoreListener: ListenerRegistration
+
+    private val tag = "HomeViewModel"
 
     private var _plantSelected = MutableLiveData<PlantEntity?>()
     val plantSelected: LiveData<PlantEntity?> = _plantSelected
@@ -45,6 +51,27 @@ class HomeViewModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun onSave(
+        plantEntity: PlantEntity,
+        context: Context?,
+        documentId: String,
+        onComplete: () -> Unit
+    ) {
+        val cartPlant = plantEntity.copy()
+        cartPlant.quantity = 1
+        val db = FirebaseFirestore.getInstance()
+        db.collection(Constants.COLL_CART)
+            .document(documentId)
+            .set(cartPlant)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Planta Añadida", Toast.LENGTH_SHORT).show()
+            }
+            .addOnFailureListener {
+                Toast.makeText(context, "Error al insertar", Toast.LENGTH_SHORT).show()
+            }
+            .addOnCompleteListener { onComplete() }
     }
 
 }

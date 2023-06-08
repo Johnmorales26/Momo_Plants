@@ -2,6 +2,8 @@ package com.johndev.momoplants.common.utils
 
 object Constants {
 
+    const val NAME_DATABASE = "MomoPlantsDatabase"
+
     const val ERROR_EXIST = "Error 01"
 
     const val COLL_PLANTS = "plants"

@@ -52,6 +52,12 @@ class HomeFragment : Fragment(), OnProductListener {
         startActivity(intent)
     }
 
+    override fun onClickAdd(plantEntity: PlantEntity) {
+        homeViewModel.onSave(plantEntity, requireContext(), plantEntity.plantId!!) {
+
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         homeViewModel.configFirestoreRealtime(requireContext(), plantAdapter)

@@ -73,6 +73,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore-ktx'
     //  Firebase Cloud Storage
     implementation 'com.google.firebase:firebase-storage-ktx'
+    //  Room 2.4.1
+    implementation "androidx.room:room-runtime:2.5.1"
+    kapt "androidx.room:room-compiler:2.5.1"
+    implementation 'androidx.room:room-ktx:2.5.1'
 
 }
 

@@ -42,6 +42,11 @@ class PlantCartAdapter(
                     .centerCrop()
                     .circleCrop()
                     .into(imgPlant)
+                if (plant.quantity == 1) {
+                    ibSub.setImageResource(R.drawable.ic_delete)
+                } else {
+                    ibSub.setImageResource(R.drawable.ic_remove_circle)
+                }
             }
         }
 
@@ -85,10 +90,10 @@ class PlantCartAdapter(
 
         fun setListener(plantEntity: PlantEntity) {
             binding.ibSum.setOnClickListener {
-                listener.setQuantity(plantEntity)
+                listener.incrementQuantity(plantEntity)
             }
             binding.ibSub.setOnClickListener {
-                listener.setQuantity(plantEntity)
+                listener.decrementQuantity(plantEntity)
             }
         }
     }

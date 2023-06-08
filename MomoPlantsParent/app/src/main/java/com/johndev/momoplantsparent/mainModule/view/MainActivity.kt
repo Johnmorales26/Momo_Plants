@@ -8,6 +8,7 @@ import com.johndev.momoplantsparent.addModule.view.AddDialogFragment
 import com.johndev.momoplantsparent.common.utils.openFragment
 import com.johndev.momoplantsparent.databinding.ActivityMainBinding
 import com.johndev.momoplantsparent.mainModule.viewModel.HomeViewModel
+import com.johndev.momoplantsparent.ordersModule.view.OrdersFragment
 import com.johndev.momoplantsparent.profileModule.view.ProfileFragment
 import com.johndev.momoplantsparent.profileModule.viewModel.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home -> {
                     val homeFragment = HomeFragment()
                     openFragment(fragment = homeFragment, fragmentManager = supportFragmentManager, containerId = R.id.container)
+                    true
+                }
+                R.id.navigation_orders -> {
+                    val ordersFragment = OrdersFragment()
+                    openFragment(fragment = ordersFragment, fragmentManager = supportFragmentManager, containerId = R.id.container)
                     true
                 }
                 R.id.navigation_profile -> {

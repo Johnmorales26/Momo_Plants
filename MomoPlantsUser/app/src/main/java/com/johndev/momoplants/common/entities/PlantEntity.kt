@@ -1,9 +1,13 @@
 package com.johndev.momoplants.common.entities
 
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import com.google.firebase.firestore.Exclude
 
+@Entity(tableName = "PlantEntity", indices = [Index(value = ["plantId"], unique = true)])
 data class PlantEntity(
-    @get:Exclude var plantId: String? = null,
+    @PrimaryKey @get:Exclude var plantId: String = "",
     var name: String? = null,
     var description: String? = null,
     var imageUrl: String? = null,
@@ -22,6 +26,6 @@ data class PlantEntity(
     }
 
     override fun hashCode(): Int {
-        return plantId?.hashCode() ?: 0
+        return plantId.hashCode() ?: 0
     }
 }

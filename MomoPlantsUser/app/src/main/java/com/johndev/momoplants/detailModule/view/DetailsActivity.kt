@@ -1,21 +1,17 @@
 package com.johndev.momoplants.detailModule.view
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.CalendarContract.Colors
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.bumptech.glide.Glide
-import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.PlantEntity
-import com.johndev.momoplants.common.utils.Constants
 import com.johndev.momoplants.common.utils.Constants.PLANT_ID_INTENT
 import com.johndev.momoplants.databinding.ActivityDetailsBinding
 import com.johndev.momoplants.detailModule.viewModel.DetailViewModel
-import com.johndev.momoplants.mainModule.view.MainActivity
-import com.johndev.momoplants.profileModule.viewModel.ProfileViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailsBinding
@@ -33,7 +29,8 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun setupViewModels() {
-        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
+        val vm: DetailViewModel by viewModels()
+        detailViewModel = vm
     }
 
     private fun setupObservers() {
@@ -48,9 +45,7 @@ class DetailsActivity : AppCompatActivity() {
     private fun setupButtons() {
         binding.ibReturn.setOnClickListener { finish() }
         binding.bottomOptions.fabAddCart.setOnClickListener {
-            detailViewModel.onSave(plantEntity!!, this, plantEntity?.plantId!!) {
-
-            }
+            detailViewModel.onSave(plantEntity!!)
         }
     }
 

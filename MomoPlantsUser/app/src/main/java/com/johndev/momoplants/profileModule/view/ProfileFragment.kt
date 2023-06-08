@@ -45,6 +45,7 @@ class ProfileFragment : Fragment() {
                 with(binding) {
                     etName.text = firebaseUser.displayName?.editable()
                     etEmail.text = firebaseUser.email?.editable()
+                    etPhoneNumber.text = firebaseUser.phoneNumber?.editable()
                     Glide
                         .with(requireContext())
                         .load(firebaseUser.photoUrl)
