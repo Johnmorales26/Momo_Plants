@@ -17,26 +17,18 @@ class CartViewModel @Inject constructor(
     private var dataSource: MomoPlantsDataSource
 ) : ViewModel() {
 
-    private var _totalPrice = MutableLiveData(0.0)
-    val totalPrice: LiveData<Double> = _totalPrice
-
     private val _listCart = MutableLiveData<List<PlantEntity>>(listOf())
     val listCart: LiveData<List<PlantEntity>> = _listCart
 
     fun getCartList() {
         viewModelScope.launch(Dispatchers.IO) {
             dataSource.getAllPlants {
-                onGetTotalPrice(it)
-                _listCart.postValue(it)
+                if (it.isEmpty()) {
+                    _listCart.postValue(emptyList())
+                } else {
+                    _listCart.postValue(it)
+                }
             }
-        }
-    }
-
-    private fun onGetTotalPrice(listPlants: List<PlantEntity>) {
-        viewModelScope.launch(Dispatchers.Main) {
-            var totalPrice = 0.0
-            listPlants.forEach { totalPrice += (it.price * it.quantity) }
-            _totalPrice.value = totalPrice
         }
     }
 

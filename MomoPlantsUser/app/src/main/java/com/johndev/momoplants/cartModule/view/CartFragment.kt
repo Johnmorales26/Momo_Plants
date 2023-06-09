@@ -1,6 +1,7 @@
 package com.johndev.momoplants.cartModule.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,16 +33,20 @@ class CartFragment : Fragment(), OnCartListener {
         setupRecyclerView()
         updateBottomOptions()
         setupObservers()
+        cartViewModel.getCartList()
     }
 
     private fun setupObservers() {
-        cartViewModel.totalPrice.observe(viewLifecycleOwner) {
-            it?.let { price ->
-                binding.bottomOptions.tvPrice.text = price.toString().trim()
-            }
-        }
         cartViewModel.listCart.observe(viewLifecycleOwner) {
-            it?.let { it.forEach { plantCartAdapter.add(it) } }
+            it?.let {
+                if (it.isEmpty()) {
+                    plantCartAdapter.clearCart()
+                } else {
+                    it.forEach {
+                        plantCartAdapter.add(it)
+                    }
+                }
+            }
         }
     }
 
@@ -71,12 +76,17 @@ class CartFragment : Fragment(), OnCartListener {
     }
 
     override fun showTotal(total: Double) {
-
+        Log.i("CartFragment", "showTotal: $total")
+        if (total == 0.0){
+            binding.bottomOptions.tvPrice.text = getString(R.string.product_empty_cart)
+        } else {
+            binding.bottomOptions.tvPrice.text = getString(R.string.product_full_cart, total)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        cartViewModel.getCartList()
+        //cartViewModel.getCartList()
     }
 
     override fun onDestroyView() {

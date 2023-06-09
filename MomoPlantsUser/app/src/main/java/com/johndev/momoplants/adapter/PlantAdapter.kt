@@ -3,6 +3,8 @@ package com.johndev.momoplants.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -43,6 +45,7 @@ class PlantAdapter(
                     .circleCrop()
                     .placeholder(R.drawable.ic_broken_image)
                     .into(it.imgPlant)
+                if (plantEntity.quantity < 0) it.fabAdd.visibility = GONE else it.fabAdd.visibility = VISIBLE
             }
         }
     }

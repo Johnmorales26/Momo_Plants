@@ -47,6 +47,28 @@ class DetailViewModel @Inject constructor(
     }
 
     fun onSave(plantEntity: PlantEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataSource.getPlantByID(plantEntity.plantId) {
+                if (it != null) {
+                    //  Update Plant
+                    updatePlant(it)
+                } else {
+                    //  Add Plant
+                    addPlant(plantEntity)
+                }
+            }
+
+        }
+    }
+
+    private fun updatePlant(plantEntity: PlantEntity) {
+        plantEntity.quantity += 1
+        viewModelScope.launch(Dispatchers.IO) {
+            dataSource.updatePlant(plantEntity)
+        }
+    }
+
+    private fun addPlant(plantEntity: PlantEntity) {
         val cartPlant = plantEntity.copy()
         cartPlant.quantity = 1
         viewModelScope.launch(Dispatchers.IO) {

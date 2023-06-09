@@ -13,6 +13,9 @@ interface PlantDao {
     @Query("SELECT * FROM PlantEntity")
     suspend fun getAll(): List<PlantEntity>
 
+    @Query("SELECT * FROM PlantEntity WHERE plantId = :plantId")
+    suspend fun getPlantByID(plantId: String): PlantEntity?
+
     @Insert
     suspend fun add(plantEntity: PlantEntity): Long
 

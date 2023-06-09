@@ -10,10 +10,8 @@ class MomoPlantsDataSourceRoom @Inject constructor(
 ) : MomoPlantsDataSource {
 
     override suspend fun getAllPlants(callback: (List<PlantEntity>) -> Unit) = callback(dao.getAll())
-
+    override suspend fun getPlantByID(plantId: String, callback: (PlantEntity?) -> Unit) = callback(dao.getPlantByID(plantId))
     override suspend fun addPlant(plantEntity: PlantEntity, callback: (Long) -> Unit) = callback(dao.add(plantEntity))
-
     override suspend fun deletePlant(plantEntity: PlantEntity) = dao.delete(plantEntity)
-
     override suspend fun updatePlant(plantEntity: PlantEntity) = dao.update(plantEntity)
 }

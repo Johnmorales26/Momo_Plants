@@ -6,17 +6,23 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.johndev.momoplants.adapter.PlantAdapter
+import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val dataSource: MomoPlantsDataSource
+) : ViewModel() {
 
     lateinit var firestoreListener: ListenerRegistration
 
@@ -53,25 +59,40 @@ class HomeViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    fun onSave(
-        plantEntity: PlantEntity,
-        context: Context?,
-        documentId: String,
-        onComplete: () -> Unit
-    ) {
+    fun onSave(plantEntity: PlantEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            dataSource.getPlantByID(plantEntity.plantId) {
+                if (it != null) {
+                    //  Update Plant
+                    updatePlant(it)
+                } else {
+                    //  Add Plant
+                    addPlant(plantEntity)
+                }
+            }
+
+        }
+    }
+
+    private fun updatePlant(plantEntity: PlantEntity) {
+        plantEntity.quantity += 1
+        viewModelScope.launch(Dispatchers.IO) {
+            dataSource.updatePlant(plantEntity)
+        }
+    }
+
+    private fun addPlant(plantEntity: PlantEntity) {
         val cartPlant = plantEntity.copy()
         cartPlant.quantity = 1
-        val db = FirebaseFirestore.getInstance()
-        db.collection(Constants.COLL_CART)
-            .document(documentId)
-            .set(cartPlant)
-            .addOnSuccessListener {
-                Toast.makeText(context, "Planta Añadida", Toast.LENGTH_SHORT).show()
+        viewModelScope.launch(Dispatchers.IO) {
+            dataSource.addPlant(cartPlant) { id ->
+                if (id < 1) {
+                    Log.i(tag, "Save Plant: Error!!")
+                } else {
+                    Log.i(tag, "Save Plant: Success!!")
+                }
             }
-            .addOnFailureListener {
-                Toast.makeText(context, "Error al insertar", Toast.LENGTH_SHORT).show()
-            }
-            .addOnCompleteListener { onComplete() }
+        }
     }
 
 }

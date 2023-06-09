@@ -53,9 +53,7 @@ class HomeFragment : Fragment(), OnProductListener {
     }
 
     override fun onClickAdd(plantEntity: PlantEntity) {
-        homeViewModel.onSave(plantEntity, requireContext(), plantEntity.plantId!!) {
-
-        }
+        homeViewModel.onSave(plantEntity)
     }
 
     override fun onResume() {

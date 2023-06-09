@@ -59,6 +59,7 @@ class PlantCartAdapter(
             plantList.add(plantEntity)
             notifyItemInserted(plantList.size - 1)
         }
+        getTotalPrice()
     }
 
     fun update(plantEntity: PlantEntity) {
@@ -67,6 +68,7 @@ class PlantCartAdapter(
             plantList[index] = plantEntity
             notifyItemChanged(index)
         }
+        getTotalPrice()
     }
 
     fun delete(plantEntity: PlantEntity) {
@@ -75,14 +77,21 @@ class PlantCartAdapter(
             plantList.removeAt(index)
             notifyItemRemoved(index)
         }
+        getTotalPrice()
     }
 
-    fun getTotalPrice(): Double {
+    fun getTotalPrice() {
         var totalPrice = 0.0
         plantList.forEach {
             totalPrice += it.price * it.quantity
         }
-        return totalPrice
+
+        listener.showTotal(totalPrice)
+    }
+
+    fun clearCart() {
+        plantList.clear()
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
