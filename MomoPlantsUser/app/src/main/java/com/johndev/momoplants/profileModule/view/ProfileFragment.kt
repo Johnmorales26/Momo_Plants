@@ -1,12 +1,25 @@
 package com.johndev.momoplants.profileModule.view
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.content.PackageManagerCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
+import androidx.fragment.app.FragmentResultOwner
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.utils.editable
 import com.johndev.momoplants.common.utils.printToastMsg
@@ -15,6 +28,7 @@ import com.johndev.momoplants.mainModule.view.MainActivity.Companion.profileView
 
 class ProfileFragment : Fragment() {
 
+    private lateinit var bindingg: FragmentProfileBinding
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
@@ -24,8 +38,65 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        bindingg = FragmentProfileBinding.inflate(layoutInflater)
         return binding.root
+
     }
+
+    private fun requestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    pickPhotoFromGallery()
+                }
+                else -> requestPermissionLauncher.launch(
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                )
+            }
+        } else {
+            pickPhotoFromGallery()
+        }
+    }
+
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                pickPhotoFromGallery()
+            } else {
+                // Permiso denegado, puedes manejarlo de acuerdo a tus necesidades
+            }
+        }
+
+    private val startForActivityGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Uri? = result.data?.data
+                if (data != null) {
+                    Glide.with(requireContext())
+                        .load(data)
+                        .centerCrop()
+                        .centerCrop()
+                        .transform(CircleCrop())
+                        .placeholder(R.drawable.ic_broken_image)
+                        .into(binding.btnSelectImg)
+                } else {
+                    // Manejar el caso cuando la URI de la imagen es nula
+                }
+
+            }
+        }
+
+    private fun pickPhotoFromGallery() {
+        val intent = Intent(Intent.ACTION_GET_CONTENT)
+        intent.type = "image/*"
+        startForActivityGallery.launch(intent)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,9 +153,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupButtons() {
-        binding.btnSelectImg.setOnClickListener {
-            printToastMsg(R.string.soon_available_option, requireContext())
-        }
+       binding.btnSelectImg.setOnClickListener {
+           requestPermissions()
+       }
         binding.btnEditProfile.setOnClickListener {
             printToastMsg(
                 R.string.soon_available_option,
