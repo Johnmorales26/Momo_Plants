@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.johndev.momoplants.adapter.PlantCartAdapter
+import com.johndev.momoplants.adapters.PlantCartAdapter
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
 import com.johndev.momoplants.common.entities.PlantEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -50,6 +50,15 @@ class CartViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) { dataSource.updatePlant(plantEntity) }
         plantCartAdapter.update(plantEntity)
         getCartList()
+    }
+
+    fun clearCart() {
+        viewModelScope.launch(Dispatchers.IO) {
+            _listCart.value?.forEach {
+                dataSource.deletePlant(it)
+                getCartList()
+            }
+        }
     }
 
 }

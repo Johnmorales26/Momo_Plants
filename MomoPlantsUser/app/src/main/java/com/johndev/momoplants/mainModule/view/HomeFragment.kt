@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.johndev.momoplants.R
-import com.johndev.momoplants.adapter.PlantAdapter
+import com.johndev.momoplants.adapters.PlantAdapter
 import com.johndev.momoplants.common.dataAccess.OnProductListener
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants.PLANT_ID_INTENT

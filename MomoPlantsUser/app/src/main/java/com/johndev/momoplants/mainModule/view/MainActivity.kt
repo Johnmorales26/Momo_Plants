@@ -2,16 +2,20 @@ package com.johndev.momoplants.mainModule.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.johndev.momoplants.R
 import com.johndev.momoplants.cartModule.view.CartFragment
 import com.johndev.momoplants.cartModule.viewModel.CartViewModel
 import com.johndev.momoplants.common.utils.openFragment
 import com.johndev.momoplants.databinding.ActivityMainBinding
+import com.johndev.momoplants.detailModule.viewModel.DetailViewModel
 import com.johndev.momoplants.mainModule.viewModel.HomeViewModel
 import com.johndev.momoplants.ordersModule.view.OrdersFragment
+import com.johndev.momoplants.ordersModule.viewModel.OrdersViewModel
 import com.johndev.momoplants.profileModule.view.ProfileFragment
 import com.johndev.momoplants.profileModule.viewModel.ProfileViewModel
+import com.johndev.momoplants.trackModule.viewModel.TrackViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +27,8 @@ class MainActivity : AppCompatActivity() {
         lateinit var profileViewModel: ProfileViewModel
         lateinit var homeViewModel: HomeViewModel
         lateinit var cartViewModel: CartViewModel
+        lateinit var ordersViewModel: OrdersViewModel
+        lateinit var trackViewModel: TrackViewModel
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,13 +41,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupViewModels() {
-        profileViewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
-        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
-        cartViewModel = ViewModelProvider(this)[CartViewModel::class.java]
+        val vmProfile: ProfileViewModel by viewModels()
+        profileViewModel = vmProfile
+        val vmHome: HomeViewModel by viewModels()
+        homeViewModel = vmHome
+        val vmCart: CartViewModel by viewModels()
+        cartViewModel = vmCart
+        val vmOrders: OrdersViewModel by viewModels()
+        ordersViewModel = vmOrders
+        val vmTrack: TrackViewModel by viewModels()
+        trackViewModel = vmTrack
     }
 
     private fun setupBottomNavigation() {
-        binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_home -> {
                     val homeFragment = HomeFragment()

@@ -1,4 +1,4 @@
-package com.johndev.momoplants.adapter
+package com.johndev.momoplants.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -80,7 +80,7 @@ class PlantCartAdapter(
         getTotalPrice()
     }
 
-    fun getTotalPrice() {
+    private fun getTotalPrice() {
         var totalPrice = 0.0
         plantList.forEach {
             totalPrice += it.price * it.quantity
@@ -89,9 +89,13 @@ class PlantCartAdapter(
         listener.showTotal(totalPrice)
     }
 
+    fun getPlants(): List<PlantEntity> = plantList
+
     fun clearCart() {
+        val itemCount = plantList.size
         plantList.clear()
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(0, itemCount)
+        getTotalPrice()
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

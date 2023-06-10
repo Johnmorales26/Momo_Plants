@@ -10,7 +10,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
-import com.johndev.momoplants.adapter.PlantAdapter
+import com.johndev.momoplants.adapters.PlantAdapter
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants

@@ -12,8 +12,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.johndev.momoplants.loginModule.view.LoginActivity
 import com.johndev.momoplants.R
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class ProfileViewModel : ViewModel() {
+@HiltViewModel
+class ProfileViewModel @Inject constructor(): ViewModel() {
 
     private var _userData = MutableLiveData<FirebaseUser?>()
     val userData: LiveData<FirebaseUser?> = _userData

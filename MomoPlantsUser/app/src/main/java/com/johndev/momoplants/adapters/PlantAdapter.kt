@@ -1,4 +1,4 @@
-package com.johndev.momoplants.adapter
+package com.johndev.momoplants.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
