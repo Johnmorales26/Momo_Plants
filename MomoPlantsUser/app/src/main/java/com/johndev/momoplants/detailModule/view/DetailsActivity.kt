@@ -1,8 +1,12 @@
 package com.johndev.momoplants.detailModule.view
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.PlantEntity
@@ -26,6 +30,39 @@ class DetailsActivity : AppCompatActivity() {
         setupObservers()
         setupButtons()
         detailViewModel.onSearchPlant(intent.getStringExtra(PLANT_ID_INTENT), this)
+
+        var like = false
+
+        val corazon = findViewById<View>(R.id.likeImageView)
+        corazon.setOnClickListener {
+            like = likeAnimation(corazon as LottieAnimationView, R.raw.black_joy, like)
+        }
+    }
+
+    private fun likeAnimation(imageView: LottieAnimationView,
+                              animation: Int,
+                              like: Boolean) : Boolean {
+
+        if (!like) {
+            imageView.setAnimation(animation)
+            imageView.playAnimation()
+        } else {
+            imageView.animate()
+                .alpha(0f)
+                .setDuration(200)
+                .setListener(object : AnimatorListenerAdapter() {
+
+                    override fun onAnimationEnd(animator: Animator) {
+
+                        imageView.setImageResource(R.drawable.corazon)
+                        imageView.alpha = 1f
+                    }
+
+                })
+
+        }
+
+        return !like
     }
 
     private fun setupViewModels() {

@@ -33,6 +33,13 @@
                     android:layout_marginTop="24dp"
                     tools:text="Name Plant" />
 
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/likeImageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/corazon"/>
+
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvDescription"
                     android:layout_width="match_parent"
