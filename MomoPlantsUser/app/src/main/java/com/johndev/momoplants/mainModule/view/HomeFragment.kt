@@ -16,7 +16,9 @@ import com.johndev.momoplants.common.utils.Constants.PLANT_ID_INTENT
 import com.johndev.momoplants.databinding.FragmentHomeBinding
 import com.johndev.momoplants.detailModule.view.DetailsActivity
 import com.johndev.momoplants.mainModule.view.MainActivity.Companion.homeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), OnProductListener {
 
     private var _binding: FragmentHomeBinding? = null

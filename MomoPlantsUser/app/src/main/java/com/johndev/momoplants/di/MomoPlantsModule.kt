@@ -2,6 +2,8 @@ package com.johndev.momoplants.di
 
 import android.content.Context
 import androidx.room.Room
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSourceRoom
 import com.johndev.momoplants.common.dataAccess.PlantDao
@@ -21,6 +23,16 @@ abstract class DataSourceModule {
     @Singleton
     @Binds
     abstract fun bindDataSource(impl: MomoPlantsDataSourceRoom): MomoPlantsDataSource
+
+}
+
+@InstallIn(SingletonComponent::class)
+@Module
+object FirebaseModule {
+
+    @Singleton
+    @Provides
+    fun provideFirestore() = Firebase.firestore
 
 }
 

@@ -9,12 +9,15 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.utils.Constants
+import com.johndev.momoplants.common.utils.FirebaseUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 @HiltViewModel
-class TrackViewModel @Inject constructor(): ViewModel() {
+class TrackViewModel @Inject constructor(
+    private var database: FirebaseUtils
+): ViewModel() {
 
     private var _orderEntity = MutableLiveData<OrderEntity>()
     val orderEntity: LiveData<OrderEntity> = _orderEntity
@@ -31,8 +34,7 @@ class TrackViewModel @Inject constructor(): ViewModel() {
 
     fun onGetOrder(context: Context) {
         Log.i("TrackActivity", "idOrder: ${_idOrder.value}")
-        val db = FirebaseFirestore.getInstance()
-        db.collection(Constants.COLL_REQUESTS).get()
+        database.getRequestsRef().get()
             .addOnSuccessListener {
                 for (document in it) {
                     val order = document.toObject(OrderEntity::class.java)
@@ -51,8 +53,7 @@ class TrackViewModel @Inject constructor(): ViewModel() {
 
     fun getOrderInRealtime() {
         _idOrder.value?.let {
-            val db = FirebaseFirestore.getInstance()
-            val orderRef = db.collection(Constants.COLL_REQUESTS).document()
+            val orderRef = database.getRequestsRef().document()
             orderRef.addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     //Toast.makeText(this, "Error al consultar esta orden", Toast.LENGTH_SHORT).show()

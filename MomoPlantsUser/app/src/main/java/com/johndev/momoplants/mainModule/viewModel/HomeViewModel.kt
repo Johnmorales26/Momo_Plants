@@ -2,6 +2,7 @@ package com.johndev.momoplants.mainModule.viewModel
 
 import android.content.Context
 import android.util.Log
+import android.util.LogPrinter
 import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +15,7 @@ import com.johndev.momoplants.adapters.PlantAdapter
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants
+import com.johndev.momoplants.common.utils.FirebaseUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val dataSource: MomoPlantsDataSource
+    private val dataSource: MomoPlantsDataSource,
+    private val database: FirebaseUtils
 ) : ViewModel() {
 
     lateinit var firestoreListener: ListenerRegistration
@@ -38,8 +41,7 @@ class HomeViewModel @Inject constructor(
     fun getPlantSelected(): PlantEntity? = plantSelected.value
 
     fun configFirestoreRealtime(context: Context, plantAdapter: PlantAdapter) {
-        val db = FirebaseFirestore.getInstance()
-        val plantRef = db.collection(Constants.COLL_PLANTS)
+        val plantRef = database.getPlantsRef()
         firestoreListener = plantRef.addSnapshotListener { snapshots, error ->
             if (error != null) {
                 Toast.makeText(context, "Error al consultar datos", Toast.LENGTH_SHORT)
@@ -63,10 +65,8 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             dataSource.getPlantByID(plantEntity.plantId) {
                 if (it != null) {
-                    //  Update Plant
                     updatePlant(it)
                 } else {
-                    //  Add Plant
                     addPlant(plantEntity)
                 }
             }

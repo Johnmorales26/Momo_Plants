@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants.COLL_PLANTS
+import com.johndev.momoplants.common.utils.FirebaseUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private var dataSource: MomoPlantsDataSource
+    private var dataSource: MomoPlantsDataSource,
+    private val database: FirebaseUtils
 ) : ViewModel() {
 
     private val tag = "DetailViewModel"
@@ -28,8 +30,7 @@ class DetailViewModel @Inject constructor(
 
     fun onSearchPlant(idPlant: String?, context: Context) {
         idPlant?.let {
-            val db = FirebaseFirestore.getInstance()
-            db.collection(COLL_PLANTS)
+            database.getPlantsRef()
                 .get()
                 .addOnSuccessListener { snapshots ->
                     for (document in snapshots) {
@@ -50,10 +51,8 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             dataSource.getPlantByID(plantEntity.plantId) {
                 if (it != null) {
-                    //  Update Plant
                     updatePlant(it)
                 } else {
-                    //  Add Plant
                     addPlant(plantEntity)
                 }
             }
