@@ -35,7 +35,7 @@ class DetailsActivity : AppCompatActivity() {
 
         val corazon = findViewById<View>(R.id.likeImageView)
         corazon.setOnClickListener {
-            like = likeAnimation(corazon as LottieAnimationView, R.raw.black_joy, like)
+            //like = likeAnimation(corazon as LottieAnimationView, R.raw.black_joy, like)
         }
     }
 

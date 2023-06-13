@@ -2,29 +2,29 @@ package com.johndev.momoplants.profileModule.view
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.content.PackageManagerCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
-import androidx.fragment.app.FragmentResultOwner
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
-
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.utils.editable
 import com.johndev.momoplants.common.utils.printToastMsg
 import com.johndev.momoplants.databinding.FragmentProfileBinding
 import com.johndev.momoplants.mainModule.view.MainActivity.Companion.profileViewModel
+import java.util.UUID
+
 
 class ProfileFragment : Fragment() {
 
@@ -40,7 +40,9 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
 
         bindingg = FragmentProfileBinding.inflate(layoutInflater)
+
         return binding.root
+
 
     }
 
@@ -68,22 +70,32 @@ class ProfileFragment : Fragment() {
             if (isGranted) {
                 pickPhotoFromGallery()
             } else {
-                // Permiso denegado, puedes manejarlo de acuerdo a tus necesidades
+                // Permiso denegado
             }
         }
 
     private val startForActivityGallery =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
+
                 val data: Uri? = result.data?.data
                 if (data != null) {
                     Glide.with(requireContext())
                         .load(data)
                         .centerCrop()
-                        .centerCrop()
                         .transform(CircleCrop())
                         .placeholder(R.drawable.ic_broken_image)
                         .into(binding.btnSelectImg)
+
+                   val sharedPreferences = requireContext().getSharedPreferences("ProfileFragment", Context.MODE_PRIVATE)
+                   val key = "imageUri"
+
+                    if (data != null) {
+                        val uriString = data.toString()
+                        val editor = sharedPreferences.edit()
+                        editor.putString(key, uriString)
+                        editor.apply()
+                    }
                 } else {
                     // Manejar el caso cuando la URI de la imagen es nula
                 }
@@ -97,9 +109,25 @@ class ProfileFragment : Fragment() {
         startForActivityGallery.launch(intent)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Leer el valor guardado en SharedPreferences para la clave "imageUri"
+        val sharedPreferences = requireContext().getSharedPreferences("ProfileFragment", Context.MODE_PRIVATE)
+        val key = "imageUri"
+        val savedUriString = sharedPreferences.getString(key, null)
+        val savedUri = savedUriString?.let { Uri.parse(it) }
+
+        // Mostrar la imagen si existe una URI guardada
+        savedUri?.let { uri ->
+            Glide.with(requireContext())
+                .load(uri)
+                .centerCrop()
+                .transform(CircleCrop())
+                .placeholder(R.drawable.ic_broken_image)
+                .into(binding.btnSelectImg)
+        }
+
         setupToolbar()
         setupObservers()
         setupViewModel()
