@@ -53,13 +53,34 @@
     <string name="menu_option_about">About</string>
     <string name="menu_option_settings">Settings</string>
     <string name="menu_option_sign_out">Sign Out</string>
+
     <string name="login_insert_error">Error</string>
+
     <string name="add_dialog_title">Agregar Planta</string>
     <string name="add_dialog_btn_success">Agregar</string>
     <string name="add_dialog_btn_cancel">Cancelar</string>
+
     <string name="btn_edit_plant">Edit plant</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bottom_navigation_orders">Orders</string>
+    <string name="product_empty_cart">Carrito vacío</string>
+    <string name="product_full_cart">$%1$.2f MXN</string>
+
+    <string name="order_track_shipment">Seguir envio</string>
+    <string name="order_status">Estado: %1$s</string>
+    <string name="order_id">ID: %1$s</string>
+    <string name="order_chat_help">¿Necesitas ayuda?</string>
+    <string name="order_title">Historial de compras</string>
+
+    <string name="track_title">Rastreo</string>
+
+    <string name="order_status_ordered">Pedido</string>
+    <string name="order_status_preparing">Preparando</string>
+    <string name="order_status_send">Enviado</string>
+    <string name="order_status_delivered">Entregado</string>
+    <string name="order_status_unknown">Desconocido</string>
+    <string name="traking_dialog_title">Order tracking</string>
+    <string name="hint_status">Estado</string>
 
 </resources>
