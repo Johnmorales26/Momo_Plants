@@ -35,8 +35,8 @@
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/likeImageView"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/corazon"/>
 

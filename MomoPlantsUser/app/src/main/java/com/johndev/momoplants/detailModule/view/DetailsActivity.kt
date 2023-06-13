@@ -29,13 +29,13 @@ class DetailsActivity : AppCompatActivity() {
         setupViewModels()
         setupObservers()
         setupButtons()
-        detailViewModel.onSearchPlant(intent.getStringExtra(PLANT_ID_INTENT), this)
+        detailViewModel.onSearchPlantRealtime(intent.getStringExtra(PLANT_ID_INTENT).toString())
 
         var like = false
 
         val corazon = findViewById<View>(R.id.likeImageView)
         corazon.setOnClickListener {
-            //like = likeAnimation(corazon as LottieAnimationView, R.raw.black_joy, like)
+            like = likeAnimation(corazon as LottieAnimationView, R.raw.black_joy, like)
         }
     }
 
@@ -88,25 +88,27 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun updateUI(plantEntity: PlantEntity?) {
         plantEntity?.let {
-            binding.tvPlantName.text = it.name.toString().trim()
-            binding.tvDescription.text = it.description.toString().trim()
-            binding.bottomOptions.tvPrice.text = it.price.toString().trim()
-            if (plantEntity.quantity > 0) {
-                binding.cardStock.containerCard.setBackgroundColor(getColor(R.color.md_theme_light_primaryContainer))
-                binding.cardStock.tvStock.text = getString(R.string.msg_stock_with_stock)
-                binding.bottomOptions.fabAddCart.isEnabled = true
-            } else {
-                binding.cardStock.containerCard.setBackgroundColor(getColor(R.color.md_theme_light_error))
-                binding.cardStock.tvStock.text = getString(R.string.msg_stock_without_stock)
-                binding.bottomOptions.fabAddCart.isEnabled = false
+            with(binding) {
+                tvPlantName.text = it.name.toString().trim()
+                tvDescription.text = it.description.toString().trim()
+                bottomOptions.tvPrice.text = it.price.toString().trim()
+                if (plantEntity.quantity > 0) {
+                    cardStock.containerCard.setBackgroundColor(getColor(R.color.md_theme_light_primaryContainer))
+                    cardStock.tvStock.text = getString(R.string.msg_stock_with_stock)
+                    bottomOptions.fabAddCart.isEnabled = true
+                } else {
+                    cardStock.containerCard.setBackgroundColor(getColor(R.color.md_theme_light_error))
+                    cardStock.tvStock.text = getString(R.string.msg_stock_without_stock)
+                    bottomOptions.fabAddCart.isEnabled = false
+                }
+                Glide
+                    .with(this@DetailsActivity)
+                    .load(plantEntity.imageUrl)
+                    .centerCrop()
+                    .circleCrop()
+                    .placeholder(R.drawable.ic_broken_image)
+                    .into(imgPlant)
             }
-            Glide
-                .with(this)
-                .load(plantEntity.imageUrl)
-                .centerCrop()
-                .circleCrop()
-                .placeholder(R.drawable.ic_broken_image)
-                .into(binding.imgPlant)
         }
     }
 }

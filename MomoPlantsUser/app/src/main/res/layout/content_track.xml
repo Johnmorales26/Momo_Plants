@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:showIn="@layout/app_bar"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/common_padding_default">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="43klrmk24mewkxlw" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clProgress"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:rotation="90"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvOrder">
+
+            <com.google.android.material.progressindicator.LinearProgressIndicator
+                android:id="@+id/progressBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginBottom="@dimen/track_margin_bottom_progress"
+                app:indicatorColor="?colorSecondaryVariant"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:progress="34" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbOrdered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_check_box"
+            android:clickable="false"
+            android:text="@string/order_status_ordered"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintStart_toStartOf="@id/clProgress"
+            app:layout_constraintTop_toTopOf="@id/clProgress" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbPreparing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_check_box"
+            android:clickable="false"
+            android:text="@string/order_status_preparing"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintBottom_toTopOf="@id/cbSend"
+            app:layout_constraintStart_toStartOf="@id/clProgress"
+            app:layout_constraintTop_toBottomOf="@id/cbOrdered" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_check_box"
+            android:clickable="false"
+            android:text="@string/order_status_send"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintBottom_toTopOf="@id/cbDelivered"
+            app:layout_constraintStart_toStartOf="@id/clProgress"
+            app:layout_constraintTop_toBottomOf="@id/cbPreparing" />
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/cbDelivered"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_check_box"
+            android:clickable="false"
+            android:text="@string/order_status_delivered"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            app:layout_constraintBottom_toBottomOf="@id/clProgress"
+            app:layout_constraintStart_toStartOf="@id/clProgress" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

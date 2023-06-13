@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
+import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants.COLL_PLANTS
 import com.johndev.momoplants.common.utils.FirebaseUtils
@@ -28,22 +29,19 @@ class DetailViewModel @Inject constructor(
     private var _plantEntity = MutableLiveData<PlantEntity>()
     val plantEntity: LiveData<PlantEntity> = _plantEntity
 
-    fun onSearchPlant(idPlant: String?, context: Context) {
-        idPlant?.let {
-            database.getPlantsRef()
-                .get()
-                .addOnSuccessListener { snapshots ->
-                    for (document in snapshots) {
-                        val plant = document.toObject(PlantEntity::class.java)
-                        plant.plantId = document.id
-                        if (plant.plantId == it) {
-                            _plantEntity.value = plant
-                        }
-                    }
+    fun onSearchPlantRealtime(idPlant: String) {
+        val orderRef = database.getPlantsRef().document(idPlant)
+        orderRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                val plant = snapshot.toObject(PlantEntity::class.java)
+                plant?.let {
+                    it.plantId = snapshot.id
+                    _plantEntity.value = it
                 }
-                .addOnFailureListener {
-                    Toast.makeText(context, "Error al consultar datos.", Toast.LENGTH_SHORT).show()
-                }
+            }
         }
     }
 

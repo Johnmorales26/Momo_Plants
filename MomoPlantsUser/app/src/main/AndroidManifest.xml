@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".MomoPlantApp"
@@ -18,13 +17,14 @@
         android:theme="@style/Theme.MomoPlants"
         tools:targetApi="31">
         <activity
+            android:name=".trackModule.view.TrackActivity"
+            android:exported="false" />
+        <activity
             android:name=".detailModule.view.DetailsActivity"
             android:exported="false" />
-
         <activity
             android:name=".mainModule.view.MainActivity"
             android:exported="true" />
-
         <activity
             android:name=".loginModule.view.LoginActivity"
             android:exported="true">

@@ -16,32 +16,22 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TrackViewModel @Inject constructor(
+    @ApplicationContext val context: Context,
     private var database: FirebaseUtils
 ): ViewModel() {
 
     private var _orderEntity = MutableLiveData<OrderEntity>()
     val orderEntity: LiveData<OrderEntity> = _orderEntity
 
-    private var _idOrder = MutableLiveData<String>("")
-    val idOrder: LiveData<String> = _idOrder
-
-    private var _status = MutableLiveData(0)
-    val status: LiveData<Int> = _status
-
-    fun onGetIdOrder(idOrder: String) { _idOrder.value = idOrder }
-
-    fun onGetStatusOrder(status: Int) { _status.value = status }
-
-    fun onGetOrder(context: Context) {
-        Log.i("TrackActivity", "idOrder: ${_idOrder.value}")
+    fun onGetOrder(idOrder: String) {
         database.getRequestsRef().get()
             .addOnSuccessListener {
                 for (document in it) {
                     val order = document.toObject(OrderEntity::class.java)
                     order.id = document.id
-                    if (_idOrder.value == order.id) {
+                    if (idOrder == order.id) {
                         _orderEntity.postValue(order)
-                        Toast.makeText( context, "Orden encontrada", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Orden encontrada", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -51,21 +41,17 @@ class TrackViewModel @Inject constructor(
             .addOnCompleteListener {}
     }
 
-    fun getOrderInRealtime() {
-        _idOrder.value?.let {
-            val orderRef = database.getRequestsRef().document()
-            orderRef.addSnapshotListener { snapshot, error ->
-                if (error != null) {
-                    //Toast.makeText(this, "Error al consultar esta orden", Toast.LENGTH_SHORT).show()
-                    return@addSnapshotListener
-                }
-                if (snapshot != null && snapshot.exists()) {
-                    val order = snapshot.toObject(OrderEntity::class.java)
-                    order?.let {
-                        it.id = snapshot.id
-                        _orderEntity.value = it
-                        //updateIU(it)
-                    }
+    fun getOrderInRealtime(idOrder: String) {
+        val orderRef = database.getRequestsRef().document(idOrder)
+        orderRef.addSnapshotListener { snapshot, error ->
+            if (error != null) {
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                val order = snapshot.toObject(OrderEntity::class.java)
+                order?.let {
+                    it.id = snapshot.id
+                    _orderEntity.value = it
                 }
             }
         }

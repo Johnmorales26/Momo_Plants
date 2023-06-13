@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.johndev.momoplantsparent.R
@@ -13,13 +14,19 @@ import com.johndev.momoplantsparent.addModule.view.AddDialogFragment
 import com.johndev.momoplantsparent.common.dataAccess.OnProductListener
 import com.johndev.momoplantsparent.common.entities.PlantEntity
 import com.johndev.momoplantsparent.databinding.FragmentHomeBinding
-import com.johndev.momoplantsparent.mainModule.view.MainActivity.Companion.homeViewModel
+import com.johndev.momoplantsparent.mainModule.viewModel.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), OnProductListener {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var plantAdapter: PlantAdapter
+
+    companion object {
+        lateinit var homeViewModel: HomeViewModel
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +38,13 @@ class HomeFragment : Fragment(), OnProductListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViewModel()
         initRecyclerView(view)
+    }
+
+    private fun setupViewModel() {
+        val vm: HomeViewModel by viewModels()
+        homeViewModel = vm
     }
 
     private fun initRecyclerView(view: View) {

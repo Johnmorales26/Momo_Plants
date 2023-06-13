@@ -17,10 +17,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var homeViewModel: HomeViewModel
 
     companion object {
         lateinit var profileViewModel: ProfileViewModel
-        lateinit var homeViewModel: HomeViewModel
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

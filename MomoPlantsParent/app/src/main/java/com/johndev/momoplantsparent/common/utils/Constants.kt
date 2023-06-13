@@ -11,6 +11,7 @@ object Constants {
     const val PLANT_ID = "PLANT_ID"
 
     const val COLL_PLANTS = "plants"
+    const val COLL_REQUESTS = "requests"
     const val PATH_PLANT_IMAGE = "plant_images"
 
 }

@@ -1,5 +1,6 @@
 package com.johndev.momoplants.ordersModule.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,9 +14,9 @@ import com.johndev.momoplants.adapters.OrderAdapter
 import com.johndev.momoplants.common.dataAccess.OnOrderListener
 import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.utils.Constants.COLL_REQUESTS
+import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
 import com.johndev.momoplants.databinding.FragmentOrdersBinding
-import com.johndev.momoplants.mainModule.view.MainActivity.Companion.trackViewModel
-import com.johndev.momoplants.trackModule.view.TrackDialogFragment
+import com.johndev.momoplants.trackModule.view.TrackActivity
 
 class OrdersFragment : Fragment(), OnOrderListener {
 
@@ -66,13 +67,10 @@ class OrdersFragment : Fragment(), OnOrderListener {
     }
 
     override fun onTrack(orderEntity: OrderEntity) {
-        /*val intent = Intent(requireContext(), TrackActivity::class.java).apply {
+        val intent = Intent(requireContext(), TrackActivity::class.java).apply {
             putExtra(ORDER_ID_INTENT, orderEntity.id)
         }
-        startActivity(intent)*/
-        trackViewModel.onGetIdOrder(orderEntity.id)
-        trackViewModel.onGetStatusOrder(orderEntity.status)
-        TrackDialogFragment().show(parentFragmentManager, TrackDialogFragment::class.java.simpleName)
+        startActivity(intent)
     }
 
     override fun onStartChat(orderEntity: OrderEntity) {

@@ -21,8 +21,10 @@ import com.johndev.momoplantsparent.R
 import com.johndev.momoplantsparent.common.entities.PlantEntity
 import com.johndev.momoplantsparent.common.utils.editable
 import com.johndev.momoplantsparent.databinding.FragmentDialogAddBinding
-import com.johndev.momoplantsparent.mainModule.view.MainActivity.Companion.homeViewModel
+import com.johndev.momoplantsparent.mainModule.view.HomeFragment.Companion.homeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AddDialogFragment : DialogFragment(), DialogInterface.OnShowListener {
 
     private var binding: FragmentDialogAddBinding? = null
@@ -90,7 +92,7 @@ class AddDialogFragment : DialogFragment(), DialogInterface.OnShowListener {
         }
     }
 
-        private fun configButtons() {
+    private fun configButtons() {
             binding?.let {
                 it.ibPlant.setOnClickListener {
                     openGallery()

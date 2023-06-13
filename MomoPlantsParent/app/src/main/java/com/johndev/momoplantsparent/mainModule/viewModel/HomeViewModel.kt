@@ -14,8 +14,14 @@ import com.johndev.momoplantsparent.adapter.PlantAdapter
 import com.johndev.momoplantsparent.common.entities.PlantEntity
 import com.johndev.momoplantsparent.common.utils.Constants
 import com.johndev.momoplantsparent.common.utils.EventPost
+import com.johndev.momoplantsparent.common.utils.FirebaseUtils
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val database: FirebaseUtils
+) : ViewModel() {
 
     lateinit var firestoreListener: ListenerRegistration
 
@@ -36,8 +42,7 @@ class HomeViewModel : ViewModel() {
         onProgressListener: (Int) -> Unit,
         ) {
         val eventPost = EventPost()
-        eventPost.documentId = plantId ?: FirebaseFirestore.getInstance()
-            .collection(Constants.COLL_PLANTS).document().id
+        eventPost.documentId = plantId ?: database.getPlantsRef().document().id
         val storageRef = FirebaseStorage.getInstance().reference.child(Constants.PATH_PLANT_IMAGE)
         photoSelectedUri?.let { uri ->
             val photoRef = storageRef.child(eventPost.documentId!!)
@@ -63,8 +68,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun configFirestoreRealtime(context: Context, plantAdapter: PlantAdapter) {
-        val db = FirebaseFirestore.getInstance()
-        val plantRef = db.collection(Constants.COLL_PLANTS)
+        val plantRef = database.getPlantsRef()
         firestoreListener = plantRef.addSnapshotListener { snapshots, error ->
             if (error != null) {
                 Toast.makeText(context, "Error al consultar datos", Toast.LENGTH_SHORT)
@@ -89,8 +93,7 @@ class HomeViewModel : ViewModel() {
         documentId: String,
         onComplete: () -> Unit
     ) {
-        val db = FirebaseFirestore.getInstance()
-        db.collection(Constants.COLL_PLANTS)
+        database.getPlantsRef()
             .document(documentId)
             .set(plantEntity)
             .addOnSuccessListener {
@@ -103,9 +106,8 @@ class HomeViewModel : ViewModel() {
     }
 
     fun onUpdate(plantEntity: PlantEntity, context: Context?, onComplete: () -> Unit) {
-        val db = FirebaseFirestore.getInstance()
         plantEntity.plantId?.let { id ->
-            db.collection(Constants.COLL_PLANTS)
+            database.getPlantsRef()
                 .document(id)
                 .set(plantEntity)
                 .addOnSuccessListener {
@@ -119,8 +121,7 @@ class HomeViewModel : ViewModel() {
     }
 
     fun onDelete(plantEntity: PlantEntity, context: Context) {
-        val db = FirebaseFirestore.getInstance()
-        val plantRef = db.collection(Constants.COLL_PLANTS)
+        val plantRef = database.getPlantsRef()
         plantEntity.plantId?.let { id ->
             plantRef.document(id)
                 .delete()
