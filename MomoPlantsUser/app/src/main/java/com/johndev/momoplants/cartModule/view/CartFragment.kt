@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,11 +49,17 @@ class CartFragment : Fragment(), OnCartListener {
     private fun setupObservers() {
         cartViewModel.listCart.observe(viewLifecycleOwner) {
             it?.let {
-                if (it.isEmpty()) {
-                    plantCartAdapter.clearCart()
-                } else {
-                    it.forEach {
-                        plantCartAdapter.add(it)
+                with(binding) {
+                    if (it.isEmpty()) {
+                        plantCartAdapter.clearCart()
+                        animationView.visibility = VISIBLE
+                        recyclerview.visibility = GONE
+                    } else {
+                        animationView.visibility = GONE
+                        recyclerview.visibility = VISIBLE
+                        it.forEach {
+                            plantCartAdapter.add(it)
+                        }
                     }
                 }
             }
@@ -129,11 +137,6 @@ class CartFragment : Fragment(), OnCartListener {
         } else {
             binding.bottomOptions.tvPrice.text = getString(R.string.product_full_cart, totalPrice)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        //cartViewModel.getCartList()
     }
 
     override fun onDestroyView() {

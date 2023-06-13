@@ -2,6 +2,8 @@ package com.johndev.momoplants.trackModule.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.OrderEntity
@@ -34,8 +36,13 @@ class TrackActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         trackViewModel.orderEntity.observe(this) {
-            it?.let { orderEntity ->
-                updateIU(orderEntity)
+            if (it == null) {
+                binding.animationView.visibility = VISIBLE
+                binding.content.container.visibility = GONE
+            } else {
+                binding.animationView.visibility = GONE
+                binding.content.container.visibility = VISIBLE
+                updateIU(it)
             }
         }
     }

@@ -20,8 +20,8 @@ class TrackViewModel @Inject constructor(
     private var database: FirebaseUtils
 ): ViewModel() {
 
-    private var _orderEntity = MutableLiveData<OrderEntity>()
-    val orderEntity: LiveData<OrderEntity> = _orderEntity
+    private var _orderEntity = MutableLiveData<OrderEntity?>(null)
+    val orderEntity: LiveData<OrderEntity?> = _orderEntity
 
     fun onGetOrder(idOrder: String) {
         database.getRequestsRef().get()
