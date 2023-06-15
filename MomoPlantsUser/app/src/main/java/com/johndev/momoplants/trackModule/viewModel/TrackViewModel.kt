@@ -7,9 +7,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.johndev.momoplants.R
+import com.johndev.momoplants.common.entities.Notification
 import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.utils.Constants
 import com.johndev.momoplants.common.utils.FirebaseUtils
+import com.johndev.momoplants.common.utils.onSetupStatusNotification
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -18,10 +21,13 @@ import javax.inject.Inject
 class TrackViewModel @Inject constructor(
     @ApplicationContext val context: Context,
     private var database: FirebaseUtils
-): ViewModel() {
+) : ViewModel() {
 
     private var _orderEntity = MutableLiveData<OrderEntity?>(null)
     val orderEntity: LiveData<OrderEntity?> = _orderEntity
+
+    private var _status = MutableLiveData<Notification>()
+    val status: LiveData<Notification> = _status
 
     fun onGetOrder(idOrder: String) {
         database.getRequestsRef().get()
@@ -31,6 +37,7 @@ class TrackViewModel @Inject constructor(
                     order.id = document.id
                     if (idOrder == order.id) {
                         _orderEntity.postValue(order)
+                        _status.value = Notification(order.id, onSetupStatusNotification(context, order.status))
                         Toast.makeText(context, "Orden encontrada", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -51,6 +58,7 @@ class TrackViewModel @Inject constructor(
                 val order = snapshot.toObject(OrderEntity::class.java)
                 order?.let {
                     it.id = snapshot.id
+                    _status.value = Notification(order.id, onSetupStatusNotification(context, order.status))
                     _orderEntity.value = it
                 }
             }

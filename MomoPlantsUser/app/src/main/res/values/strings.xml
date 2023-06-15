@@ -78,5 +78,7 @@
     <string name="order_status_unknown">Desconocido</string>
     <string name="traking_dialog_title">Order tracking</string>
     <string name="add_dialog_btn_success">Success</string>
+    <string name="order_track_update">Estado del envio actualizado: %1$s</string>
+    <string name="track_notification_description">Notifications about order status change</string>
 
 </resources>

@@ -12,4 +12,6 @@ object Constants {
     const val PLANT_ID_INTENT = "plant_id_intent"
     const val ORDER_ID_INTENT = "order_id_intent"
 
+    const val CHANNEL_ID = "Canal de ejemplo"
+
 }

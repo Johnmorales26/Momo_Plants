@@ -7,8 +7,10 @@ import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.OrderEntity
-import com.johndev.momoplants.common.utils.Constants
 import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
+import com.johndev.momoplants.common.utils.executeOrRequestPermission
+import com.johndev.momoplants.common.utils.lauchNotification
+import com.johndev.momoplants.common.utils.simpleNotification
 import com.johndev.momoplants.databinding.ActivityTrackBinding
 import com.johndev.momoplants.trackModule.viewModel.TrackViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -45,6 +47,9 @@ class TrackActivity : AppCompatActivity() {
                 updateIU(it)
             }
         }
+        trackViewModel.status.observe(this) {
+            lauchNotification(this, it)
+        }
     }
 
     private fun setupToolbar() {
@@ -62,7 +67,6 @@ class TrackActivity : AppCompatActivity() {
         }
 
     }
-
     private fun updateIU(orderEntity: OrderEntity) {
         with(binding) {
             content.let{

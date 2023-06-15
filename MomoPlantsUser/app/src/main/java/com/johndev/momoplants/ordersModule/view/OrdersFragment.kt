@@ -7,22 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplants.adapters.OrderAdapter
 import com.johndev.momoplants.common.dataAccess.OnOrderListener
 import com.johndev.momoplants.common.entities.OrderEntity
-import com.johndev.momoplants.common.utils.Constants.COLL_REQUESTS
 import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
+import com.johndev.momoplants.common.utils.lauchNotification
 import com.johndev.momoplants.databinding.FragmentOrdersBinding
+import com.johndev.momoplants.ordersModule.viewModel.OrdersViewModel
 import com.johndev.momoplants.trackModule.view.TrackActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OrdersFragment : Fragment(), OnOrderListener {
 
     private var _binding: FragmentOrdersBinding? = null
     private val binding get() = _binding!!
     private lateinit var orderAdapter: OrderAdapter
+    private lateinit var ordersViewModel: OrdersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,8 +37,25 @@ class OrdersFragment : Fragment(), OnOrderListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
         setupRecyclerView()
-        setupFirestore()
+        setupObservers()
+        //ordersViewModel.onSetupFirestore()
+        ordersViewModel.onSetupFirestoreRealtime(orderAdapter)
+    }
+
+    private fun initViewModel() {
+        val vm: OrdersViewModel by viewModels()
+        ordersViewModel = vm
+    }
+
+    private fun setupObservers() {
+        ordersViewModel.orderList.observe(viewLifecycleOwner) {
+            it.forEach { order -> orderAdapter.add(order) }
+        }
+        ordersViewModel.status.observe(viewLifecycleOwner) {
+            lauchNotification(requireActivity(), it)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -44,26 +64,6 @@ class OrdersFragment : Fragment(), OnOrderListener {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = orderAdapter
         }
-    }
-
-    private fun setupFirestore() {
-        val user = FirebaseAuth.getInstance().currentUser
-        val db = FirebaseFirestore.getInstance()
-        db.collection(COLL_REQUESTS).get()
-            .addOnSuccessListener {
-                for (document in it) {
-                    val order = document.toObject(OrderEntity::class.java)
-                    user?.let {
-                        if (user.uid == order.clientId) {
-                            order.id = document.id
-                            orderAdapter.add(order)
-                        }
-                    }
-                }
-            }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error al consultar los datos", Toast.LENGTH_SHORT).show()
-            }
     }
 
     override fun onTrack(orderEntity: OrderEntity) {

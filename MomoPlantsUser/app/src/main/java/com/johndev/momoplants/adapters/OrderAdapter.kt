@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.dataAccess.OnOrderListener
 import com.johndev.momoplants.common.entities.OrderEntity
+import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.databinding.ItemOrderBinding
 
 class OrderAdapter(
@@ -48,6 +49,22 @@ class OrderAdapter(
     fun add(orderEntity: OrderEntity) {
         orderList.add(orderEntity)
         notifyItemInserted(orderList.size - 1)
+    }
+
+    fun update(orderEntity: OrderEntity) {
+        val index = orderList.indexOf(orderEntity)
+        if (index != -1) {
+            orderList[index] = orderEntity
+            notifyItemChanged(index)
+        }
+    }
+
+    fun delete(orderEntity: OrderEntity) {
+        val index = orderList.indexOf(orderEntity)
+        if (index != -1) {
+            orderList.removeAt(index)
+            notifyItemRemoved(index)
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
