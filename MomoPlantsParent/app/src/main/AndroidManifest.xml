@@ -23,7 +23,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mainModule.view.MainActivity"
+            android:name=".mainModule.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".chatModule.view.ChatActivity"
             android:exported="true" />
     </application>
 

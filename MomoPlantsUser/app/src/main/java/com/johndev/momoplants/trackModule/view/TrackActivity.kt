@@ -8,9 +8,8 @@ import androidx.activity.viewModels
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
-import com.johndev.momoplants.common.utils.executeOrRequestPermission
 import com.johndev.momoplants.common.utils.lauchNotification
-import com.johndev.momoplants.common.utils.simpleNotification
+import com.johndev.momoplants.common.utils.printToastMsg
 import com.johndev.momoplants.databinding.ActivityTrackBinding
 import com.johndev.momoplants.trackModule.viewModel.TrackViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +49,9 @@ class TrackActivity : AppCompatActivity() {
         trackViewModel.status.observe(this) {
             lauchNotification(this, it)
         }
+        trackViewModel.msg.observe(this) {
+            printToastMsg(it, this)
+        }
     }
 
     private fun setupToolbar() {
@@ -62,7 +64,7 @@ class TrackActivity : AppCompatActivity() {
 
     private fun recibeValues() {
         trackViewModel.apply {
-            onGetOrder(intent.getStringExtra(ORDER_ID_INTENT).toString())
+            getOrderById(intent.getStringExtra(ORDER_ID_INTENT).toString())
             getOrderInRealtime(intent.getStringExtra(ORDER_ID_INTENT).toString())
         }
 

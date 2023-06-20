@@ -1,20 +1,19 @@
 package com.johndev.momoplantsparent.ordersModule.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplantsparent.adapter.OrderAdapter
+import com.johndev.momoplantsparent.chatModule.view.ChatActivity
 import com.johndev.momoplantsparent.common.dataAccess.OnOrderListener
 import com.johndev.momoplantsparent.common.entities.OrderEntity
-import com.johndev.momoplantsparent.common.utils.Constants.COLL_REQUESTS
-import com.johndev.momoplantsparent.common.utils.Constants.PROP_STATUS
+import com.johndev.momoplantsparent.common.utils.Constants.CHAT_ID_INTENT
+import com.johndev.momoplantsparent.common.utils.printToastMsg
 import com.johndev.momoplantsparent.databinding.FragmentOrdersBinding
 import com.johndev.momoplantsparent.ordersModule.viewModel.OrdersViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -40,7 +39,7 @@ class OrdersFragment : Fragment(), OnOrderListener {
         initViewModel()
         setupObservers()
         setupRecyclerView()
-        ordersViewModel.setupFirestore(requireContext())
+        ordersViewModel.setupFirestore()
     }
 
     private fun initViewModel() {
@@ -51,6 +50,9 @@ class OrdersFragment : Fragment(), OnOrderListener {
     private fun setupObservers() {
         ordersViewModel.orderList.observe(viewLifecycleOwner) {
             it.forEach { orderAdapter.add(it) }
+        }
+        ordersViewModel.msg.observe(viewLifecycleOwner) {
+            printToastMsg(it, requireContext())
         }
     }
 
@@ -63,11 +65,14 @@ class OrdersFragment : Fragment(), OnOrderListener {
     }
 
     override fun onStatusChange(orderEntity: OrderEntity) {
-        ordersViewModel.onStatusChange(orderEntity, requireContext())
+        ordersViewModel.statusChange(orderEntity, requireContext())
     }
 
     override fun onStartChat(orderEntity: OrderEntity) {
-        Toast.makeText(requireContext(), "Iniciando Chat", Toast.LENGTH_SHORT).show()
+        val intent = Intent(requireContext(), ChatActivity::class.java).apply {
+            putExtra(CHAT_ID_INTENT, orderEntity.id)
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

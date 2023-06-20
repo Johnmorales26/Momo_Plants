@@ -5,16 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.johndev.momoplants.adapters.PlantCartAdapter
-import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
+import com.johndev.momoplants.cartModule.model.CartRepository
 import com.johndev.momoplants.common.entities.PlantEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class CartViewModel @Inject constructor(
-    private var dataSource: MomoPlantsDataSource
+    private val cartRepository: CartRepository
 ) : ViewModel() {
 
     private val _listCart = MutableLiveData<List<PlantEntity>>(listOf())
@@ -22,12 +23,8 @@ class CartViewModel @Inject constructor(
 
     fun getCartList() {
         viewModelScope.launch(Dispatchers.IO) {
-            dataSource.getAllPlants {
-                if (it.isEmpty()) {
-                    _listCart.postValue(emptyList())
-                } else {
-                    _listCart.postValue(it)
-                }
+            cartRepository.onGetCartList {
+                _listCart.postValue(it)
             }
         }
     }
@@ -37,28 +34,57 @@ class CartViewModel @Inject constructor(
         isIncrement: Boolean,
         plantCartAdapter: PlantCartAdapter
     ) {
-        if (isIncrement) {
-            plantEntity.quantity += 1
-        } else {
-            if (plantEntity.quantity == 1) {
-                viewModelScope.launch(Dispatchers.IO) { dataSource.deletePlant(plantEntity) }
-                plantCartAdapter.delete(plantEntity)
-            } else {
-                plantEntity.quantity -= 1
-            }
+        viewModelScope.launch(Dispatchers.IO) {
+            cartRepository.updateQuantity(
+                plantEntity = plantEntity,
+                isIncrement = isIncrement,
+                onDeleteInAdapter = { viewModelScope.launch { deleteItem(plantCartAdapter, it) } },
+                onUpdateInAdapter = { viewModelScope.launch { updateItem(plantCartAdapter, it) } },
+                onDecreaseAmount = { plantEntity.quantity -= it }
+            )
         }
-        viewModelScope.launch(Dispatchers.IO) { dataSource.updatePlant(plantEntity) }
-        plantCartAdapter.update(plantEntity)
         getCartList()
     }
 
-    fun clearCart() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _listCart.value?.forEach {
-                dataSource.deletePlant(it)
+    private suspend fun updateItem(plantCartAdapter: PlantCartAdapter, plantEntity: PlantEntity) =
+        withContext(Dispatchers.Main) {
+            plantCartAdapter.update(plantEntity)
+        }
+
+    private suspend fun deleteItem(plantCartAdapter: PlantCartAdapter, plantEntity: PlantEntity) =
+        withContext(Dispatchers.Main) {
+            plantCartAdapter.delete(plantEntity)
+        }
+
+    private fun clearCart() {
+        _listCart.value?.let {
+            viewModelScope.launch(Dispatchers.IO) {
+                cartRepository.clearCart(it)
                 getCartList()
             }
         }
+    }
+
+    fun onRequestOrder(
+        plantCartAdapter: PlantCartAdapter,
+        totalPrice: Double,
+        enableUI: (Boolean) -> Unit,
+        onSuccess: () -> Unit,
+        onFailure: () -> Unit,
+    ) {
+        cartRepository.onRequestOrder(
+            listPlants = plantCartAdapter.getPlants(),
+            totalPrice = totalPrice,
+            enableUI = {
+                       enableUI(it)
+            },
+            onSuccess = {
+                plantCartAdapter.clearCart()
+                clearCart()
+                onSuccess()
+            },
+            onFailure = { onFailure() }
+        )
     }
 
 }

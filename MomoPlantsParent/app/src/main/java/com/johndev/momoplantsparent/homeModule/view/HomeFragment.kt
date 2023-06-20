@@ -1,4 +1,4 @@
-package com.johndev.momoplantsparent.mainModule.view
+package com.johndev.momoplantsparent.homeModule.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,8 +13,9 @@ import com.johndev.momoplantsparent.adapter.PlantAdapter
 import com.johndev.momoplantsparent.addModule.view.AddDialogFragment
 import com.johndev.momoplantsparent.common.dataAccess.OnProductListener
 import com.johndev.momoplantsparent.common.entities.PlantEntity
+import com.johndev.momoplantsparent.common.utils.printToastMsg
 import com.johndev.momoplantsparent.databinding.FragmentHomeBinding
-import com.johndev.momoplantsparent.mainModule.viewModel.HomeViewModel
+import com.johndev.momoplantsparent.homeModule.viewModel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,6 +41,13 @@ class HomeFragment : Fragment(), OnProductListener {
         super.onViewCreated(view, savedInstanceState)
         setupViewModel()
         initRecyclerView(view)
+        setupObservers()
+    }
+
+    private fun setupObservers() {
+        homeViewModel.msg.observe(viewLifecycleOwner) {
+            it?.let { msg -> printToastMsg(msg, requireContext()) }
+        }
     }
 
     private fun setupViewModel() {
@@ -62,17 +70,17 @@ class HomeFragment : Fragment(), OnProductListener {
     }
 
     override fun onLongClick(plantEntity: PlantEntity) {
-        homeViewModel.onDelete(plantEntity, requireContext())
+        homeViewModel.onDelete(plantEntity)
     }
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.configFirestoreRealtime(requireContext(), plantAdapter)
+        homeViewModel.configFirestoreRealtime(plantAdapter)
     }
 
     override fun onPause() {
         super.onPause()
-        homeViewModel.firestoreListener.remove()
+        homeViewModel.removeListener()
     }
 
     override fun onDestroyView() {

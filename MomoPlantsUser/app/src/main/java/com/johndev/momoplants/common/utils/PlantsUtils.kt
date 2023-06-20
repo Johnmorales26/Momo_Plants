@@ -94,3 +94,9 @@ fun lauchNotification(activity: Activity, notification: Notification) {
         simpleNotification(activity, notification)
     }
 }
+
+fun lauchNotificationWithReciber(activity: Activity, notification: Notification) {
+    executeOrRequestPermission(activity) {
+        buttonNotification(activity, notification)
+    }
+}

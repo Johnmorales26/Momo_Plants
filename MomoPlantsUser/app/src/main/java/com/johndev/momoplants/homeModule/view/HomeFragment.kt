@@ -1,4 +1,4 @@
-package com.johndev.momoplants.mainModule.view
+package com.johndev.momoplants.homeModule.view
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.johndev.momoplants.R
@@ -13,9 +14,10 @@ import com.johndev.momoplants.adapters.PlantAdapter
 import com.johndev.momoplants.common.dataAccess.OnProductListener
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants.PLANT_ID_INTENT
+import com.johndev.momoplants.common.utils.printSnackbarMsg
 import com.johndev.momoplants.databinding.FragmentHomeBinding
 import com.johndev.momoplants.detailModule.view.DetailsActivity
-import com.johndev.momoplants.mainModule.view.MainActivity.Companion.homeViewModel
+import com.johndev.momoplants.homeModule.viewModel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +26,7 @@ class HomeFragment : Fragment(), OnProductListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var plantAdapter: PlantAdapter
+    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,13 @@ class HomeFragment : Fragment(), OnProductListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViewModel()
         initRecyclerView(view)
+    }
+
+    private fun initViewModel() {
+        val vmHome: HomeViewModel by viewModels()
+        homeViewModel = vmHome
     }
 
     private fun initRecyclerView(view: View) {
@@ -60,12 +69,17 @@ class HomeFragment : Fragment(), OnProductListener {
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.configFirestoreRealtime(requireContext(), plantAdapter)
+        homeViewModel.configFirestoreRealtime(
+            plantAdapter = plantAdapter,
+            onQueryError = { msg ->
+                printSnackbarMsg(binding.root, msg, requireContext())
+            }
+        )
     }
 
     override fun onPause() {
         super.onPause()
-        homeViewModel.firestoreListener.remove()
+        homeViewModel.onRemoveListener()
     }
 
     override fun onDestroyView() {

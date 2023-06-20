@@ -10,10 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.johndev.momoplants.adapters.OrderAdapter
+import com.johndev.momoplants.chatModule.view.ChatActivity
 import com.johndev.momoplants.common.dataAccess.OnOrderListener
 import com.johndev.momoplants.common.entities.OrderEntity
+import com.johndev.momoplants.common.utils.Constants.CHAT_ID_INTENT
 import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
 import com.johndev.momoplants.common.utils.lauchNotification
+import com.johndev.momoplants.common.utils.lauchNotificationWithReciber
+import com.johndev.momoplants.common.utils.printToastMsg
 import com.johndev.momoplants.databinding.FragmentOrdersBinding
 import com.johndev.momoplants.ordersModule.viewModel.OrdersViewModel
 import com.johndev.momoplants.trackModule.view.TrackActivity
@@ -54,7 +58,10 @@ class OrdersFragment : Fragment(), OnOrderListener {
             it.forEach { order -> orderAdapter.add(order) }
         }
         ordersViewModel.status.observe(viewLifecycleOwner) {
-            lauchNotification(requireActivity(), it)
+            lauchNotificationWithReciber(requireActivity(), it)
+        }
+        ordersViewModel.msg.observe(viewLifecycleOwner) {
+            printToastMsg(it, requireContext())
         }
     }
 
@@ -74,7 +81,10 @@ class OrdersFragment : Fragment(), OnOrderListener {
     }
 
     override fun onStartChat(orderEntity: OrderEntity) {
-        Toast.makeText(requireContext(), "Iniciando Chat", Toast.LENGTH_SHORT).show()
+        val intent = Intent(requireContext(), ChatActivity::class.java).apply {
+            putExtra(CHAT_ID_INTENT, orderEntity.id)
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

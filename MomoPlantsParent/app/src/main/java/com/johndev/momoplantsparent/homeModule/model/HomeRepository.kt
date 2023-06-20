@@ -1,46 +1,32 @@
-package com.johndev.momoplantsparent.mainModule.viewModel
+package com.johndev.momoplantsparent.homeModule.model
 
 import android.content.Context
 import android.net.Uri
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.storage.FirebaseStorage
-import com.johndev.momoplantsparent.adapter.PlantAdapter
+import com.johndev.momoplantsparent.R
 import com.johndev.momoplantsparent.common.entities.PlantEntity
 import com.johndev.momoplantsparent.common.utils.Constants
 import com.johndev.momoplantsparent.common.utils.EventPost
 import com.johndev.momoplantsparent.common.utils.FirebaseUtils
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-@HiltViewModel
-class HomeViewModel @Inject constructor(
+class HomeRepository @Inject constructor(
+    @ApplicationContext val context: Context,
     private val database: FirebaseUtils
-) : ViewModel() {
+) {
 
-    lateinit var firestoreListener: ListenerRegistration
-
-    private var _plantSelected = MutableLiveData<PlantEntity?>()
-    val plantSelected: LiveData<PlantEntity?> = _plantSelected
-
-    fun onPlantSelected(plantEntity: PlantEntity?) {
-        _plantSelected.value = plantEntity
-    }
-
-    fun getPlantSelected(): PlantEntity? = plantSelected.value
+    private lateinit var firestoreListener: ListenerRegistration
 
     fun onUploadImage(
         plantId: String?,
         photoSelectedUri: Uri?,
-        context: Context,
         callback: (EventPost) -> Unit,
         onProgressListener: (Int) -> Unit,
-        ) {
+    ) {
         val eventPost = EventPost()
         eventPost.documentId = plantId ?: database.getPlantsRef().document().id
         val storageRef = FirebaseStorage.getInstance().reference.child(Constants.PATH_PLANT_IMAGE)
@@ -67,21 +53,25 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun configFirestoreRealtime(context: Context, plantAdapter: PlantAdapter) {
+    fun configFirestoreRealtime(
+        onError: (Int) -> Unit,
+        onAdded: (PlantEntity) -> Unit,
+        onModified: (PlantEntity) -> Unit,
+        onRemoved: (PlantEntity) -> Unit
+    ) {
         val plantRef = database.getPlantsRef()
         firestoreListener = plantRef.addSnapshotListener { snapshots, error ->
             if (error != null) {
-                Toast.makeText(context, "Error al consultar datos", Toast.LENGTH_SHORT)
-                    .show()
+                onError(R.string.msg_query_error)
                 return@addSnapshotListener
             }
             for (snapshot in snapshots!!.documentChanges) {
                 val plant = snapshot.document.toObject(PlantEntity::class.java)
                 plant.plantId = snapshot.document.id
                 when (snapshot.type) {
-                    DocumentChange.Type.ADDED -> plantAdapter.add(plant)
-                    DocumentChange.Type.MODIFIED -> plantAdapter.update(plant)
-                    DocumentChange.Type.REMOVED -> plantAdapter.delete(plant)
+                    DocumentChange.Type.ADDED -> onAdded(plant)
+                    DocumentChange.Type.MODIFIED -> onModified(plant)
+                    DocumentChange.Type.REMOVED -> onRemoved(plant)
                 }
             }
         }
@@ -89,47 +79,57 @@ class HomeViewModel @Inject constructor(
 
     fun onSave(
         plantEntity: PlantEntity,
-        context: Context?,
         documentId: String,
+        onSuccess: (Int) -> Unit,
+        onFailure: (Int) -> Unit,
         onComplete: () -> Unit
     ) {
         database.getPlantsRef()
             .document(documentId)
             .set(plantEntity)
             .addOnSuccessListener {
-                Toast.makeText(context, "Planta Añadida", Toast.LENGTH_SHORT).show()
+                onSuccess(R.string.msg_plant_added)
             }
             .addOnFailureListener {
-                Toast.makeText(context, "Error al insertar", Toast.LENGTH_SHORT).show()
+                onFailure(R.string.msg_error_add_plant)
             }
             .addOnCompleteListener { onComplete() }
     }
 
-    fun onUpdate(plantEntity: PlantEntity, context: Context?, onComplete: () -> Unit) {
+    fun onUpdate(
+        plantEntity: PlantEntity,
+        onSuccess: (Int) -> Unit,
+        onFailure: (Int) -> Unit,
+        onComplete: () -> Unit
+    ) {
         plantEntity.plantId?.let { id ->
             database.getPlantsRef()
                 .document(id)
                 .set(plantEntity)
                 .addOnSuccessListener {
-                    Toast.makeText(context, "Planta actualizada", Toast.LENGTH_SHORT).show()
+                    onSuccess(R.string.msg_plant_update)
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Error al actualizar", Toast.LENGTH_SHORT).show()
+                    onFailure(R.string.msg_error_update_plant)
                 }
                 .addOnCompleteListener { onComplete() }
         }
     }
 
-    fun onDelete(plantEntity: PlantEntity, context: Context) {
+    fun onDelete(
+        plantEntity: PlantEntity,
+        onFailure: (Int) -> Unit
+    ) {
         val plantRef = database.getPlantsRef()
         plantEntity.plantId?.let { id ->
             plantRef.document(id)
                 .delete()
                 .addOnFailureListener {
-                    Toast.makeText(context, "Error al eliminar", Toast.LENGTH_SHORT)
-                        .show()
+                    onFailure(R.string.msg_error_delete_plant)
                 }
         }
     }
+
+    fun onRemoveListener() = firestoreListener.remove()
 
 }

@@ -18,13 +18,16 @@
         android:theme="@style/Theme.MomoPlants"
         tools:targetApi="31">
         <activity
+            android:name=".chatModule.view.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".trackModule.view.TrackActivity"
             android:exported="false" />
         <activity
             android:name=".detailModule.view.DetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".mainModule.view.MainActivity"
+            android:name=".mainModule.MainActivity"
             android:exported="true" />
         <activity
             android:name=".loginModule.view.LoginActivity"

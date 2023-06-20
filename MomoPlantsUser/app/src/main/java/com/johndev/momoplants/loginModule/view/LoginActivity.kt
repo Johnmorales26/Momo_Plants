@@ -11,7 +11,7 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.johndev.momoplants.databinding.ActivityLoginBinding
-import com.johndev.momoplants.mainModule.view.MainActivity
+import com.johndev.momoplants.mainModule.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 

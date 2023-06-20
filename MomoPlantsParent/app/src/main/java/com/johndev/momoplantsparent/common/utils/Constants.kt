@@ -14,9 +14,15 @@ object Constants {
     const val COLL_REQUESTS = "requests"
     const val PATH_PLANT_IMAGE = "plant_images"
 
+    //  Realtime Database
+    const val PATH_CHATS = "chats"
+
     const val PLANT_ID_INTENT = "plant_id_intent"
     const val ORDER_ID_INTENT = "order_id_intent"
+    const val CHAT_ID_INTENT = "chat_id_intent"
 
     const val PROP_STATUS = "status"
+
+    const val IMAGE_SP_URI = "image_shared_preferences_uri"
 
 }

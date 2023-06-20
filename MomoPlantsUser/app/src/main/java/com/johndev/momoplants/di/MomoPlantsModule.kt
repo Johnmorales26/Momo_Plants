@@ -1,6 +1,8 @@
 package com.johndev.momoplants.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
 import androidx.room.Room
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -49,3 +51,15 @@ object RoomModule {
         Room.databaseBuilder(context, MomoPlantsDatabase::class.java, NAME_DATABASE).build()
 
 }
+
+@Module
+@InstallIn(SingletonComponent::class)
+object PreferenceModule {
+    @Provides
+    @Singleton
+    fun provideSharedPreference(@ApplicationContext context: Context): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
+
+}
+
+

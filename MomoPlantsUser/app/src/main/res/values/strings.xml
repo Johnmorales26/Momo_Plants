@@ -80,5 +80,17 @@
     <string name="add_dialog_btn_success">Success</string>
     <string name="order_track_update">Estado del envio actualizado: %1$s</string>
     <string name="track_notification_description">Notifications about order status change</string>
+    <string name="hint_chat">Mensaje</string>
+    <string name="chat_error_load">Error al cargar chat</string>
+    <string name="chat_title">Soporte</string>
+    <string name="cart_purchase_made">Compra realizada</string>
+    <string name="cart_error_buying">Error al comprar</string>
+    <string name="btn_check_out">Check Out</string>
+    <string name="chat_order_not_found">Orden no encontrada</string>
+    <string name="chat_error_deleting_message">Error al eliminar mensaje.</string>
+    <string name="chat_success_deleting_message">Mensaje eliminado.</string>
+    <string name="msg_query_error">Error al consultar datos</string>
+    <string name="chat_order_found">Orden encontrada</string>
+    <string name="notification_see_track">See</string>
 
 </resources>

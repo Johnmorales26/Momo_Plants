@@ -21,7 +21,7 @@ import com.johndev.momoplantsparent.R
 import com.johndev.momoplantsparent.common.entities.PlantEntity
 import com.johndev.momoplantsparent.common.utils.editable
 import com.johndev.momoplantsparent.databinding.FragmentDialogAddBinding
-import com.johndev.momoplantsparent.mainModule.view.HomeFragment.Companion.homeViewModel
+import com.johndev.momoplantsparent.homeModule.view.HomeFragment.Companion.homeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -77,7 +77,6 @@ class AddDialogFragment : DialogFragment(), DialogInterface.OnShowListener {
                 homeViewModel.onUploadImage(
                     plantId = plant?.plantId,
                     photoSelectedUri = photoSelectedUri,
-                    context = requireContext(),
                     callback = { eventPost ->
                         if (eventPost.isSuccess) collectData(eventPost)
                     },
@@ -140,7 +139,7 @@ class AddDialogFragment : DialogFragment(), DialogInterface.OnShowListener {
                         price = it.etPrice.text.toString().toDouble(),
                         quantity = it.etQuantity.text.toString().toInt(),
                     )
-                    homeViewModel.onSave(plantEntity, context, eventPost.documentId!!) {
+                    homeViewModel.onSave(plantEntity, eventPost.documentId!!) {
                         binding?.progressBar?.visibility = GONE
                         dismiss()
                     }
@@ -154,7 +153,7 @@ class AddDialogFragment : DialogFragment(), DialogInterface.OnShowListener {
                         format = it.etFormat.text.toString().trim()
                         price = it.etPrice.text.toString().toDouble()
                         quantity = it.etQuantity.text.toString().toInt()
-                        homeViewModel.onUpdate(this, context) {
+                        homeViewModel.onUpdate(this) {
                             binding?.progressBar?.visibility = GONE
                             dismiss()
                         }

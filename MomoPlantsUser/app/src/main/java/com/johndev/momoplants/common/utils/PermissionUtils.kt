@@ -5,8 +5,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -34,5 +36,23 @@ fun executeOrRequestPermission(activity: Activity, callback: () -> Unit) {
         }
     } else {
         callback()
+    }
+}
+fun requestPermissionsForImage(
+    context: Context,
+    requestPermissionLauncher: ActivityResultLauncher<String>,
+    onSuccess: () -> Unit
+) {
+    when (PackageManager.PERMISSION_GRANTED) {
+        ContextCompat.checkSelfPermission(
+            context,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        ) -> {
+            onSuccess()
+        }
+
+        else -> requestPermissionLauncher.launch(
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
     }
 }

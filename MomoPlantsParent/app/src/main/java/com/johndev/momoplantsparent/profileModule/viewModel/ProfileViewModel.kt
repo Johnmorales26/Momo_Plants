@@ -2,6 +2,7 @@ package com.johndev.momoplantsparent.profileModule.viewModel
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.LiveData
@@ -13,14 +14,20 @@ import com.google.firebase.auth.FirebaseUser
 import com.johndev.momoplantsparent.loginModule.view.LoginActivity
 import com.johndev.momoplantsparent.R
 import com.johndev.momoplantsparent.common.utils.FirebaseUtils
+import com.johndev.momoplantsparent.profileModule.model.ProfileRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class ProfileViewModel @Inject constructor(): ViewModel() {
+class ProfileViewModel @Inject constructor(
+    private val profileRepository: ProfileRepository
+): ViewModel() {
 
     private var _userData = MutableLiveData<FirebaseUser?>()
     val userData: LiveData<FirebaseUser?> = _userData
+
+    private var _imageUri = MutableLiveData<String>()
+    val imageUri: LiveData<String> = _imageUri
 
     fun onGetUserData() {
         _userData.value = FirebaseAuth.getInstance().currentUser
@@ -37,6 +44,16 @@ class ProfileViewModel @Inject constructor(): ViewModel() {
                 val intent = Intent(context, LoginActivity::class.java)
                 startActivity(context, intent, null)
             }
+    }
+
+    fun saveUriImage(uri: Uri) {
+        profileRepository.onSaveUriImage(uri)
+    }
+
+    fun getUriImage() {
+        profileRepository.onGetUriImage()?.let {
+            _imageUri.value = it
+        }
     }
 
 }

@@ -47,6 +47,8 @@
     <string name="hint_phone_number">Phone Number</string>
     <string name="hint_lastname">Lastname</string>
     <string name="hint_verigy_password">Verify the password</string>
+    <string name="hint_status">Estado</string>
+    <string name="hint_chat">Message</string>
 
     <string name="soon_available_option">Soon available this option</string>
 
@@ -81,6 +83,17 @@
     <string name="order_status_delivered">Entregado</string>
     <string name="order_status_unknown">Desconocido</string>
     <string name="traking_dialog_title">Order tracking</string>
-    <string name="hint_status">Estado</string>
+
+    <string name="chat_error_load">Error al cargar chat</string>
+    <string name="chat_title">Support</string>
+    <string name="chat_order_not_found">Orden no encontrada</string>
+    <string name="msg_query_error">Error al consultar datos</string>
+    <string name="msg_plant_added">Planta Añadida</string>
+    <string name="msg_error_add_plant">Error al insertar</string>
+    <string name="msg_plant_update">Planta actualizada</string>
+    <string name="msg_error_update_plant">Error al actualizar</string>
+    <string name="msg_error_delete_plant">Error al eliminar</string>
+    <string name="msg_order_update">Orden actualizada</string>
+    <string name="msg_error_order_update">Error al actualizar orden.</string>
 
 </resources>
