@@ -7,23 +7,13 @@
     android:padding="@dimen/common_padding_middle"
     tools:context=".loginModule.view.LoginActivity">
 
-    <ProgressBar
-        android:id="@+id/progresBar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tvLabel"/>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/tvLabel"
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cargando Contendo..."
-        android:textAlignment="center"
-        android:textAppearance="?attr/textAppearanceHeadline2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progresBar"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:lottie_rawRes="@raw/girlfloating"
+        tools:ignore="MissingConstraints" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

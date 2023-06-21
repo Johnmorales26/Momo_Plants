@@ -5,6 +5,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -55,7 +57,16 @@ class OrdersFragment : Fragment(), OnOrderListener {
 
     private fun setupObservers() {
         ordersViewModel.orderList.observe(viewLifecycleOwner) {
-            it.forEach { order -> orderAdapter.add(order) }
+            with(binding) {
+                if (it.isEmpty()) {
+                    animationView.visibility = VISIBLE
+                    recyclerview.visibility = GONE
+                } else {
+                    animationView.visibility = GONE
+                    recyclerview.visibility = VISIBLE
+                    it.forEach { order -> orderAdapter.add(order) }
+                }
+            }
         }
         ordersViewModel.status.observe(viewLifecycleOwner) {
             lauchNotificationWithReciber(requireActivity(), it)

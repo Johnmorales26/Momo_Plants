@@ -74,17 +74,22 @@ class CartFragment : Fragment(), OnCartListener {
         binding.let {
             it.bottomOptions.fabAddCart.setIconResource(R.drawable.ic_payment)
             it.bottomOptions.fabAddCart.text = getString(R.string.btn_check_out)
-            it.bottomOptions.fabAddCart.setOnClickListener { requestOrder() }
+            it.bottomOptions.fabAddCart.setOnClickListener {
+                if (plantCartAdapter.itemCount == 0) {
+                    printToastMsg(R.string.cart_error_buying, requireContext())
+                } else {
+                    requestOrder()
+                }
+            }
         }
     }
-
     private fun requestOrder() {
-        cartViewModel.onRequestOrder(
-            plantCartAdapter = plantCartAdapter,
-            totalPrice = totalPrice,
-            enableUI = { enableUI(it) },
-            onSuccess = { printToastMsg(R.string.cart_purchase_made, requireContext()) },
-            onFailure = { printToastMsg(R.string.cart_error_buying, requireContext()) })
+            cartViewModel.onRequestOrder(
+                plantCartAdapter = plantCartAdapter,
+                totalPrice = totalPrice,
+                enableUI = { enableUI(it) },
+                onSuccess = { printToastMsg(R.string.cart_purchase_made, requireContext()) },
+                onFailure = { printToastMsg(R.string.cart_error_buying, requireContext()) })
     }
 
     private fun enableUI(isEnable: Boolean) {

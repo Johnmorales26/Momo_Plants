@@ -38,10 +38,8 @@ class TrackActivity : AppCompatActivity() {
     private fun setupObservers() {
         trackViewModel.orderEntity.observe(this) {
             if (it == null) {
-                binding.animationView.visibility = VISIBLE
                 binding.content.container.visibility = GONE
             } else {
-                binding.animationView.visibility = GONE
                 binding.content.container.visibility = VISIBLE
                 updateIU(it)
             }
