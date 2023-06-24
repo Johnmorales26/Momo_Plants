@@ -18,6 +18,15 @@ class ChatViewModel @Inject constructor(
     private val _orderEntity = MutableLiveData<OrderEntity>()
     val orderEntity: LiveData<OrderEntity> = _orderEntity
 
+    private val _deleteMessage = MutableLiveData<Boolean>()
+    val deleteMessage: LiveData<Boolean> = _deleteMessage
+
+    private val _enableButton = MutableLiveData<Boolean>()
+    val enableButton: LiveData<Boolean> = _enableButton
+
+    private val _lostOrder = MutableLiveData<Boolean>()
+    val lostOrder: LiveData<Boolean> = _lostOrder
+
     fun onSetupRealtimeDatabase(chatAdapter: ChatAdapter, updateScroll: () -> Unit, onCancelled: () -> Unit) {
         _orderEntity.value?.let {
             chatRepository.onSetupRealtimeDatabase(
@@ -33,35 +42,43 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun onGetOrder(idOrder: String?, onError: () -> Unit) {
+    fun onGetOrder(idOrder: String?) {
         chatRepository.onGetOrder(
             idOrder = idOrder,
-            onSuccessListener = { _orderEntity.value = it },
-            onErrorListener = { onError() }
+            onSuccessListener = { getOrderSuccess(it) },
+            onErrorListener = { getOrderError(it) }
         )
     }
 
-    fun onDeleteMessage(messageEntity: MessageEntity, onSuccess: (Boolean) -> Unit) {
+    fun getOrderError(error: Boolean?) { error?.let { _lostOrder.value = it } }
+
+    fun getOrderSuccess(orderEntity: OrderEntity?) { orderEntity?.let { _orderEntity.value = it } }
+
+    fun onDeleteMessage(messageEntity: MessageEntity) {
         _orderEntity.value?.let {
             chatRepository.onDeleteMessage(
                 orderEntity = it,
                 messageEntity = messageEntity,
-                onSuccess = { isSuccess ->
-                    onSuccess(isSuccess)
-                }
+                onSuccess = { isSuccess -> deleteMessageSuccess(isSuccess) }
             )
         }
     }
 
-    fun onSendMessage(message: String, onEnabledButton: (Boolean) -> Unit, onSuccess: () -> Unit) {
+    fun deleteMessageSuccess(success: Boolean) {
+        _deleteMessage.value = success
+    }
+
+    fun onSendMessage(message: String, onSuccess: () -> Unit) {
         _orderEntity.value?.let { order ->
             chatRepository.onSendMessage(
                 orderEntity = order,
                 message = message,
-                onEnabledButton = { onEnabledButton(it) },
+                onEnabledButton = { sendMessageEnabled(it) },
                 onSuccess = { onSuccess() }
             )
         }
     }
+
+    fun sendMessageEnabled(isEnable: Boolean) { _enableButton.value = isEnable }
 
 }

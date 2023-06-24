@@ -46,9 +46,9 @@ class OrdersRepository @Inject constructor(
     fun onSetupFirestoreRealtime(
         onError: (Int) -> Unit,
         onAdded: (OrderEntity) -> Unit,
-        onModified: (OrderEntity) -> Unit,
-        onRemoved: (OrderEntity) -> Unit,
-        onUpdateStatus: (Notification) -> Unit
+        onModified: (OrderEntity?) -> Unit,
+        onRemoved: (OrderEntity?) -> Unit,
+        onUpdateStatus: (Notification?) -> Unit
     ) {
         val plantRef = database.getRequestsRef()
         val user = FirebaseAuth.getInstance().currentUser

@@ -22,13 +22,17 @@ class DetailViewModel @Inject constructor(
     fun onSearchPlantRealtime(idPlant: String) {
         detailsRepository.onSearchPlantRealtime(
             idPlant = idPlant,
-            onSearchSuccess = { _plantEntity.value = it }
+            onSearchSuccess = { searchPlantRealtimeSuccess(it) }
         )
+    }
+
+    fun searchPlantRealtimeSuccess(plantEntity: PlantEntity?) {
+        plantEntity?.let { _plantEntity.value = it }
     }
 
     fun onSave(plantEntity: PlantEntity) {
         viewModelScope.launch(Dispatchers.IO) {
-            detailsRepository.onSave(plantEntity)
+            detailsRepository.addPlant(plantEntity)
         }
     }
 

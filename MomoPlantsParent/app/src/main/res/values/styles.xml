@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FirebaseUITheme" parent="FirebaseUI">
+        
+        <item name="colorPrimary">@color/md_theme_light_primaryContainer</item>
+        <item name="colorPrimaryDark">@color/md_theme_light_primary</item>
+        <item name="colorAccent">@color/md_theme_light_onPrimary</item>
+        <item name="android:colorBackground">@color/white</item>
+        <!-- On API 21+ you can use android:statusBarColor -->
+    </style>
+</resources>

@@ -23,7 +23,9 @@ class HomeReposirory @Inject constructor(
 
     fun configFirestoreRealtime(
         onQueryError: (Int) -> Unit,
-        onAddedPlant: (PlantEntity) -> Unit
+        onAddedPlant: (PlantEntity) -> Unit,
+        onModifiedPlant: (PlantEntity) -> Unit,
+        onRemovedPlant: (PlantEntity) -> Unit,
     ) {
         val plantRef = database.getPlantsRef()
         firestoreListener = plantRef.addSnapshotListener { snapshots, error ->
@@ -36,6 +38,8 @@ class HomeReposirory @Inject constructor(
                 plant.plantId = snapshot.document.id
                 when (snapshot.type) {
                     DocumentChange.Type.ADDED -> onAddedPlant(plant)
+                    DocumentChange.Type.MODIFIED -> onModifiedPlant(plant)
+                    DocumentChange.Type.REMOVED -> onRemovedPlant(plant)
                     else -> {}
                 }
             }
@@ -54,7 +58,7 @@ class HomeReposirory @Inject constructor(
 
     private suspend fun updatePlant(plantEntity: PlantEntity) {
         plantEntity.quantity += 1
-            dataSource.updatePlant(plantEntity)
+        dataSource.updatePlant(plantEntity)
     }
 
     private suspend fun addPlant(plantEntity: PlantEntity) {

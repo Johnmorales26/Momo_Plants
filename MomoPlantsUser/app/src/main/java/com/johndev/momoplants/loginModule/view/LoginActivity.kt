@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
+import com.johndev.momoplants.R
 import com.johndev.momoplants.databinding.ActivityLoginBinding
 import com.johndev.momoplants.mainModule.MainActivity
 
@@ -63,14 +65,24 @@ class LoginActivity : AppCompatActivity() {
             } else {
                 val providers = arrayListOf(
                     AuthUI.IdpConfig.EmailBuilder().build(),
-                    AuthUI.IdpConfig.GoogleBuilder().build()
+                    AuthUI.IdpConfig.GoogleBuilder().build(),
+                    AuthUI.IdpConfig.PhoneBuilder().build()
                 )
+
+                val loginView = AuthMethodPickerLayout.Builder(R.layout.view_login)
+                    .setEmailButtonId(R.id.fabEmail)
+                    .setGoogleButtonId(R.id.fabGoogle)
+                    .setPhoneButtonId(R.id.fabPhone)
+                    .setFacebookButtonId(R.id.fabFacebook)
+                    .build()
 
                 authLauncher.launch(
                     AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setAvailableProviders(providers)
                         .setIsSmartLockEnabled(false)
+                        .setAuthMethodPickerLayout(loginView)
+                        .setTheme(R.style.FirebaseUITheme)
                         .build()
                 )
             }

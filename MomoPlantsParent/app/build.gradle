@@ -79,7 +79,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
     //Lottie
     implementation 'com.airbnb.android:lottie:4.0.0'
-    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.activity:activity-ktx:1.7.2'
+
+    //  Hamcrest
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    //  Mockito
+    testImplementation "org.mockito:mockito-core:5.4.0"
 
 }
 

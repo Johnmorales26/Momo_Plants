@@ -24,13 +24,34 @@ class HomeViewModel @Inject constructor(
     private val homeReposirory: HomeReposirory
 ) : ViewModel() {
 
-    fun configFirestoreRealtime(plantAdapter: PlantAdapter, onQueryError: (Int) -> Unit) {
+    private val _addPlant = MutableLiveData<PlantEntity>()
+    val addPlant: LiveData<PlantEntity> = _addPlant
+
+    private val _updatePlant = MutableLiveData<PlantEntity>()
+    val updatePlant: LiveData<PlantEntity> = _updatePlant
+
+    private val _removedPlant = MutableLiveData<PlantEntity>()
+    val removedPlant: LiveData<PlantEntity> = _removedPlant
+
+    fun configFirestoreRealtime(onQueryError: (Int) -> Unit) {
         homeReposirory.configFirestoreRealtime(
             onQueryError = { msg -> onQueryError(msg) },
-            onAddedPlant = { plant ->
-                plantAdapter.add(plant)
-            }
+            onAddedPlant = { plant -> addedPlant(plant) },
+            onModifiedPlant = { plant -> modifierPlant(plant) },
+            onRemovedPlant = { plant -> removedPlant(plant) }
         )
+    }
+
+    fun removedPlant(plant: PlantEntity?) {
+        plant?.let { _removedPlant.value = it }
+    }
+
+    fun modifierPlant(plant: PlantEntity?) {
+        plant?.let { _updatePlant.value = it }
+    }
+
+    fun addedPlant(plant: PlantEntity?) {
+        plant?.let { _addPlant.value = it }
     }
 
     fun onSave(plantEntity: PlantEntity) {

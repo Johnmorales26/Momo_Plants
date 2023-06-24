@@ -15,5 +15,4 @@
         app:lottie_rawRes="@raw/girlfloating"
         tools:ignore="MissingConstraints" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

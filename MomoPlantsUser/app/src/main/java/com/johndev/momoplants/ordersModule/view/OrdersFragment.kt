@@ -46,8 +46,7 @@ class OrdersFragment : Fragment(), OnOrderListener {
         initViewModel()
         setupRecyclerView()
         setupObservers()
-        //ordersViewModel.onSetupFirestore()
-        ordersViewModel.onSetupFirestoreRealtime(orderAdapter)
+        ordersViewModel.onSetupFirestoreRealtime()
     }
 
     private fun initViewModel() {
@@ -74,6 +73,9 @@ class OrdersFragment : Fragment(), OnOrderListener {
         ordersViewModel.msg.observe(viewLifecycleOwner) {
             printToastMsg(it, requireContext())
         }
+        ordersViewModel.orderAdded.observe(viewLifecycleOwner) { orderAdapter.add(it) }
+        ordersViewModel.orderModified.observe(viewLifecycleOwner) { orderAdapter.update(it) }
+        ordersViewModel.orderRemoved.observe(viewLifecycleOwner) { orderAdapter.delete(it) }
     }
 
     private fun setupRecyclerView() {

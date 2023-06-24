@@ -63,8 +63,8 @@ class ChatRepository @Inject constructor(
 
     fun onGetOrder(
         idOrder: String?,
-        onSuccessListener: (OrderEntity) -> Unit,
-        onErrorListener: () -> Unit
+        onSuccessListener: (OrderEntity?) -> Unit,
+        onErrorListener: (Boolean?) -> Unit
     ) {
         database.getRequestsRef().get()
             .addOnSuccessListener {
@@ -77,7 +77,7 @@ class ChatRepository @Inject constructor(
                 }
             }
             .addOnFailureListener {
-                onErrorListener()
+                onErrorListener(true)
             }
     }
 

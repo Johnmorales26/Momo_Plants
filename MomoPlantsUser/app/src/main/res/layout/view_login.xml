@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/common_padding_middle"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvLabelFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hey there,"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvLabelSecond"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an Account"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelFirst"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:src="@drawable/img_login"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelSecond"
+        app:layout_constraintBottom_toTopOf="@id/llButtons"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/llButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".10"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".90"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_padding_min"
+            android:text="Sign in with Email"
+            app:backgroundTint="@color/md_theme_light_primaryContainer"
+            app:icon="@drawable/ic_email_res"
+            app:layout_constraintStart_toStartOf="@id/guideStart"
+            app:layout_constraintEnd_toEndOf="@id/guideEnd"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fabGoogle"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabGoogle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_padding_min"
+            android:text="Sign in with Google"
+            app:backgroundTint="@color/md_theme_light_primaryContainer"
+            app:icon="@drawable/ic_google_res"
+            app:layout_constraintStart_toStartOf="@id/fabEmail"
+            app:layout_constraintEnd_toEndOf="@id/fabEmail"
+            app:layout_constraintTop_toBottomOf="@id/fabEmail"
+            app:layout_constraintBottom_toTopOf="@id/fabPhone"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabPhone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_padding_min"
+            android:text="Sign in with Phone Number"
+            app:backgroundTint="@color/md_theme_light_primaryContainer"
+            app:icon="@drawable/ic_phone_res"
+            app:layout_constraintStart_toStartOf="@id/fabEmail"
+            app:layout_constraintEnd_toEndOf="@id/fabEmail"
+            app:layout_constraintTop_toBottomOf="@id/fabGoogle"
+            app:layout_constraintBottom_toTopOf="@id/fabFacebook"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabFacebook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/common_padding_min"
+            android:text="Sign in with Facebook"
+            app:backgroundTint="@color/md_theme_light_primaryContainer"
+            app:icon="@drawable/ic_facebook_res"
+            app:layout_constraintStart_toStartOf="@id/fabEmail"
+            app:layout_constraintEnd_toEndOf="@id/fabEmail"
+            app:layout_constraintTop_toBottomOf="@id/fabPhone"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

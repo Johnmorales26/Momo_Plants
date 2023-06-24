@@ -46,7 +46,8 @@ class HomeRepository @Inject constructor(
                     }
                 }
                 .addOnFailureListener {
-                    Toast.makeText(context, "Error al cargar imagen", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context,
+                        context.getString(R.string.error_upload_image), Toast.LENGTH_SHORT).show()
                     eventPost.isSuccess = false
                     callback(eventPost)
                 }

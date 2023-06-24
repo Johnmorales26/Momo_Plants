@@ -85,9 +85,10 @@ class AddDialogFragment : DialogFragment(), DialogInterface.OnShowListener {
                             binding?.progressBar?.progress = progress
                             binding?.tvProgress?.text = String.format("%s%%", progress)
                         }
-                    })
-                negativeButton?.setOnClickListener { dismiss() }
+                    }
+                )
             }
+            negativeButton?.setOnClickListener { dismiss() }
         }
     }
 

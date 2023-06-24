@@ -95,5 +95,6 @@
     <string name="msg_error_delete_plant">Error al eliminar</string>
     <string name="msg_order_update">Orden actualizada</string>
     <string name="msg_error_order_update">Error al actualizar orden.</string>
+    <string name="error_upload_image">Error al cargar imagen</string>
 
 </resources>

@@ -44,9 +44,7 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
 
     private fun recibeIdOrder() {
         val idOrder = intent.getStringExtra(CHAT_ID_INTENT)
-        chatViewModel.onGetOrder(idOrder) {
-            printToastMsg(R.string.chat_order_not_found, this)
-        }
+        chatViewModel.onGetOrder(idOrder)
     }
 
     private fun setupToolbar() {
@@ -71,6 +69,19 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
                 )
             }
         }
+        chatViewModel.deleteMessage.observe(this) { isSuccess ->
+            if (!isSuccess) {
+                printSnackbarMsg(binding.root, R.string.chat_error_deleting_message, this)
+            } else {
+                printSnackbarMsg(binding.root, R.string.chat_success_deleting_message, this)
+            }
+        }
+        chatViewModel.enableButton.observe(this) {
+            binding.ibSend.isEnabled = it
+        }
+        chatViewModel.lostOrder.observe(this) {
+            if (it == true) printToastMsg(R.string.chat_order_not_found, this)
+        }
     }
 
     private fun setupRecyclerView() {
@@ -92,22 +103,14 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
     private fun sendMessage() {
         chatViewModel.onSendMessage(
             message = binding.etMessage.text.toString().trim(),
-            onEnabledButton = {
-                binding.ibSend.isEnabled = it
-            }, onSuccess = {
+            onSuccess = {
                 binding.etMessage.text = "".editable()
             }
         )
     }
 
     override fun deleteMessage(messageEntity: MessageEntity) {
-        chatViewModel.onDeleteMessage(messageEntity) { isSuccess ->
-            if (!isSuccess) {
-                printSnackbarMsg(binding.root, R.string.chat_error_deleting_message, this)
-            } else {
-                printSnackbarMsg(binding.root, R.string.chat_success_deleting_message, this)
-            }
-        }
+        chatViewModel.onDeleteMessage(messageEntity)
     }
 
 }

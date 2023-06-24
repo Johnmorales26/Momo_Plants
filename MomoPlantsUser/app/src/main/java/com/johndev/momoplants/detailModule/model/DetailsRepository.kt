@@ -30,22 +30,12 @@ class DetailsRepository @Inject constructor(
         }
     }
 
-    suspend fun onSave(plantEntity: PlantEntity) {
-        dataSource.getPlantByID(plantEntity.plantId) {
-            if (it != null) {
-                runBlocking { updatePlant(it) }
-            } else {
-                runBlocking { addPlant(plantEntity) }
-            }
-        }
-    }
-
-    private suspend fun updatePlant(plantEntity: PlantEntity) {
+    suspend fun updatePlant(plantEntity: PlantEntity) {
         plantEntity.quantity += 1
         dataSource.updatePlant(plantEntity)
     }
 
-    private suspend fun addPlant(plantEntity: PlantEntity) {
+    suspend fun addPlant(plantEntity: PlantEntity) {
         val cartPlant = plantEntity.copy()
         cartPlant.quantity = 1
         dataSource.addPlant(cartPlant) { id ->

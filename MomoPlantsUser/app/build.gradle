@@ -37,6 +37,9 @@ android {
     buildFeatures{
         viewBinding true
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 dependencies {
@@ -65,6 +68,10 @@ dependencies {
     //  Hilt
     implementation 'com.google.dagger:hilt-android:2.45'
     kapt 'com.google.dagger:hilt-compiler:2.45'
+    kapt "com.google.dagger:hilt-android-compiler:2.45"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:2.45"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.45"
+    implementation 'androidx.hilt:hilt-navigation-fragment:1.0.0'
     // FirebaseUI for Firebase Auth
     implementation 'com.firebaseui:firebase-ui-auth:8.0.2'
     //  BoM Firebase Platform
@@ -84,6 +91,22 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.4.0'
     //  SharedPreferences
     implementation 'androidx.preference:preference-ktx:1.2.0'
+    //  Robolectric
+    testImplementation 'org.robolectric:robolectric:4.9'
+    //  Hamcrest
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+    //  AndroidX Test
+    testImplementation 'androidx.test:core-ktx:1.5.0'
+    testImplementation 'androidx.test.ext:junit-ktx:1.1.5'
+    //  Fragment Testing
+    debugImplementation 'androidx.fragment:fragment-testing:1.6.0'
+    //  Arch Components
+    testImplementation 'androidx.arch.core:core-testing:2.2.0'
+    //  Mockito
+    testImplementation "org.mockito:mockito-core:5.4.0"
+    //  MockK
+    testImplementation "io.mockk:mockk:1.10.0"
+    androidTestImplementation "io.mockk:mockk-android:1.10.0"
 
 }
 

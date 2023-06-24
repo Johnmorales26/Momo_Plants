@@ -40,11 +40,26 @@ class HomeFragment : Fragment(), OnProductListener {
         super.onViewCreated(view, savedInstanceState)
         initViewModel()
         initRecyclerView(view)
+        setupObservers()
     }
 
     private fun initViewModel() {
         val vmHome: HomeViewModel by viewModels()
         homeViewModel = vmHome
+    }
+
+    private fun setupObservers() {
+        homeViewModel.run {
+            addPlant.observe(viewLifecycleOwner) {
+                it?.let { plant -> plantAdapter.add(plant) }
+            }
+            updatePlant.observe(viewLifecycleOwner) {
+                it?.let { plant -> plantAdapter.update(plant) }
+            }
+            removedPlant.observe(viewLifecycleOwner) {
+                it?.let { plant -> plantAdapter.delete(plant) }
+            }
+        }
     }
 
     private fun initRecyclerView(view: View) {
@@ -70,7 +85,6 @@ class HomeFragment : Fragment(), OnProductListener {
     override fun onResume() {
         super.onResume()
         homeViewModel.configFirestoreRealtime(
-            plantAdapter = plantAdapter,
             onQueryError = { msg ->
                 printSnackbarMsg(binding.root, msg, requireContext())
             }
