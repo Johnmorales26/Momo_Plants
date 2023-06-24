@@ -23,6 +23,8 @@ class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
     private val binding get() = _binding!!
+
+
     private val startForActivityGallery =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -39,6 +41,13 @@ class ProfileFragment : Fragment() {
             }
         }
 
+    private fun pickPhotoFromGallery() {
+        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "image/jpeg"
+        }
+        startForActivityGallery.launch(intent)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +86,16 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+        profileViewModel.imageUri.observe(viewLifecycleOwner) {
+            it?.let { imgUri ->
+                Glide.with(requireContext())
+                    .load(imgUri)
+                    .centerCrop()
+                    .transform(CircleCrop())
+                    .placeholder(R.drawable.ic_broken_image)
+                    .into(binding.btnSelectImg)
+            }
+        }
     }
 
     private fun setupToolbar() {
@@ -102,13 +121,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    private fun pickPhotoFromGallery() {
-        val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-            addCategory(Intent.CATEGORY_OPENABLE)
-            type = "image/jpeg"
-        }
-        startForActivityGallery.launch(intent)
-    }
 
     private fun setupButtons() {
         binding.btnSelectImg.setOnClickListener {
