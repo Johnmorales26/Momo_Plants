@@ -7,6 +7,9 @@
 
     <string name="msg_welcome_user">Bienvenido %s</string>
     <string name="msg_user_not_found">No se encontró el usuario</string>
+    <string name="msg_query_error">Error al consultar datos</string>
+
+    <string name="notification_see_track">Ver</string>
 
     <string name="login_insert_success">Usuario registrado con éxito</string>
 
@@ -15,6 +18,7 @@
     <string name="bottom_navigation_home">Principal</string>
     <string name="bottom_navigation_cart">Carrito</string>
     <string name="bottom_navigation_profile">Perfil</string>
+    <string name="bottom_navigation_orders">Orden</string>
 
     <string name="label_description">Descripción:</string>
     <string name="label_format">Formato:</string>
@@ -41,16 +45,67 @@
     <string name="btn_sign_in">Iniciar sesión</string>
     <string name="btn_sign_up">Registrarse</string>
     <string name="btn_see_details">Ver detalles</string>
+    <string name="btn_sign_email">Iniciar sesión con correo electrónico</string>
+    <string name="btn_sign_google">Iniciar sesión con Google</string>
+    <string name="btn_sign_phone_number">Iniciar sesión con número de teléfono</string>
+    <string name="btn_sign_facebook">Iniciar sesión con Facebook</string>
+    <string name="btn_check_out">Realizar compra</string>
 
     <string name="hint_name">Nombre</string>
     <string name="hint_email">Correo</string>
     <string name="hint_password">Contraseña</string>
+    <string name="hint_phone_number">Numero de telefono</string>
     <string name="hint_lastname">Apellido</string>
     <string name="hint_verigy_password">Verifica la contraseña</string>
+    <string name="hint_chat">Message</string>
 
     <string name="soon_available_option">Estamos trabajando en esta opción</string>
 
     <string name="menu_option_about">Acerca de</string>
     <string name="menu_option_settings">Configuración</string>
     <string name="menu_option_sign_out">Cerrar Sesión</string>
+
+    <string name="msg_stock_with_stock">Hay plantas en nuestros almacenes</string>
+    <string name="msg_stock_without_stock">No hay plantas en nuestros almacenes</string>
+
+    <string name="product_empty_cart">Carrito vacío</string>
+    <string name="product_full_cart">$%1$.2f MXN</string>
+
+    <string name="order_track_shipment">Seguir envio</string>
+    <string name="order_status">Estado: %1$s</string>
+    <string name="order_id">ID: %1$s</string>
+    <string name="order_chat_help">¿Necesitas ayuda?</string>
+    <string name="order_title">Historial de compras</string>
+    <string name="order_status_ordered">Pedido</string>
+    <string name="order_status_preparing">Preparando</string>
+    <string name="order_status_send">Enviado</string>
+    <string name="order_status_delivered">Entregado</string>
+    <string name="order_status_unknown">Desconocido</string>
+    <string name="order_track_update">Estado del envio actualizado: %1$s</string>
+
+    <string name="track_title">Rastreo</string>
+    <string name="traking_dialog_title">Seguimiento de orden</string>
+
+    <string name="add_dialog_btn_success">Éxito</string>
+
+    <string name="chat_error_load">Error al cargar chat</string>
+    <string name="chat_title">Soporte</string>
+    <string name="chat_order_not_found">Orden no encontrada</string>
+    <string name="chat_error_deleting_message">Error al eliminar mensaje.</string>
+    <string name="chat_success_deleting_message">Mensaje eliminado.</string>
+    <string name="chat_order_found">Orden encontrada</string>
+
+    <string name="track_notification_description">Notificaciones sobre cambios en el estado del pedido</string>
+
+    <string name="cart_purchase_made">Compra realizada</string>
+    <string name="cart_error_buying">Error al comprar</string>
+
+    <string name="view_login_label_top">Hola,</string>
+    <string name="view_login_label_create_account">Create an Account</string>
+
+    <string name="login_welcome">Bienvenido %1$s</string>
+    <string name="login_see_you_soon">Hasta pronto</string>
+    <string name="login_no_net">Sin red</string>
+    <string name="login_error_code">Código de error: %1$s</string>
+    <string name="login_insert_error">Error</string>
 </resources>

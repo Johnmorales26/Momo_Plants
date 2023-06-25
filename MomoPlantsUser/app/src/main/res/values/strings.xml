@@ -6,7 +6,7 @@
 
     <string name="msg_welcome_user">Welcome, %s</string>
     <string name="msg_user_not_found">User not found</string>
-    <string name="msg_query_error">Error al consultar datos</string>
+    <string name="msg_query_error">Error querying data</string>
 
     <string name="notification_see_track">See</string>
 
@@ -67,45 +67,45 @@
     <string name="msg_stock_with_stock">There are plants in our warehouses</string>
     <string name="msg_stock_without_stock">There are no plants in our warehouses</string>
 
-    <string name="product_empty_cart">Carrito vacío</string>
+    <string name="product_empty_cart">Empty Cart</string>
     <string name="product_full_cart">$%1$.2f MXN</string>
 
-    <string name="order_track_shipment">Seguir envio</string>
-    <string name="order_status">Estado: %1$s</string>
+    <string name="order_track_shipment">Track Shipment</string>
+    <string name="order_status">Status: %1$s</string>
     <string name="order_id">ID: %1$s</string>
-    <string name="order_chat_help">¿Necesitas ayuda?</string>
-    <string name="order_title">Historial de compras</string>
-    <string name="order_status_ordered">Pedido</string>
-    <string name="order_status_preparing">Preparando</string>
-    <string name="order_status_send">Enviado</string>
-    <string name="order_status_delivered">Entregado</string>
-    <string name="order_status_unknown">Desconocido</string>
-    <string name="order_track_update">Estado del envio actualizado: %1$s</string>
+    <string name="order_chat_help">Need Help?</string>
+    <string name="order_title">Purchase History</string>
+    <string name="order_status_ordered">Ordered</string>
+    <string name="order_status_preparing">Preparing</string>
+    <string name="order_status_send">Shipped</string>
+    <string name="order_status_delivered">Delivered</string>
+    <string name="order_status_unknown">Unknown</string>
+    <string name="order_track_update">Updated Shipment Status: %1$s</string>
 
-    <string name="track_title">Rastreo</string>
-    <string name="traking_dialog_title">Order tracking</string>
+    <string name="track_title">Tracking</string>
+    <string name="traking_dialog_title">Order Tracking</string>
 
     <string name="add_dialog_btn_success">Success</string>
 
-    <string name="chat_error_load">Error al cargar chat</string>
-    <string name="chat_title">Soporte</string>
-    <string name="chat_order_not_found">Orden no encontrada</string>
-    <string name="chat_error_deleting_message">Error al eliminar mensaje.</string>
-    <string name="chat_success_deleting_message">Mensaje eliminado.</string>
-    <string name="chat_order_found">Orden encontrada</string>
+    <string name="chat_error_load">Error Loading Chat</string>
+    <string name="chat_title">Support</string>
+    <string name="chat_order_not_found">Order Not Found</string>
+    <string name="chat_error_deleting_message">Error Deleting Message.</string>
+    <string name="chat_success_deleting_message">Message Deleted.</string>
+    <string name="chat_order_found">Order Found</string>
 
     <string name="track_notification_description">Notifications about order status change</string>
 
-    <string name="cart_purchase_made">Compra realizada</string>
-    <string name="cart_error_buying">Error al comprar</string>
+    <string name="cart_purchase_made">Purchase Made</string>
+    <string name="cart_error_buying">Error Buying</string>
 
     <string name="view_login_label_top">Hey there,</string>
     <string name="view_login_label_create_account">Create an Account</string>
 
-    <string name="login_welcome">Bienvenido %1$s</string>
-    <string name="login_see_you_soon">Hasta pronto</string>
-    <string name="login_no_net">Sin red</string>
-    <string name="login_error_code">Código de error: %1$s</string>
+    <string name="login_welcome">Welcome %1$s</string>
+    <string name="login_see_you_soon">See You Soon</string>
+    <string name="login_no_net">No Network</string>
+    <string name="login_error_code">Error Code: %1$s</string>
     <string name="login_insert_error">Error</string>
 
 </resources>
