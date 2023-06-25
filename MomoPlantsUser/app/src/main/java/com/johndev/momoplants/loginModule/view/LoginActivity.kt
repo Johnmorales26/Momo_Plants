@@ -27,21 +27,23 @@ class LoginActivity : AppCompatActivity() {
             if (it.resultCode == RESULT_OK) {
                 val user = FirebaseAuth.getInstance().currentUser
                 if (user != null) {
-                    Toast.makeText(this, "Bienvenido ${user.displayName}", Toast.LENGTH_SHORT)
+                    Toast.makeText(this,
+                        getString(R.string.login_welcome, user.displayName), Toast.LENGTH_SHORT)
                         .show()
                     startActivity(Intent(this, MainActivity::class.java))
                 }
             } else {
                 if (response == null) {
-                    Toast.makeText(this, "Hasta pronto", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, getString(R.string.login_see_you_soon), Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
                     response.error?.let {
                         if (it.errorCode == ErrorCodes.NO_NETWORK) {
-                            Toast.makeText(this, "Sin red", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this,
+                                getString(R.string.login_no_net), Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(
-                                this, "Código de error: ${it.errorCode}",
+                                this, getString(R.string.login_error_code, it.errorCode.toString()),
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
