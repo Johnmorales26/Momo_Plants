@@ -60,7 +60,7 @@ dependencies {
     //  ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     //  Fragment ViewModels
-    implementation 'androidx.fragment:fragment-ktx:1.5.7'
+    implementation 'androidx.fragment:fragment-ktx:1.6.0'
     //  Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     //  Glide
@@ -83,12 +83,12 @@ dependencies {
     //  Firebase Realtime Database
     implementation 'com.google.firebase:firebase-database-ktx'
     //  Room 2.4.1
-    implementation "androidx.room:room-runtime:2.5.1"
-    kapt "androidx.room:room-compiler:2.5.1"
-    implementation 'androidx.room:room-ktx:2.5.1'
+    implementation "androidx.room:room-runtime:2.5.2"
+    kapt "androidx.room:room-compiler:2.5.2"
+    implementation 'androidx.room:room-ktx:2.5.2'
     //Lottie
     implementation 'com.airbnb.android:lottie:4.0.0'
-    implementation 'androidx.activity:activity-ktx:1.4.0'
+    implementation 'androidx.activity:activity-ktx:1.7.2'
     //  SharedPreferences
     implementation 'androidx.preference:preference-ktx:1.2.0'
     //  Robolectric
