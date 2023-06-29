@@ -24,7 +24,7 @@ class CartViewModel @Inject constructor(
     fun getCartList() {
         viewModelScope.launch(Dispatchers.IO) {
             cartRepository.onGetCartList {
-                _listCart.postValue(it)
+                it?.let { _listCart.postValue(it) }
             }
         }
     }

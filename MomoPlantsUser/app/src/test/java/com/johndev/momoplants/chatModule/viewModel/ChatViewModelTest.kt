@@ -41,7 +41,7 @@ class ChatViewModelTest {
                 status = 0
             )
             chatViewModel.orderEntity.observeForever(observer)
-            chatViewModel.getOrderSuccess(orderEntity)
+            chatViewModel.getOrderResult(orderEntity)
             val result = chatViewModel.orderEntity.value
             MatcherAssert.assertThat(result, CoreMatchers.not(CoreMatchers.nullValue()))
         } finally {
@@ -68,7 +68,7 @@ class ChatViewModelTest {
         val observer = Observer<Boolean>{}
         try {
             chatViewModel.deleteMessage.observeForever(observer)
-            chatViewModel.deleteMessageSuccess(true)
+            chatViewModel.deleteMessageResult(true)
             val result = chatViewModel.deleteMessage.value
             MatcherAssert.assertThat(result, CoreMatchers.not(CoreMatchers.nullValue()))
             MatcherAssert.assertThat(result, `is`(true))
@@ -82,7 +82,7 @@ class ChatViewModelTest {
         val observer = Observer<Boolean>{}
         try {
             chatViewModel.enableButton.observeForever(observer)
-            chatViewModel.sendMessageEnabled(true)
+            chatViewModel.sendMessageResult(true)
             val result = chatViewModel.enableButton.value
             MatcherAssert.assertThat(result, CoreMatchers.not(CoreMatchers.nullValue()))
             MatcherAssert.assertThat(result, `is`(true))

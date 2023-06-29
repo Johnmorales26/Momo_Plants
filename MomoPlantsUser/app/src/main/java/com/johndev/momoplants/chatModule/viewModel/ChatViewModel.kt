@@ -3,6 +3,7 @@ package com.johndev.momoplants.chatModule.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.johndev.momoplants.R
 import com.johndev.momoplants.adapters.ChatAdapter
 import com.johndev.momoplants.chatModule.model.ChatRepository
 import com.johndev.momoplants.common.entities.MessageEntity
@@ -24,12 +25,12 @@ class ChatViewModel @Inject constructor(
     private val _enableButton = MutableLiveData<Boolean>()
     val enableButton: LiveData<Boolean> = _enableButton
 
-    private val _lostOrder = MutableLiveData<Boolean>()
-    val lostOrder: LiveData<Boolean> = _lostOrder
+    private val _msg = MutableLiveData<Int>()
+    val msg: LiveData<Int> = _msg
 
-    fun onSetupRealtimeDatabase(chatAdapter: ChatAdapter, updateScroll: () -> Unit, onCancelled: () -> Unit) {
+    fun setupRealtimeDatabase(chatAdapter: ChatAdapter, updateScroll: () -> Unit, onCancelled: () -> Unit) {
         _orderEntity.value?.let {
-            chatRepository.onSetupRealtimeDatabase(
+            chatRepository.setupRealtimeDatabase(
                 orderEntity = it,
                 onChildAdded = { message ->
                     chatAdapter.add(message)
@@ -42,43 +43,45 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun onGetOrder(idOrder: String?) {
+    fun getOrder(idOrder: String?) {
         chatRepository.onGetOrder(
             idOrder = idOrder,
-            onSuccessListener = { getOrderSuccess(it) },
-            onErrorListener = { getOrderError(it) }
+            callback = { getOrderResult(it) }
         )
     }
 
-    fun getOrderError(error: Boolean?) { error?.let { _lostOrder.value = it } }
+    fun getOrderResult(orderEntity: OrderEntity?) {
+        orderEntity?.let {
+            _orderEntity.value = it
+        } ?: {
+            _msg.value = R.string.chat_order_not_found
+        }
+    }
 
-    fun getOrderSuccess(orderEntity: OrderEntity?) { orderEntity?.let { _orderEntity.value = it } }
-
-    fun onDeleteMessage(messageEntity: MessageEntity) {
+    fun deleteMessage(messageEntity: MessageEntity) {
         _orderEntity.value?.let {
-            chatRepository.onDeleteMessage(
+            chatRepository.deleteMessage(
                 orderEntity = it,
                 messageEntity = messageEntity,
-                onSuccess = { isSuccess -> deleteMessageSuccess(isSuccess) }
+                callback = { isSuccess -> deleteMessageResult(isSuccess) }
             )
         }
     }
 
-    fun deleteMessageSuccess(success: Boolean) {
+    fun deleteMessageResult(success: Boolean) {
         _deleteMessage.value = success
     }
 
-    fun onSendMessage(message: String, onSuccess: () -> Unit) {
+    fun onSendMessage(message: String) {
         _orderEntity.value?.let { order ->
             chatRepository.onSendMessage(
                 orderEntity = order,
                 message = message,
-                onEnabledButton = { sendMessageEnabled(it) },
-                onSuccess = { onSuccess() }
+                callback = { sendMessageResult(it) },
             )
         }
     }
 
-    fun sendMessageEnabled(isEnable: Boolean) { _enableButton.value = isEnable }
+    fun sendMessageResult(isEnable: Boolean) { _enableButton.value = isEnable }
 
 }

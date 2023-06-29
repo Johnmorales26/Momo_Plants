@@ -30,7 +30,7 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initViewModel()
-        recibeIdOrder()
+        receiveIdOrder()
         setupObservers()
         setupToolbar()
         setupRecyclerView()
@@ -42,9 +42,9 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
         chatViewModel = vm
     }
 
-    private fun recibeIdOrder() {
+    private fun receiveIdOrder() {
         val idOrder = intent.getStringExtra(CHAT_ID_INTENT)
-        chatViewModel.onGetOrder(idOrder)
+        chatViewModel.getOrder(idOrder)
     }
 
     private fun setupToolbar() {
@@ -59,7 +59,7 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
         chatViewModel.orderEntity.observe(this) { order ->
             order?.let {
                 orderEntity = order
-                chatViewModel.onSetupRealtimeDatabase(
+                chatViewModel.setupRealtimeDatabase(
                     chatAdapter = chatAdapter,
                     updateScroll = {
                         binding.recyclerview.scrollToPosition(chatAdapter.itemCount - 1)
@@ -79,8 +79,8 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
         chatViewModel.enableButton.observe(this) {
             binding.ibSend.isEnabled = it
         }
-        chatViewModel.lostOrder.observe(this) {
-            if (it == true) printToastMsg(R.string.chat_order_not_found, this)
+        chatViewModel.msg.observe(this) {
+            printToastMsg(it, this)
         }
     }
 
@@ -103,14 +103,12 @@ class ChatActivity : AppCompatActivity(), OnChatListener {
     private fun sendMessage() {
         chatViewModel.onSendMessage(
             message = binding.etMessage.text.toString().trim(),
-            onSuccess = {
-                binding.etMessage.text = "".editable()
-            }
         )
+        binding.etMessage.text = "".editable()
     }
 
     override fun deleteMessage(messageEntity: MessageEntity) {
-        chatViewModel.onDeleteMessage(messageEntity)
+        chatViewModel.deleteMessage(messageEntity)
     }
 
 }

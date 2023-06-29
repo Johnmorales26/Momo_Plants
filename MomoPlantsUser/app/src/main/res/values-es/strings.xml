@@ -101,7 +101,7 @@
     <string name="cart_error_buying">Error al comprar</string>
 
     <string name="view_login_label_top">Hola,</string>
-    <string name="view_login_label_create_account">Create an Account</string>
+    <string name="view_login_label_create_account">Crear una cuenta</string>
 
     <string name="login_welcome">Bienvenido %1$s</string>
     <string name="login_see_you_soon">Hasta pronto</string>

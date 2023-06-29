@@ -19,7 +19,7 @@ class ChatRepository @Inject constructor(
     private val database: FirebaseUtils
 ) {
 
-    fun onSetupRealtimeDatabase(
+    fun setupRealtimeDatabase(
         orderEntity: OrderEntity,
         onChildAdded: (MessageEntity) -> Unit,
         onChildChanged: (MessageEntity) -> Unit,
@@ -63,8 +63,7 @@ class ChatRepository @Inject constructor(
 
     fun onGetOrder(
         idOrder: String?,
-        onSuccessListener: (OrderEntity?) -> Unit,
-        onErrorListener: (Boolean?) -> Unit
+        callback: (OrderEntity?) -> Unit,
     ) {
         database.getRequestsRef().get()
             .addOnSuccessListener {
@@ -72,16 +71,16 @@ class ChatRepository @Inject constructor(
                     val order = document.toObject(OrderEntity::class.java)
                     order.id = document.id
                     if (idOrder == order.id) {
-                        onSuccessListener(order)
+                        callback(order)
                     }
                 }
             }
             .addOnFailureListener {
-                onErrorListener(true)
+                callback(null)
             }
     }
 
-    fun onSendMessage(orderEntity: OrderEntity, message: String, onEnabledButton: (Boolean) -> Unit, onSuccess: () -> Unit) {
+    fun onSendMessage(orderEntity: OrderEntity, message: String, callback: (Boolean) -> Unit) {
             val database = Firebase.database
             val chatRef = database.getReference(Constants.PATH_CHATS).child(orderEntity.id)
             val user = FirebaseAuth.getInstance().currentUser
@@ -91,28 +90,25 @@ class ChatRepository @Inject constructor(
                     sender = it.uid,
                     time = System.currentTimeMillis().toString().trim()
                 )
-                onEnabledButton(false)
+                callback(false)
                 chatRef.push().setValue(messageEntity)
                     .addOnSuccessListener {
-                        onSuccess()
-                    }
-                    .addOnCompleteListener {
-                        onEnabledButton(true)
+                        callback(true)
                     }
             }
     }
 
-    fun onDeleteMessage(
+    fun deleteMessage(
         orderEntity: OrderEntity,
         messageEntity: MessageEntity,
-        onSuccess: (Boolean) -> Unit
+        callback: (Boolean) -> Unit
     ) {
         val database = Firebase.database
         val messageRef =
             database.getReference(Constants.PATH_CHATS).child(orderEntity.id)
                 .child(messageEntity.id)
         messageRef.removeValue { error, _ ->
-            if (error != null) onSuccess(false) else onSuccess(true)
+            if (error != null) callback(false) else callback(true)
         }
     }
 

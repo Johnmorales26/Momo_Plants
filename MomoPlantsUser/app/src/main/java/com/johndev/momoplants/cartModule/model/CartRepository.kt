@@ -13,12 +13,12 @@ class CartRepository @Inject constructor(
     private var dataSource: MomoPlantsDataSource
 ) {
 
-    suspend fun onGetCartList(onReturnList: (List<PlantEntity>) -> Unit) {
+    suspend fun onGetCartList(callback: (List<PlantEntity>?) -> Unit) {
         dataSource.getAllPlants {
             if (it.isEmpty()) {
-                onReturnList(emptyList())
+                callback(null)
             } else {
-                onReturnList(it)
+                callback(it)
             }
         }
     }
