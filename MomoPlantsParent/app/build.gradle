@@ -77,10 +77,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     //  Firebase Realtime Database
     implementation 'com.google.firebase:firebase-database-ktx'
-    //Lottie
+    //  Volley
+    implementation 'com.android.volley:volley:1.2.1'
+    //  Lottie
     implementation 'com.airbnb.android:lottie:4.0.0'
     implementation 'androidx.activity:activity-ktx:1.7.2'
-
     //  Hamcrest
     testImplementation 'org.hamcrest:hamcrest:2.2'
     //  Mockito

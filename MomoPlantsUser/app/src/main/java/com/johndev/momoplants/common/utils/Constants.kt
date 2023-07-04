@@ -6,11 +6,15 @@ object Constants {
 
     const val ERROR_EXIST = "Error 01"
 
+    //  Firestore
     const val COLL_PLANTS = "plants"
     const val COLL_REQUESTS = "requests"
-
+    const val COLL_USERS = "users"
+    const val COLL_TOKENS = "tokens"
     //  Realtime Database
     const val PATH_CHATS = "chats"
+    //  Cloud Messaging
+    const val PROP_TOKEN = "token"
 
     const val PLANT_ID_INTENT = "plant_id_intent"
     const val ORDER_ID_INTENT = "order_id_intent"

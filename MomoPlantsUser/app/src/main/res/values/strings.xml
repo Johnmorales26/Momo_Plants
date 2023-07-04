@@ -9,6 +9,8 @@
     <string name="msg_query_error">Error querying data</string>
 
     <string name="notification_see_track">See</string>
+    <string name="notification_channel_id_default">general</string>
+    <string name="notification_channel_name_default">Generales</string>
 
     <string name="login_insert_success">Insert Success</string>
 

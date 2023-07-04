@@ -12,10 +12,23 @@ object Constants {
 
     const val COLL_PLANTS = "plants"
     const val COLL_REQUESTS = "requests"
+    const val COLL_USERS = "users"
+    const val COLL_TOKENS = "tokens"
     const val PATH_PLANT_IMAGE = "plant_images"
+    //  Cloud Messaging
+    const val PROP_TOKEN = "token"
 
     //  Realtime Database
     const val PATH_CHATS = "chats"
+    //  FCM
+    const val MOMO_PLANTS_RS = "https://momoplantsparent.000webhostapp.com/MomoPlantsParent/MomoPlantsRS.php"
+    const val SEND_NOTIFICATION = "sendNotification"
+
+    const val PARAM_METHOD = "method"
+    const val PARAM_TITLE = "title"
+    const val PARAM_MESSAGE = "message"
+    const val PARAM_TOKENS = "tokens"
+    const val PARAM_SUCCESS = "success"
 
     const val PLANT_ID_INTENT = "plant_id_intent"
     const val ORDER_ID_INTENT = "order_id_intent"

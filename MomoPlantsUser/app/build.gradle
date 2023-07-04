@@ -82,6 +82,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-storage-ktx'
     //  Firebase Realtime Database
     implementation 'com.google.firebase:firebase-database-ktx'
+    //  Firebase Cloud Messaging
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    //  Preferences
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     //  Room 2.4.1
     implementation "androidx.room:room-runtime:2.5.2"
     kapt "androidx.room:room-compiler:2.5.2"
@@ -89,8 +93,6 @@ dependencies {
     //Lottie
     implementation 'com.airbnb.android:lottie:4.0.0'
     implementation 'androidx.activity:activity-ktx:1.7.2'
-    //  SharedPreferences
-    implementation 'androidx.preference:preference-ktx:1.2.0'
     //  Robolectric
     testImplementation 'org.robolectric:robolectric:4.9'
     //  Hamcrest
@@ -105,7 +107,7 @@ dependencies {
     //  Mockito
     testImplementation "org.mockito:mockito-core:5.4.0"
     //  MockK
-    testImplementation "io.mockk:mockk:1.10.0"
+    testImplementation "io.mockk:mockk:1.13.2"
     androidTestImplementation "io.mockk:mockk-android:1.10.0"
 
 }

@@ -2,6 +2,9 @@ package com.johndev.momoplants.mainModule
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import com.johndev.momoplants.R
 import com.johndev.momoplants.cartModule.view.CartFragment
 import com.johndev.momoplants.common.utils.openFragment
@@ -15,7 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
