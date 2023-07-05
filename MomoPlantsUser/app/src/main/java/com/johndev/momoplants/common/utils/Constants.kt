@@ -6,6 +6,8 @@ object Constants {
 
     const val ERROR_EXIST = "Error 01"
 
+    //  Analytics
+    const val USER_PROP_QUANTITY = "quantity_product"
     //  Firestore
     const val COLL_PLANTS = "plants"
     const val COLL_REQUESTS = "requests"

@@ -84,6 +84,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-database-ktx'
     //  Firebase Cloud Messaging
     implementation 'com.google.firebase:firebase-messaging-ktx'
+    //  Firebase Analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
     //  Preferences
     implementation 'androidx.preference:preference-ktx:1.2.0'
     //  Room 2.4.1

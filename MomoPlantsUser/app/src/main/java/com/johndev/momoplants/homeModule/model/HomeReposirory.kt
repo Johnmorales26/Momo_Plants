@@ -2,6 +2,8 @@ package com.johndev.momoplants.homeModule.model
 
 import android.content.Context
 import android.util.Log
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.ListenerRegistration
 import com.johndev.momoplants.R
@@ -15,7 +17,8 @@ import javax.inject.Inject
 class HomeReposirory @Inject constructor(
     @ApplicationContext val context: Context,
     private val dataSource: MomoPlantsDataSource,
-    private val database: FirebaseUtils
+    private val database: FirebaseUtils,
+    private val analytics: FirebaseAnalytics
 ) {
 
     private lateinit var firestoreListener: ListenerRegistration
@@ -47,12 +50,16 @@ class HomeReposirory @Inject constructor(
     }
 
     suspend fun onSave(plantEntity: PlantEntity) {
-            dataSource.getPlantByID(plantEntity.plantId) {
-                if (it != null) {
-                    runBlocking { updatePlant(it) }
-                } else {
-                    runBlocking { addPlant(plantEntity) }
-                }
+        dataSource.getPlantByID(plantEntity.plantId) {
+            if (it != null) {
+                runBlocking { updatePlant(it) }
+            } else {
+                runBlocking { addPlant(plantEntity) }
+            }
+        }
+        analytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
+            param(FirebaseAnalytics.Param.ITEM_ID, plantEntity.plantId)
+            param(FirebaseAnalytics.Param.ITEM_NAME, plantEntity.name!!)
         }
     }
 
@@ -64,11 +71,11 @@ class HomeReposirory @Inject constructor(
     private suspend fun addPlant(plantEntity: PlantEntity) {
         val cartPlant = plantEntity.copy()
         cartPlant.quantity = 1
-            dataSource.addPlant(cartPlant) { id ->
-                if (id < 1) {
-                    Log.i(tag, "Save Plant: Error!!")
-                } else {
-                    Log.i(tag, "Save Plant: Success!!")
+        dataSource.addPlant(cartPlant) { id ->
+            if (id < 1) {
+                Log.i(tag, "Save Plant: Error!!")
+            } else {
+                Log.i(tag, "Save Plant: Success!!")
             }
         }
     }

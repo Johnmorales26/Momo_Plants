@@ -70,6 +70,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_add"
         android:layout_marginBottom="@dimen/common_padding_min"
+        android:layout_marginEnd="@dimen/common_padding_min"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 

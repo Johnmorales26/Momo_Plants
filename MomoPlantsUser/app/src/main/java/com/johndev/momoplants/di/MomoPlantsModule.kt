@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.room.Room
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
@@ -35,6 +36,10 @@ object FirebaseModule {
     @Singleton
     @Provides
     fun provideFirestore() = Firebase.firestore
+
+    @Singleton
+    @Provides
+    fun provideFirebaseAnalytics() = Firebase.analytics
 
 }
 

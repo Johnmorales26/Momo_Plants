@@ -11,7 +11,6 @@ import com.johndev.momoplantsparent.common.entities.MessageEntity
 import com.johndev.momoplantsparent.common.entities.OrderEntity
 import com.johndev.momoplantsparent.common.utils.Constants
 import com.johndev.momoplantsparent.common.utils.FirebaseUtils
-import com.johndev.momoplantsparent.common.utils.editable
 import javax.inject.Inject
 
 class ChatRepository @Inject constructor(

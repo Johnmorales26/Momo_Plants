@@ -2,17 +2,21 @@ package com.johndev.momoplants.trackModule.model
 
 import android.content.Context
 import android.widget.Toast
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.Notification
 import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.utils.FirebaseUtils
 import com.johndev.momoplants.common.utils.onSetupStatusNotification
 import dagger.hilt.android.qualifiers.ApplicationContext
+import java.util.logging.XMLFormatter
 import javax.inject.Inject
 
 class TrackRepository @Inject constructor(
     @ApplicationContext val context: Context,
-    private var database: FirebaseUtils
+    private var database: FirebaseUtils,
+    private var analytics: FirebaseAnalytics
 ) {
 
     fun getOrderById(
@@ -62,6 +66,12 @@ class TrackRepository @Inject constructor(
                     onSuccessOrder(it)
                 }
             }
+        }
+    }
+
+    fun parseScreenInput() {
+        analytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW) {
+            param(FirebaseAnalytics.Param.METHOD, "check_track")
         }
     }
 

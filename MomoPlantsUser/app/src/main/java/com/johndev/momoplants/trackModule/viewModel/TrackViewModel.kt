@@ -42,4 +42,8 @@ class TrackViewModel @Inject constructor(
         )
     }
 
+    fun parseScreenInput() {
+        trackRepository.parseScreenInput()
+    }
+
 }

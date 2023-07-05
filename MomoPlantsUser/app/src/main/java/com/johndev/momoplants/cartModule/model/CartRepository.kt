@@ -1,5 +1,8 @@
 package com.johndev.momoplants.cartModule.model
 
+import android.os.Bundle
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
@@ -7,10 +10,12 @@ import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.entities.PlantOrderEntity
 import com.johndev.momoplants.common.utils.Constants
+import com.johndev.momoplants.common.utils.Constants.USER_PROP_QUANTITY
 import javax.inject.Inject
 
 class CartRepository @Inject constructor(
-    private var dataSource: MomoPlantsDataSource
+    private val dataSource: MomoPlantsDataSource,
+    private val analytics: FirebaseAnalytics
 ) {
 
     suspend fun onGetCartList(callback: (List<PlantEntity>?) -> Unit) {
@@ -58,11 +63,12 @@ class CartRepository @Inject constructor(
         onFailure: () -> Unit,
     ) {
         val user = FirebaseAuth.getInstance().currentUser
-        user?.let {  myUser ->
+        user?.let { myUser ->
             enableUI(false)
             val plants = hashMapOf<String, PlantOrderEntity>()
             listPlants.forEach { plant ->
-                plants[plant.plantId] = PlantOrderEntity(plant.plantId, plant.name!!, plant.quantity)
+                plants[plant.plantId] =
+                    PlantOrderEntity(plant.plantId, plant.name!!, plant.quantity)
             }
             val order = OrderEntity(
                 clientId = myUser.uid,
@@ -75,6 +81,21 @@ class CartRepository @Inject constructor(
                 .add(order)
                 .addOnSuccessListener {
                     onSuccess()
+                    analytics.logEvent(FirebaseAnalytics.Event.ADD_PAYMENT_INFO) {
+                        val products = mutableListOf<Bundle>()
+                        plants.forEach {
+                            if (it.value.quantity > 5) {
+                                val bundle = Bundle()
+                                bundle.putString("id_product", it.key)
+                                products.add(bundle)
+                            }
+                        }
+                        param(FirebaseAnalytics.Param.QUANTITY, products.toTypedArray())
+                    }
+                    analytics.setUserProperty(
+                        USER_PROP_QUANTITY,
+                        if (plants.size > 0) "con_mayoreo" else "sin_mayoreo"
+                    )
                 }
                 .addOnFailureListener {
                     onFailure()

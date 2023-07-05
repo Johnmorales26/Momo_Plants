@@ -1,10 +1,11 @@
 package com.johndev.momoplantsparent.ordersModule.model
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
 import com.johndev.momoplantsparent.R
 import com.johndev.momoplantsparent.common.entities.OrderEntity
 import com.johndev.momoplantsparent.common.fmc.NotificationRS
@@ -18,16 +19,9 @@ import javax.inject.Inject
 class OrdersRepository @Inject constructor(
     @ApplicationContext val context: Context,
     private val firebaseUtils: FirebaseUtils,
+    private val firebaseAnalytics: FirebaseAnalytics,
     private val notification: NotificationRS
 ) {
-
-    private val aValues: Array<String> by lazy {
-        context.resources.getStringArray(R.array.status_value)
-    }
-
-    private val aKeys: Array<Int> by lazy {
-        context.resources.getIntArray(R.array.status_key).toTypedArray()
-    }
 
     private fun notifyClient(orderEntity: OrderEntity) {
         firebaseUtils.getUsersRef()
@@ -100,6 +94,17 @@ class OrdersRepository @Inject constructor(
             .addOnSuccessListener {
                 onSuccess(R.string.msg_order_update)
                 notifyClient(orderEntity)
+                //  Analytics
+                firebaseAnalytics.logEvent(FirebaseAnalytics.Event.ADD_SHIPPING_INFO) {
+                    val products = mutableListOf<Bundle>()
+                    orderEntity.products.forEach {
+                        val bundle: Bundle = Bundle()
+                        bundle.putString("id_product", it.key)
+                        products.add(bundle)
+                    }
+                    param(FirebaseAnalytics.Param.SHIPPING, products.toTypedArray())
+                    param(FirebaseAnalytics.Param.PRICE, orderEntity.totalPrice)
+                }
             }
             .addOnFailureListener {
                 onFailure(R.string.msg_error_order_update)

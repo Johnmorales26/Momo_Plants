@@ -112,7 +112,7 @@ class ProfileFragment : Fragment() {
                 }
 
                 R.id.action_signout -> {
-                    profileViewModel.onSignInAccount(requireContext())
+                    profileViewModel.signInAccount(requireContext())
                     true
                 }
 

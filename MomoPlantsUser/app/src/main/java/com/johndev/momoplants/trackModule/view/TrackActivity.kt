@@ -28,6 +28,7 @@ class TrackActivity : AppCompatActivity() {
         setupObservers()
         setupToolbar()
         recibeValues()
+        trackViewModel.parseScreenInput()
     }
 
     private fun initViewModel() {
