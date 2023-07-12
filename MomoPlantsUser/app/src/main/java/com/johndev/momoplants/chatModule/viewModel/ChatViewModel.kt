@@ -74,7 +74,7 @@ class ChatViewModel @Inject constructor(
 
     fun onSendMessage(message: String) {
         _orderEntity.value?.let { order ->
-            chatRepository.onSendMessage(
+            chatRepository.sendMessage(
                 orderEntity = order,
                 message = message,
                 callback = { sendMessageResult(it) },

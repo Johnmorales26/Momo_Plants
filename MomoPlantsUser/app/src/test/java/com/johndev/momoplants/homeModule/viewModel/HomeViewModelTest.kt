@@ -3,13 +3,11 @@ package com.johndev.momoplants.homeModule.viewModel
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.johndev.momoplants.common.entities.PlantEntity
-import com.johndev.momoplants.homeModule.model.HomeReposirory
+import com.johndev.momoplants.homeModule.model.HomeRepository
 import io.mockk.mockk
-import org.hamcrest.CoreMatchers
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.not
 import org.hamcrest.CoreMatchers.nullValue
-import org.hamcrest.MatcherAssert
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -20,7 +18,7 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class HomeViewModelTest {
 
-    private lateinit var homeRepository: HomeReposirory
+    private lateinit var homeRepository: HomeRepository
     private lateinit var homeViewModel: HomeViewModel
 
     @get:Rule

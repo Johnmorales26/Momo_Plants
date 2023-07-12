@@ -100,5 +100,10 @@
     <string name="msg_error_delete_plant">Error Deleting Plant</string>
     <string name="msg_order_update">Order Updated</string>
     <string name="msg_error_order_update">Error Updating Order.</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_orders">Orders</string>
+    <string name="menu_profile">Profile</string>
+    <string name="message_error_delete_message">Error al eliminar mensaje.</string>
+    <string name="message_success_delete_message">Mensaje eliminado.</string>
 
 </resources>

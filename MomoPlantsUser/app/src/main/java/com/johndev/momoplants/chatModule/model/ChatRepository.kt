@@ -80,7 +80,7 @@ class ChatRepository @Inject constructor(
             }
     }
 
-    fun onSendMessage(orderEntity: OrderEntity, message: String, callback: (Boolean) -> Unit) {
+    fun sendMessage(orderEntity: OrderEntity, message: String, callback: (Boolean) -> Unit) {
             val database = Firebase.database
             val chatRef = database.getReference(Constants.PATH_CHATS).child(orderEntity.id)
             val user = FirebaseAuth.getInstance().currentUser

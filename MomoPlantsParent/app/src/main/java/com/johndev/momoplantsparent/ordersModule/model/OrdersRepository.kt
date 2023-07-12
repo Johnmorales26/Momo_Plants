@@ -63,8 +63,7 @@ class OrdersRepository @Inject constructor(
     }
 
     fun setupFirestore(
-        onSuccess: (MutableList<OrderEntity>) -> Unit,
-        onFailure: (Int) -> Unit
+        callback: (MutableList<OrderEntity>?) -> Unit
     ) {
         val listOrders = mutableListOf<OrderEntity>()
         val user = FirebaseAuth.getInstance().currentUser
@@ -77,10 +76,10 @@ class OrdersRepository @Inject constructor(
                         listOrders.add(order)
                     }
                 }
-                onSuccess(listOrders)
+                callback(listOrders)
             }
             .addOnFailureListener {
-                onFailure(R.string.msg_query_error)
+                callback(null)
             }
     }
 

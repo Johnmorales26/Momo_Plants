@@ -47,7 +47,7 @@ fun validFields(fields: List<Pair<TextInputEditText, TextInputLayout>>, context:
     return isValid
 }
 
-fun Toolbar.setupNavigationTo(fragment: Fragment, fragmentManager: FragmentManager) {
+/*fun Toolbar.setupNavigationTo(fragment: Fragment, fragmentManager: FragmentManager) {
     setNavigationOnClickListener {
         openFragment(
             fragment = fragment,
@@ -55,7 +55,7 @@ fun Toolbar.setupNavigationTo(fragment: Fragment, fragmentManager: FragmentManag
             containerId = R.id.container
         )
     }
-}
+}*/
 
 fun setupimageUrl(imgCover: ImageView, imgRes: Int) {
     imgCover.load(imgRes) {

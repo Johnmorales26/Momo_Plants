@@ -54,4 +54,10 @@ class ChatViewModel @Inject constructor(
             onClearMessage = { onClearMessage() })
     }
 
+    fun deleteMessage(orderId: String, messageId: String) {
+        chatRepository.deleteMessage(orderId, messageId) {
+            _msg.value = it
+        }
+    }
+
 }

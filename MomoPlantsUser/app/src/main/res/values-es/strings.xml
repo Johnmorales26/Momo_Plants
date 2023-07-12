@@ -82,6 +82,12 @@
     <string name="order_status_delivered">Entregado</string>
     <string name="order_status_unknown">Desconocido</string>
     <string name="order_track_update">Estado del envio actualizado: %1$s</string>
+    <string name="order_track_status">Estado del envio: %1$s</string>
+    <string name="order_status_ordered_subtitle">Su pedido ha sido confirmado y está listo para ser procesado.</string>
+    <string name="order_status_preparing_subtitle">Estamos preparando su pedido para el envío.</string>
+    <string name="order_status_send_subtitle">Su pedido ha sido enviado y se encuentra en tránsito hacia la dirección de entrega.</string>
+    <string name="order_status_delivered_subtitle">Su pedido ha sido entregado con éxito en la dirección especificada.</string>
+    <string name="order_status_unknown_subtitle">No se ha podido determinar el estado actual de su pedido. Por favor, póngase en contacto con nuestro servicio de atención al cliente para obtener más información.</string>
 
     <string name="track_title">Rastreo</string>
     <string name="traking_dialog_title">Seguimiento de orden</string>

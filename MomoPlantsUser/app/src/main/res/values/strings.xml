@@ -83,6 +83,14 @@
     <string name="order_status_delivered">Delivered</string>
     <string name="order_status_unknown">Unknown</string>
     <string name="order_track_update">Updated Shipment Status: %1$s</string>
+    <string name="order_track_status">Updated Shipment: %1$s</string>
+    <string name="order_status_ordered_subtitle">Your order has been confirmed and is ready to be processed.</string>
+    <string name="order_status_preparing_subtitle">We are preparing your order for shipment.</string>
+    <string name="order_status_send_subtitle">Your order has been sent and is in transit to the delivery address.</string>
+    <string name="order_status_delivered_subtitle">Your order has been successfully delivered to the specified address.</string>
+    <string name="order_status_unknown_subtitle">The current status of your order could not be determined. Please contact our customer service for more information.</string>
+    <string name="order_purchase_status">Estado de la compra</string>
+
 
     <string name="track_title">Tracking</string>
     <string name="traking_dialog_title">Order Tracking</string>

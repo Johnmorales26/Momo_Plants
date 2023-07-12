@@ -1,13 +1,11 @@
 package com.johndev.momoplantsparent.ordersModule.viewModel
 
 import android.content.Context
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.FirebaseFirestore
+import com.johndev.momoplantsparent.R
 import com.johndev.momoplantsparent.common.entities.OrderEntity
-import com.johndev.momoplantsparent.common.utils.Constants
 import com.johndev.momoplantsparent.ordersModule.model.OrdersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -25,8 +23,13 @@ class OrdersViewModel @Inject constructor(
 
     fun setupFirestore() {
         ordersRepository.setupFirestore(
-            onSuccess = { listOrders -> _orderList.value = listOrders },
-            onFailure = { _msg.value = it }
+            callback = { listOrders ->
+                if (listOrders != null) {
+                    _orderList.value = listOrders
+                } else {
+                    _msg.value = R.string.msg_query_error
+                }
+            }
         )
     }
 

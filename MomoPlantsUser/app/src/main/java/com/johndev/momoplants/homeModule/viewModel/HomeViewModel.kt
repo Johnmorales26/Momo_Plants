@@ -1,19 +1,11 @@
 package com.johndev.momoplants.homeModule.viewModel
 
-import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.firestore.DocumentChange
-import com.google.firebase.firestore.ListenerRegistration
-import com.johndev.momoplants.adapters.PlantAdapter
-import com.johndev.momoplants.common.dataAccess.MomoPlantsDataSource
 import com.johndev.momoplants.common.entities.PlantEntity
-import com.johndev.momoplants.common.utils.FirebaseUtils
-import com.johndev.momoplants.homeModule.model.HomeReposirory
+import com.johndev.momoplants.homeModule.model.HomeRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val homeReposirory: HomeReposirory
+    private val homeReposirory: HomeRepository
 ) : ViewModel() {
 
     private val _addPlant = MutableLiveData<PlantEntity>()

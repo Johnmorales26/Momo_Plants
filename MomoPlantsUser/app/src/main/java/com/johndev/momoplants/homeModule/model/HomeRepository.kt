@@ -14,7 +14,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
-class HomeReposirory @Inject constructor(
+class HomeRepository @Inject constructor(
     @ApplicationContext val context: Context,
     private val dataSource: MomoPlantsDataSource,
     private val database: FirebaseUtils,

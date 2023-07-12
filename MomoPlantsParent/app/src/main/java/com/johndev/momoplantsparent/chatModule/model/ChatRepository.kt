@@ -1,5 +1,6 @@
 package com.johndev.momoplantsparent.chatModule.model
 
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -11,6 +12,7 @@ import com.johndev.momoplantsparent.common.entities.MessageEntity
 import com.johndev.momoplantsparent.common.entities.OrderEntity
 import com.johndev.momoplantsparent.common.utils.Constants
 import com.johndev.momoplantsparent.common.utils.FirebaseUtils
+import org.checkerframework.checker.units.qual.UnitsRelations
 import javax.inject.Inject
 
 class ChatRepository @Inject constructor(
@@ -105,6 +107,23 @@ class ChatRepository @Inject constructor(
                 .addOnCompleteListener {
                     onButtonEnable(true)
                 }
+        }
+    }
+
+    fun deleteMessage(
+        idOrder: String,
+        messageId: String,
+        callback: (Int) -> Unit
+    ) {
+        val database = Firebase.database
+        val messageRef =
+            database.getReference(Constants.PATH_CHATS).child(idOrder).child(messageId)
+        messageRef.removeValue { error, ref ->
+            if (error != null) {
+                callback(R.string.message_error_delete_message)
+            } else {
+                callback(R.string.message_success_delete_message)
+            }
         }
     }
 
