@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".mainModule.MainActivity">
+    tools:context=".ui.mainModule.MainActivity">
 
     <fragment
         android:id="@+id/nav_host_fragment"

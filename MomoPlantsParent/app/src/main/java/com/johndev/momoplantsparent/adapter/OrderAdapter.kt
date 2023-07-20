@@ -53,8 +53,10 @@ class OrderAdapter(
     override fun getItemCount(): Int = orderList.size
 
     fun add(orderEntity: OrderEntity) {
-        orderList.add(orderEntity)
-        notifyItemInserted(orderList.size - 1)
+        if (!orderList.contains(orderEntity)) {
+            orderList.add(orderEntity)
+            notifyItemInserted(orderList.size - 1)
+        }
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

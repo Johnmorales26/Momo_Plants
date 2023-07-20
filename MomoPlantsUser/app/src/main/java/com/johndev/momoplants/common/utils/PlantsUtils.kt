@@ -17,6 +17,7 @@ import com.google.android.material.textfield.TextInputLayout
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.Notification
 import com.johndev.momoplants.common.utils.Constants.ERROR_EXIST
+import es.dmoral.toasty.Toasty
 
 fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, containerId: Int) {
     fragmentManager.beginTransaction()
@@ -24,11 +25,29 @@ fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, container
         .commit()
 }
 
-fun printToastMsg(msgRes: Int, context: Context) =
-    Toast.makeText(context, context.getText(msgRes), Toast.LENGTH_SHORT).show()
+fun printErrorToast(msgRes: Int? = null, msgText: String? = null, context: Context) = if (msgRes != null) {
+    Toasty.error(context, msgRes, Toast.LENGTH_SHORT, true).show()
+} else {
+    msgText?.let { Toasty.error(context, msgText, Toast.LENGTH_SHORT, true).show() }
+}
 
-fun printToastWithStringMsg(msgRes: Int, value: String, context: Context) =
-    Toast.makeText(context, context.getString(msgRes, value), Toast.LENGTH_SHORT).show()
+fun printSuccessToast(msgRes: Int? = null, msgText: String? = null, context: Context) = if (msgRes != null) {
+    Toasty.success(context, msgRes, Toast.LENGTH_SHORT, true).show()
+} else {
+    msgText?.let { Toasty.success(context, msgText, Toast.LENGTH_SHORT, true).show() }
+}
+
+fun printInfoToast(msgRes: Int? = null, msgText: String? = null, context: Context) = if (msgRes != null) {
+    Toasty.info(context, msgRes, Toast.LENGTH_SHORT, true).show()
+} else {
+    msgText?.let { Toasty.info(context, msgText, Toast.LENGTH_SHORT, true).show() }
+}
+
+fun printNormalToast(msgRes: Int? = null, msgText: String? = null, context: Context) = if (msgRes != null) {
+    Toasty.normal(context, msgRes, Toast.LENGTH_SHORT).show()
+} else {
+    msgText?.let { Toasty.normal(context, msgText, Toast.LENGTH_SHORT).show() }
+}
 
 fun printSnackbarMsg(view: View, msgRes: Int, context: Context) =
     Snackbar.make(view, context.getString(msgRes), Snackbar.LENGTH_SHORT).show()

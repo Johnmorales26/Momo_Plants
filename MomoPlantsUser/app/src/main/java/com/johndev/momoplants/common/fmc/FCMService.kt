@@ -16,7 +16,7 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.utils.Constants.PROP_TOKEN
-import com.johndev.momoplants.loginModule.view.LoginActivity
+import com.johndev.momoplants.ui.loginModule.view.LoginActivity
 
 class FCMService : FirebaseMessagingService() {
 

@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
-import com.johndev.momoplants.trackModule.view.TrackActivity
+import com.johndev.momoplants.ui.trackModule.view.TrackActivity
 
 class NotificationReceiver: BroadcastReceiver() {
 

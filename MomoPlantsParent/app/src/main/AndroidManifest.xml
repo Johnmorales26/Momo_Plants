@@ -16,7 +16,7 @@
         android:theme="@style/Theme.MomoPlantsPartnet"
         tools:targetApi="31">
         <activity
-            android:name=".loginModule.view.LoginActivity"
+            android:name=".ui.loginModule.view.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,10 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".mainModule.MainActivity"
-            android:exported="true" />
-        <activity
-            android:name=".chatModule.view.ChatActivity"
+            android:name=".ui.mainModule.MainActivity"
             android:exported="true" />
     </application>
 

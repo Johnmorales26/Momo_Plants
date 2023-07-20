@@ -7,13 +7,13 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.johndev.momoplantsparent.homeModule.view.HomeFragment"
+        android:name="com.johndev.momoplantsparent.ui.homeModule.view.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home"/>
 
     <fragment
         android:id="@+id/navigation_orders"
-        android:name="com.johndev.momoplantsparent.ordersModule.view.OrdersFragment"
+        android:name="com.johndev.momoplantsparent.ui.ordersModule.view.OrdersFragment"
         android:label="@string/menu_orders"
         tools:layout="@layout/fragment_orders">
         <action
@@ -23,13 +23,13 @@
 
     <fragment
         android:id="@+id/navigation_profile"
-        android:name="com.johndev.momoplantsparent.profileModule.view.ProfileFragment"
+        android:name="com.johndev.momoplantsparent.ui.profileModule.view.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile"/>
 
     <fragment
         android:id="@+id/navigation_chat"
-        android:name="com.johndev.momoplantsparent.chatModule.view.ChatFragment"
+        android:name="com.johndev.momoplantsparent.ui.chatModule.view.ChatFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile">
         <argument
