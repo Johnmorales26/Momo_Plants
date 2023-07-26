@@ -30,8 +30,8 @@
     <fragment
         android:id="@+id/navigation_chat"
         android:name="com.johndev.momoplantsparent.ui.chatModule.view.ChatFragment"
-        android:label="@string/menu_profile"
-        tools:layout="@layout/fragment_profile">
+        android:label="@string/menu_chat"
+        tools:layout="@layout/fragment_chat">
         <argument
             android:name="id0rder"
             app:argType="string"

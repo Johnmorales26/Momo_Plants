@@ -1,6 +1,5 @@
 package com.johndev.momoplants.ui.ordersModule.view
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,18 +8,16 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.johndev.momoplants.adapters.OrderAdapter
 import com.johndev.momoplants.common.dataAccess.OnOrderListener
 import com.johndev.momoplants.common.entities.OrderEntity
-import com.johndev.momoplants.common.utils.Constants.CHAT_ID_INTENT
-import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
-import com.johndev.momoplants.common.utils.lauchNotificationWithReciber
+import com.johndev.momoplants.common.utils.launchNotificationWithReceiver
+import com.johndev.momoplants.common.utils.openFragment
 import com.johndev.momoplants.common.utils.printErrorToast
 import com.johndev.momoplants.databinding.FragmentOrdersBinding
-import com.johndev.momoplants.ui.chatModule.view.ChatActivity
 import com.johndev.momoplants.ui.ordersModule.viewModel.OrdersViewModel
-import com.johndev.momoplants.ui.trackModule.view.TrackActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,7 +63,7 @@ class OrdersFragment : Fragment(), OnOrderListener {
             }
         }
         ordersViewModel.status.observe(viewLifecycleOwner) {
-            lauchNotificationWithReciber(requireActivity(), it)
+            launchNotificationWithReceiver(requireActivity(), it)
         }
         ordersViewModel.msg.observe(viewLifecycleOwner) {
             printErrorToast(it,  context = requireContext())
@@ -85,17 +82,13 @@ class OrdersFragment : Fragment(), OnOrderListener {
     }
 
     override fun onTrack(orderEntity: OrderEntity) {
-        val intent = Intent(requireContext(), TrackActivity::class.java).apply {
-            putExtra(ORDER_ID_INTENT, orderEntity.id)
-        }
-        startActivity(intent)
+        val action = OrdersFragmentDirections.actionOrdersToNavigationTrack(orderEntity.id)
+        openFragment(action, requireActivity(), findNavController())
     }
 
     override fun onStartChat(orderEntity: OrderEntity) {
-        val intent = Intent(requireContext(), ChatActivity::class.java).apply {
-            putExtra(CHAT_ID_INTENT, orderEntity.id)
-        }
-        startActivity(intent)
+        val action = OrdersFragmentDirections.actionOrdersToNavigationChat(orderEntity.id)
+        openFragment(action, requireActivity(), findNavController())
     }
 
     override fun onDestroyView() {

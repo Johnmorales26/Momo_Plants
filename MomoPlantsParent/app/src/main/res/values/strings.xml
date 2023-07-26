@@ -105,5 +105,6 @@
     <string name="menu_profile">Profile</string>
     <string name="message_error_delete_message">Error al eliminar mensaje.</string>
     <string name="message_success_delete_message">Mensaje eliminado.</string>
+    <string name="menu_chat">Chat</string>
 
 </resources>

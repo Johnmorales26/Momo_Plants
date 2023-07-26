@@ -1,29 +1,27 @@
 package com.johndev.momoplants.common.utils
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Context
 import android.text.Editable
+import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import coil.load
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.Notification
-import com.johndev.momoplants.common.utils.Constants.ERROR_EXIST
 import es.dmoral.toasty.Toasty
-
-fun openFragment(fragment: Fragment, fragmentManager: FragmentManager, containerId: Int) {
-    fragmentManager.beginTransaction()
-        .replace(containerId, fragment)
-        .commit()
-}
+import java.io.BufferedReader
+import java.io.InputStream
+import java.io.InputStreamReader
+import java.net.HttpURLConnection
+import java.net.URL
 
 fun printErrorToast(msgRes: Int? = null, msgText: String? = null, context: Context) = if (msgRes != null) {
     Toasty.error(context, msgRes, Toast.LENGTH_SHORT, true).show()
@@ -52,51 +50,7 @@ fun printNormalToast(msgRes: Int? = null, msgText: String? = null, context: Cont
 fun printSnackbarMsg(view: View, msgRes: Int, context: Context) =
     Snackbar.make(view, context.getString(msgRes), Snackbar.LENGTH_SHORT).show()
 
-fun validFields(fields: List<Pair<TextInputEditText, TextInputLayout>>, context: Context): Boolean {
-    var isValid = true
-    for ((field, layout) in fields) {
-        if (field.text.isNullOrEmpty()) {
-            layout.run {
-                error = context.getString(R.string.alert_required)
-                requestFocus()
-            }
-            isValid = false
-        } else {
-            layout.error = null
-        }
-    }
-    return isValid
-}
-
-fun Toolbar.setupNavigationTo(fragment: Fragment, fragmentManager: FragmentManager) {
-    setNavigationOnClickListener {
-        openFragment(
-            fragment = fragment,
-            fragmentManager = fragmentManager,
-            containerId = R.id.container
-        )
-    }
-}
-
-fun setupimageUrl(imgCover: ImageView, imgRes: Int) {
-    imgCover.load(imgRes) {
-        crossfade(true)
-        placeholder(R.drawable.ic_broken_image)
-        //transformations(CircleCropTransformation())
-    }
-}
-
 fun String.editable(): Editable = Editable.Factory.getInstance().newEditable(this)
-
-fun getMsgErrorByCode(errorCode: String?): Int = when (errorCode) {
-    ERROR_EXIST -> R.string.error_unique_code
-    else -> R.string.error_unknow
-}
-
-fun hideKeyboard(context: Context, view: View) {
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    imm?.hideSoftInputFromWindow(view.windowToken, 0)
-}
 
 fun onSetupStatusNotification(context: Context, status: Int): String {
     return when (status - 1) {
@@ -114,8 +68,69 @@ fun lauchNotification(activity: Activity, notification: Notification) {
     }
 }
 
-fun lauchNotificationWithReciber(activity: Activity, notification: Notification) {
+fun launchNotificationWithReceiver(activity: Activity, notification: Notification) {
     executeOrRequestPermission(activity) {
         buttonNotification(activity, notification)
     }
+}
+
+fun AppCompatActivity.checkSelfPermissionCompat(permission: String) =
+    ActivityCompat.checkSelfPermission(this, permission)
+
+fun AppCompatActivity.shouldShowRequestPermissionRationaleCompat(permission: String) =
+    ActivityCompat.shouldShowRequestPermissionRationale(this, permission)
+
+fun AppCompatActivity.requestPermissionsCompat(
+    permissionsArray: Array<String>,
+    requestCode: Int
+) {
+    ActivityCompat.requestPermissions(this, permissionsArray, requestCode)
+}
+
+
+
+fun readUrlFile(url: String): String? {
+    var data: String? = null
+    var iStream: InputStream? = null
+    var urlConnection: HttpURLConnection? = null
+    try {
+        urlConnection = URL(url).openConnection() as HttpURLConnection?
+        urlConnection?.connect()
+        iStream = urlConnection?.inputStream
+        val br = BufferedReader(InputStreamReader(iStream))
+        val sb = StringBuilder()
+        var line: String?
+        while (br.readLine().also { line = it } != null) {
+            sb.append(line)
+        }
+        data = sb.toString()
+        br.close()
+    } catch (e: Exception) {
+        Log.w("", "Exception while downloading url: $e")
+    } finally {
+        iStream?.close()
+        urlConnection?.disconnect()
+    }
+    return data
+}
+
+fun buildAlertDialog(context: Context, resTitle: Int, resMessage: Int): AlertDialog {
+    val alertDialog = AlertDialog.Builder(context).create()
+    alertDialog.setTitle(context.getString(resTitle))
+    alertDialog.setMessage(context.getString(resMessage))
+    alertDialog.setCancelable(false)
+    return alertDialog
+}
+
+fun openFragment(action: NavDirections, activity: Activity, navController: NavController) {
+    val bottomNavigation = activity.findViewById<BottomNavigationView>(R.id.bottom_navigation)
+    navController.addOnDestinationChangedListener { _, destination, _ ->
+        when(destination.id) {
+            R.id.navigation_chat -> bottomNavigation.visibility = View.GONE
+            R.id.navigation_track -> bottomNavigation.visibility = View.GONE
+            R.id.navigation_details -> bottomNavigation.visibility = View.GONE
+            else -> bottomNavigation.visibility = View.VISIBLE
+        }
+    }
+    navController.navigate(action)
 }

@@ -2,6 +2,9 @@ package com.johndev.momoplants.common.utils
 
 object Constants {
 
+    const val PERMISSION_REQUEST_STORAGE = 0
+    const val URL_APP_DOWNLOAD = "https://github.com/Johnmorales26/Momo_Plants/raw/main/app-release.apk"
+
     const val NAME_DATABASE = "MomoPlantsDatabase"
 
     const val ERROR_EXIST = "Error 01"

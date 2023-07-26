@@ -7,16 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.johndev.momoplants.R
 import com.johndev.momoplants.adapters.PlantAdapter
 import com.johndev.momoplants.common.dataAccess.OnProductListener
 import com.johndev.momoplants.common.entities.PlantEntity
 import com.johndev.momoplants.common.utils.Constants.PLANT_ID_INTENT
+import com.johndev.momoplants.common.utils.openFragment
 import com.johndev.momoplants.common.utils.printSnackbarMsg
 import com.johndev.momoplants.databinding.FragmentHomeBinding
-import com.johndev.momoplants.ui.detailModule.view.DetailsActivity
 import com.johndev.momoplants.ui.homeModule.viewModel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -72,10 +75,8 @@ class HomeFragment : Fragment(), OnProductListener {
     }
 
     override fun onClick(plantEntity: PlantEntity) {
-        val intent = Intent(requireContext(), DetailsActivity::class.java).apply {
-            putExtra(PLANT_ID_INTENT, plantEntity.plantId)
-        }
-        startActivity(intent)
+        val action = HomeFragmentDirections.actionHomeToNavigationDetails(plantEntity.plantId)
+        openFragment(action, requireActivity(), findNavController())
     }
 
     override fun onClickAdd(plantEntity: PlantEntity) {

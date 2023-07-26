@@ -50,7 +50,15 @@ class ChatViewModel @Inject constructor(
         )
     }
 
-    fun getOrderResult(orderEntity: OrderEntity?) {
+    fun getOrderById(idOrder: String) {
+        chatRepository.getOrderById(
+            idOrder = idOrder,
+            onSuccess = { _orderEntity.value = it },
+            onFailure = { /*_msg.value = it*/ }
+        )
+    }
+
+    private fun getOrderResult(orderEntity: OrderEntity?) {
         orderEntity?.let {
             _orderEntity.value = it
         } ?: {
@@ -68,7 +76,7 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun deleteMessageResult(success: Boolean) {
+    private fun deleteMessageResult(success: Boolean) {
         _deleteMessage.value = success
     }
 
@@ -82,6 +90,6 @@ class ChatViewModel @Inject constructor(
         }
     }
 
-    fun sendMessageResult(isEnable: Boolean) { _enableButton.value = isEnable }
+    private fun sendMessageResult(isEnable: Boolean) { _enableButton.value = isEnable }
 
 }

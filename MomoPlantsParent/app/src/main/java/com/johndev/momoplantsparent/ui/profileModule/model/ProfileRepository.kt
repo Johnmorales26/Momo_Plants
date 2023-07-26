@@ -43,8 +43,7 @@ class ProfileRepository @Inject constructor(
                     param(FirebaseAnalytics.Param.SUCCESS, 100)
                     param(FirebaseAnalytics.Param.METHOD, "sign_out")
                 }
-                val intent = Intent(context, LoginActivity::class.java)
-                ContextCompat.startActivity(context, intent, null)
+                ContextCompat.startActivity(context, Intent(context, LoginActivity::class.java), null)
             }
             .addOnCompleteListener {
                 if (!it.isSuccessful) {

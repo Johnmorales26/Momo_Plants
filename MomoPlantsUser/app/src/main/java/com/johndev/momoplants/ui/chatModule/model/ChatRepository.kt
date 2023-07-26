@@ -7,10 +7,12 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.MessageEntity
 import com.johndev.momoplants.common.entities.OrderEntity
 import com.johndev.momoplants.common.utils.Constants
 import com.johndev.momoplants.common.utils.FirebaseUtils
+import com.johndev.momoplants.common.utils.ToastType
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -110,6 +112,22 @@ class ChatRepository @Inject constructor(
         messageRef.removeValue { error, _ ->
             if (error != null) callback(false) else callback(true)
         }
+    }
+
+    fun getOrderById(idOrder: String?, onSuccess: (OrderEntity) -> Unit, onFailure: (Pair<Int, ToastType>) -> Unit) {
+        database.getRequestsRef().get()
+            .addOnSuccessListener {
+                for (document in it) {
+                    val order = document.toObject(OrderEntity::class.java)
+                    order.id = document.id
+                    if (idOrder == order.id) {
+                        onSuccess(order)
+                    }
+                }
+            }
+            .addOnFailureListener {
+                onFailure(Pair(R.string.chat_order_not_found, ToastType.Error))
+            }
     }
 
 }

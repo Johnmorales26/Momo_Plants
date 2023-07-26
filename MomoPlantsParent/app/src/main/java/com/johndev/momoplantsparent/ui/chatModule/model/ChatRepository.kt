@@ -80,7 +80,6 @@ class ChatRepository @Inject constructor(
             .addOnFailureListener {
                 onFailure(Pair(R.string.chat_order_not_found, ToastType.Error))
             }
-            .addOnCompleteListener {}
     }
 
     fun onSendMessage(

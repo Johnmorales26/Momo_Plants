@@ -1,29 +1,44 @@
 package com.johndev.momoplants.ui.trackModule.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import coil.load
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.OrderEntity
-import com.johndev.momoplants.common.utils.Constants.ORDER_ID_INTENT
+import com.johndev.momoplants.common.utils.Constants
 import com.johndev.momoplants.common.utils.lauchNotification
 import com.johndev.momoplants.common.utils.printErrorToast
 import com.johndev.momoplants.common.utils.printSuccessToast
-import com.johndev.momoplants.databinding.ActivityTrackBinding
+import com.johndev.momoplants.databinding.FragmentTrackBinding
+import com.johndev.momoplants.ui.chatModule.view.ChatFragmentArgs
 import com.johndev.momoplants.ui.trackModule.viewModel.TrackViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class TrackActivity : AppCompatActivity() {
+class TrackFragment : Fragment() {
 
-    private lateinit var binding: ActivityTrackBinding
+    private var _binding: FragmentTrackBinding? = null
+    private val binding get() = _binding!!
     private lateinit var trackViewModel: TrackViewModel
+    private val args : TrackFragmentArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityTrackBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTrackBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initViewModel()
         receiveValues()
         setupObservers()
@@ -36,7 +51,7 @@ class TrackActivity : AppCompatActivity() {
     }
 
     private fun setupObservers() {
-        trackViewModel.orderEntity.observe(this) {
+        trackViewModel.orderEntity.observe(viewLifecycleOwner) {
             if (it == null) {
                 //binding.viewCompose.visibility = GONE
             } else {
@@ -44,11 +59,11 @@ class TrackActivity : AppCompatActivity() {
                 updateUI(it)
             }
         }
-        trackViewModel.status.observe(this) {
-            lauchNotification(this, it)
+        trackViewModel.status.observe(viewLifecycleOwner) {
+            lauchNotification(requireActivity(), it)
         }
-        trackViewModel.msg.observe(this) {
-            if (it == R.string.chat_order_found) printSuccessToast(it, context = this) else printErrorToast(it, context = this)
+        trackViewModel.msg.observe(viewLifecycleOwner) {
+            if (it == R.string.chat_order_found) printSuccessToast(it, context = requireContext()) else printErrorToast(it, context = requireContext())
         }
     }
 
@@ -87,10 +102,17 @@ class TrackActivity : AppCompatActivity() {
 
     private fun receiveValues() {
         trackViewModel.apply {
-            getOrderById(intent.getStringExtra(ORDER_ID_INTENT).toString())
-            getOrderInRealtime(intent.getStringExtra(ORDER_ID_INTENT).toString())
+            args.id0rder?.let {
+                getOrderById(it)
+                getOrderInRealtime(it)
+            }
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
