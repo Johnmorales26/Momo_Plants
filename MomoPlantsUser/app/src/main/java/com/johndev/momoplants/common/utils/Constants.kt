@@ -7,6 +7,8 @@ object Constants {
 
     const val NAME_DATABASE = "MomoPlantsDatabase"
 
+    const val readExternalStoragePermission = 2004
+
     const val ERROR_EXIST = "Error 01"
 
     //  Analytics

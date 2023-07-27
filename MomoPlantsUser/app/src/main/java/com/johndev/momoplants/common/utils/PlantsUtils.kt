@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.johndev.momoplants.R
@@ -62,7 +61,7 @@ fun onSetupStatusNotification(context: Context, status: Int): String {
     }
 }
 
-fun lauchNotification(activity: Activity, notification: Notification) {
+fun launchNotification(activity: Activity, notification: Notification) {
     executeOrRequestPermission(activity) {
         simpleNotification(activity, notification)
     }

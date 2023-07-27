@@ -40,9 +40,11 @@ class OrdersRepository @Inject constructor(
                     var names = ""
                     orderEntity.products.forEach { names += "${it.value.name}, " }
                     names = names.dropLast(2)
-                    //val index = aKeys.indexOf()
                     notification.sendNotification(
-                        "Tu pedido a sido ${onSetupStatusNotification(context, orderEntity.status)}",
+                        context.getString(
+                            R.string.notification_order,
+                            onSetupStatusNotification(context, orderEntity.status)
+                        ),
                         names,
                         tokensStr
                     )

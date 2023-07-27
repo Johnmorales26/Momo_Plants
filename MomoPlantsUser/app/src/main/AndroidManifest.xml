@@ -3,11 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
@@ -35,24 +37,25 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".common.fmc.FCMService"
+        <service
+            android:name=".common.fmc.FCMService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_stat_name"/>
+            android:resource="@drawable/ic_stat_name" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/md_theme_light_primary"/>
+            android:resource="@color/md_theme_light_primary" />
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/notification_channel_id_default"/>
+            android:value="@string/notification_channel_id_default" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -63,6 +66,15 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <receiver android:name=".common.utils.DownloadReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action
+                android:name="android.intent.action.DOWNLOAD_COMPLETE"
+                android:enabled="true" />
+            </intent-filter>
+        </receiver>
 
     </application>
 

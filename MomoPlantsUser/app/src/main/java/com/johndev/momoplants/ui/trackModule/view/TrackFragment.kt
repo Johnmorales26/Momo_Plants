@@ -5,18 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.entities.OrderEntity
-import com.johndev.momoplants.common.utils.Constants
-import com.johndev.momoplants.common.utils.lauchNotification
+import com.johndev.momoplants.common.utils.launchNotification
 import com.johndev.momoplants.common.utils.printErrorToast
 import com.johndev.momoplants.common.utils.printSuccessToast
 import com.johndev.momoplants.databinding.FragmentTrackBinding
-import com.johndev.momoplants.ui.chatModule.view.ChatFragmentArgs
 import com.johndev.momoplants.ui.trackModule.viewModel.TrackViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -60,7 +57,7 @@ class TrackFragment : Fragment() {
             }
         }
         trackViewModel.status.observe(viewLifecycleOwner) {
-            lauchNotification(requireActivity(), it)
+            launchNotification(requireActivity(), it)
         }
         trackViewModel.msg.observe(viewLifecycleOwner) {
             if (it == R.string.chat_order_found) printSuccessToast(it, context = requireContext()) else printErrorToast(it, context = requireContext())

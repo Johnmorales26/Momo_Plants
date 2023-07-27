@@ -134,7 +134,6 @@
     <string name="menu_orders">Orders</string>
     <string name="menu_profile">Profile</string>
     <string name="menu_cart">Cart</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="menu_chat">Chat</string>
     <string name="menu_track">Track</string>

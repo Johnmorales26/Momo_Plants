@@ -57,6 +57,10 @@
     <string name="menu_option_about">Acerca de</string>
     <string name="menu_option_settings">Configuración</string>
     <string name="menu_option_sign_out">Cerrar Sesión</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_orders">Orden</string>
+    <string name="menu_profile">Profile</string>
+    <string name="menu_chat">Chat</string>
 
     <string name="add_dialog_title">Agregar Planta</string>
     <string name="add_dialog_btn_success">Agregar</string>
@@ -101,5 +105,10 @@
     <string name="msg_error_delete_plant">Error al eliminar</string>
     <string name="msg_order_update">Orden actualizada</string>
     <string name="msg_error_order_update">Error al actualizar orden.</string>
+
+    <string name="message_error_delete_message">Error al eliminar mensaje.</string>
+    <string name="message_success_delete_message">Mensaje eliminado.</string>
+
+    <string name="notification_order">Tu pedido a sido %1$s</string>
 
 </resources>
