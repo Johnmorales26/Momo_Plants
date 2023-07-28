@@ -66,7 +66,9 @@
         android:padding="@dimen/common_padding_default"
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@null"
+        style="@style/IconButtonTint"/>
 
     <include
         android:id="@+id/bottomOptions"

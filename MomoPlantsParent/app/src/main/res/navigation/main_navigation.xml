@@ -18,7 +18,11 @@
         tools:layout="@layout/fragment_orders">
         <action
             android:id="@+id/action_orders_to_navigation_chat"
-            app:destination="@id/navigation_chat" />
+            app:destination="@id/navigation_chat"
+            app:enterAnim="@anim/slide_in_bottom"
+            app:exitAnim="@anim/slide_out_up"
+            app:popEnterAnim="@anim/slide_in_up"
+            app:popExitAnim="@anim/slide_out_bottom"/>
     </fragment>
 
     <fragment
