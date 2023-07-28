@@ -4,18 +4,22 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="seed">#776746</color>
+
     <color name="md_theme_light_primary">#785A00</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
     <color name="md_theme_light_primaryContainer">#FFDF9C</color>
     <color name="md_theme_light_onPrimaryContainer">#251A00</color>
+
     <color name="md_theme_light_secondary">#94416F</color>
     <color name="md_theme_light_onSecondary">#FFFFFF</color>
     <color name="md_theme_light_secondaryContainer">#FFD8E8</color>
     <color name="md_theme_light_onSecondaryContainer">#3D0027</color>
+
     <color name="md_theme_light_tertiary">#974813</color>
     <color name="md_theme_light_onTertiary">#FFFFFF</color>
     <color name="md_theme_light_tertiaryContainer">#FFDBCA</color>
     <color name="md_theme_light_onTertiaryContainer">#331100</color>
+
     <color name="md_theme_light_error">#BA1A1A</color>
     <color name="md_theme_light_errorContainer">#FFDAD6</color>
     <color name="md_theme_light_onError">#FFFFFF</color>

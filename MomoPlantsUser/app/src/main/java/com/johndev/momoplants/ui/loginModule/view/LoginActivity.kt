@@ -1,13 +1,12 @@
 package com.johndev.momoplants.ui.loginModule.view
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
@@ -15,14 +14,9 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 import com.johndev.momoplants.R
-import com.johndev.momoplants.common.utils.Constants
-import com.johndev.momoplants.common.utils.DownloadController
-import com.johndev.momoplants.common.utils.checkSelfPermissionCompat
 import com.johndev.momoplants.common.utils.printErrorToast
 import com.johndev.momoplants.common.utils.printInfoToast
 import com.johndev.momoplants.common.utils.printSuccessToast
-import com.johndev.momoplants.common.utils.requestPermissionsCompat
-import com.johndev.momoplants.common.utils.shouldShowRequestPermissionRationaleCompat
 import com.johndev.momoplants.databinding.ActivityLoginBinding
 import com.johndev.momoplants.ui.loginModule.viewModel.LoginViewModel
 import com.johndev.momoplants.ui.mainModule.MainActivity
@@ -66,11 +60,17 @@ class LoginActivity : AppCompatActivity() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        splashScreenInit(splashScreen)
         setupViewModel()
         configAuth()
+    }
+
+    private fun splashScreenInit(splashScreen: SplashScreen) {
+        splashScreen.setKeepOnScreenCondition { true }
     }
 
     private fun setupViewModel() {
