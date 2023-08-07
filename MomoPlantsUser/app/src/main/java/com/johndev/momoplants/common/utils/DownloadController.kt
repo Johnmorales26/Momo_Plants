@@ -10,12 +10,10 @@ import android.os.Build
 import android.os.Environment
 import android.widget.Toast
 import androidx.core.content.FileProvider
+import com.johndev.momoplants.BuildConfig
 import com.johndev.momoplants.R
 import com.johndev.momoplants.common.utils.Constants.URL_APP_DOWNLOAD
-import dagger.hilt.android.qualifiers.ApplicationContext
-import firebase.com.protolitewrapper.BuildConfig
 import java.io.File
-import javax.inject.Inject
 
 class DownloadController(private val context: Context) {
 

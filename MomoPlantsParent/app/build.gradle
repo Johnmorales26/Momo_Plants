@@ -61,7 +61,7 @@ dependencies {
     //  ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
     //  Fragment ViewModels
-    implementation 'androidx.fragment:fragment-ktx:1.6.0'
+    implementation 'androidx.fragment:fragment-ktx:1.6.1'
     //  Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
     //  Glide
@@ -92,7 +92,7 @@ dependencies {
     //  Volley
     implementation 'com.android.volley:volley:1.2.1'
     //  Lottie
-    implementation 'com.airbnb.android:lottie:4.0.0'
+    implementation 'com.airbnb.android:lottie:6.0.0'
     implementation 'androidx.activity:activity-ktx:1.7.2'
     //  Hamcrest
     testImplementation 'org.hamcrest:hamcrest:2.2'
